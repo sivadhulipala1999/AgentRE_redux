@@ -1,7 +1,7 @@
 
 # AgentRE - redux 
 
-This repository is based on the paper "**AgentRE: An Agent-Based Framework for Navigating Complex Information Landscapes in Relation Extraction**". Go to <a href link="https://github.com/Lightblues/AgentRE/"> AgentRE's original repo </a> for a better overview of what was done. 
+This repository is based on the paper "**AgentRE: An Agent-Based Framework for Navigating Complex Information Landscapes in Relation Extraction**". Go to <a href="https://github.com/Lightblues/AgentRE/"> AgentRE's original repo </a> for a better overview of what was done. 
 
 As a part of my master thesis, my aim is to improve upon the original AgentRE architecture for extracting supply chain information from raw text. Additional experiments will be done to see what changes contribute the most to the model's increase in performance, as per the GenRES framework. 
 
