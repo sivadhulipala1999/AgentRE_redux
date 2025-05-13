@@ -1,19 +1,19 @@
 
 from config.configurator import configs
 from models.base_model import BaseModel
-import re, json
+import re
+import json
 import importlib
 from modules.tools import MEMORY_NAME2TOOL
 from trainer.metrics_v2 import EvaluatorRE
 from modules.memory.memory import CorrectMemory, BaseMemory, ReflexionMemory
 from data_utils.data_handler_re import DataHandlerRE
-from modules.module_utils import format_sample_str
+from modules.module_utils import format_sample_str, format_reflexion_sample_str
 from modules.prompt.prompter import PrompterReActMemory
 
 SUCCESS = 0
 NO_RESULT_WITHIN_MAX_ITERATIONS = -1
 NO_VALID_RESULT_WITHIN_MAX_RETRY = -2
-
 
 
 class ReAct_Memory(BaseModel):
@@ -28,12 +28,12 @@ class ReAct_Memory(BaseModel):
     history: list = []              # for recording the history, CLEARED in each iteration
     tools: dict = {}                # list of tools
     memory_names: list = []         # list of memories
-    prompter: PrompterReActMemory   # 
+    prompter: PrompterReActMemory   #
 
     # is_training = configs['train']['if_train']
-    evaluator:EvaluatorRE = EvaluatorRE()
+    evaluator: EvaluatorRE = EvaluatorRE()
 
-    def __init__(self, data_handler:DataHandlerRE):
+    def __init__(self, data_handler: DataHandlerRE):
         super().__init__(data_handler)
         if configs['train']['if_predict'] or configs['train']['if_train']:
             self.init_memorys()
@@ -58,7 +58,7 @@ class ReAct_Memory(BaseModel):
             tool = getattr(module, tool_name)(self.data_handler)
             self.tools[tool_name] = tool
         self.logger.info(f"Tools: {self.tools}")
-    
+
     # NEW: init memory
     def init_memorys(self):
         if configs['memory']['CorrectMemory']['open']:
@@ -68,10 +68,17 @@ class ReAct_Memory(BaseModel):
             # init correct memory with few-shot
             num_samples_init = configs['memory']['CorrectMemory']['num_samples_init']
             if num_samples_init > 0:
-                self.logger.info(f"Init correct memory with {num_samples_init} samples.")
-                samples_ds = self.data_handler.ds_index.select(range(num_samples_init))
+                self.logger.info(
+                    f"Init correct memory with {num_samples_init} samples.")
+                samples_ds = self.data_handler.ds_index.select(
+                    range(num_samples_init))
                 samples_list = [samples_ds[i] for i in range(num_samples_init)]
                 self.record_correct_memory(samples_list)
+
+        # if configs['memory']['IncorrectMemory']['open']:
+        #     self.memory_names.append('IncorrectMemory')
+        #     self.data_handler.incorrect_memory = IncorrectMemory()
+
         if configs['memory']['ReflexionMemory']['open']:
             self.memory_names.append('ReflexionMemory')
             self.data_handler.reflexion_memory = ReflexionMemory()
@@ -81,31 +88,42 @@ class ReAct_Memory(BaseModel):
         debug = True
 
         text = json.dumps(text.strip(), ensure_ascii=False)
-        if debug: self.logger.info(f"[idx={idx}] Input: {text}")
+        if debug:
+            self.logger.info(f"[idx={idx}] Input: {text}")
         history = []       # clear the history!
 
         # ReAct-fashion
         for _ in range(self.max_iterations):
             prompt = self.generate_prompt(text)
-            if idx < 5: self.log_prompt(prompt)
+            if idx < 5:
+                self.log_prompt(prompt)
             for _ in range(self.max_retry):
-                llm_output = self.query_llm(prompt, stop=self.stop, temperature=0.5)    # can try different parameters
+                # can try different parameters
+                llm_output = self.query_llm(
+                    prompt, stop=self.stop, temperature=0.5)
                 err_code, parsed_res = self.parse_output(llm_output)
                 if err_code == -1:
-                    if debug: self.logger.error(f"error in parse_output: {llm_output}")
+                    if debug:
+                        self.logger.error(
+                            f"error in parse_output: {llm_output}")
                     continue
                 thought, action_name, args = parsed_res
                 if action_name not in self.tools:
-                    if debug: self.logger.error(f"error action_name: {action_name}. llm_output: {llm_output}")
+                    if debug:
+                        self.logger.error(
+                            f"error action_name: {action_name}. llm_output: {llm_output}")
                     continue
                 if action_name == "Finish":
                     err_code, spo_list = self.parse_llm_output(args)
                     if err_code == -1:
-                        if debug: self.logger.error(f"error in parse_llm_output: {args}. llm_output: {llm_output}")
+                        if debug:
+                            self.logger.error(
+                                f"error in parse_llm_output: {args}. llm_output: {llm_output}")
                         continue
                 break
             else:
-                self.logger.error(f"[ERROR] Failed to generate valid output after 5 iterations.")
+                self.logger.error(
+                    f"[ERROR] Failed to generate valid output after 5 iterations.")
                 return {
                     "spo_list_pred": [],
                     "history": history.copy(),
@@ -114,13 +132,15 @@ class ReAct_Memory(BaseModel):
                 }
 
             history.append(f"Thought: {thought}")
-            if debug: self.logger.info(f"Thought: {thought}")
+            if debug:
+                self.logger.info(f"Thought: {thought}")
             if action_name == "Finish":
                 err_code, spo_list = self.parse_llm_output(args)
 
                 finish_output = json.dumps(args, ensure_ascii=False)
                 history.append(f"Finish: {finish_output}")
-                if debug: self.logger.info(f"Finish: {finish_output}")
+                if debug:
+                    self.logger.info(f"Finish: {finish_output}")
                 return {
                     "spo_list_pred": spo_list,
                     "history": history.copy(),
@@ -135,7 +155,8 @@ class ReAct_Memory(BaseModel):
                     self.logger.info(f"Action: {action_name}({args})")
                     self.logger.info(f"Observation: {observation}")
         else:
-            self.logger.error(f"[ERROR] Failed to generate valid output after 5 iterations.")
+            self.logger.error(
+                f"[ERROR] Failed to generate valid output after 5 iterations.")
             return {
                 "spo_list_pred": [],
                 "history": history.copy(),
@@ -151,11 +172,12 @@ class ReAct_Memory(BaseModel):
         self.history = []
 
         text_str = json.dumps(sample['text'].strip(), ensure_ascii=False)
-        if self.debug: self.logger.info(f"[idx={idx}] Input: {text_str}")
+        if self.debug:
+            self.logger.info(f"[idx={idx}] Input: {text_str}")
 
         # Outer loop: ReAct-fashion action search with max_iterations limit
         for _ in range(self.max_iterations):
-            # [0] prompt 
+            # [0] prompt
             prompt = self.generate_prompt(text_str)
             # if idx < 5: self.log_prompt(prompt)
             # Inner loop: try single action with max_retry limit
@@ -167,27 +189,39 @@ class ReAct_Memory(BaseModel):
 
             # [1] thought
             self.history.append(f"Thought: {thought}")
-            if self.debug: self.logger.info(f"Thought: {thought}")
+            if self.debug:
+                self.logger.info(f"Thought: {thought}")
 
             # [2] action
             if action_name == "Finish":
-                err_code, spo_list_pred = self.parse_llm_output(json.loads(args))
+                err_code, spo_list_pred = self.parse_llm_output(
+                    json.loads(args))
                 if err_code < 0:
-                    self.logger.error(f"[ERROR] error in parse_llm_output: {args}")
+                    self.logger.error(
+                        f"[ERROR] error in parse_llm_output: {args}")
                 self.history.append(f"Finish: {args}")
-                if self.debug: self.logger.info(f"Finish: {args}")
+                if self.debug:
+                    self.logger.info(f"Finish: {args}")
                 # NEW: add refexion!
                 f1 = self.get_eval_result(sample['spo_list'], spo_list_pred)
                 if f1 < 1.0:
-                    reflexion_text = self.get_reflexion(text_str, sample['spo_list'], spo_list_pred)
+                    reflexion_sample = self.get_reflexion(
+                        text_str, sample['spo_list'], spo_list_pred)
+                    reflexion_text = json.dumps(
+                        reflexion_sample, ensure_ascii=False)
                     self.history.append(f"Reflexion: {reflexion_text}")
-                    if self.debug: self.logger.info(f"Reflexion: {reflexion_text}")
+                    if self.debug:
+                        self.logger.info(f"Reflexion: {reflexion_text}")
+                    self.record_reflexion_memory(reflexion_sample)
                 else:
-                    pass
+                    # self.record_correct_memory(sample)
+                    break  # Break when the f1 score is big enough
                 # NOTE: break when Finsh?
-                break
+                # break
             else:
                 # If not "Finish", exec and generate observation
+                if action_name == "Finish":
+                    continue
                 observation = self.tools[action_name].call(args)
                 self.history.append(f"Action: {action_name}({args})")
                 self.history.append(f"Observation: {observation}")
@@ -196,16 +230,19 @@ class ReAct_Memory(BaseModel):
                     self.logger.info(f"Observation: {observation}")
         else:
             err_code = NO_RESULT_WITHIN_MAX_ITERATIONS
-            self.logger.error(f"[ERROR] Failed to generate valid output after 5 iterations.")
-        
+            self.logger.error(
+                f"[ERROR] Failed to generate valid output after 5 iterations.")
+
         # NEW: record into CorrectMemory!
         self.record_correct_memory(sample)
 
         # NEW: summary!
         if self.use_summary:
-            summary_str = self.get_summary(text_str, sample['spo_list'], self.history)
+            summary_str = self.get_summary(
+                text_str, sample['spo_list'], self.history)
             self.history.append(f"Summary: {summary_str}")
-            if self.debug: self.logger.info(f"Summary: {summary_str}")
+            if self.debug:
+                self.logger.info(f"Summary: {summary_str}")
         return {
             "spo_list_pred": spo_list_pred,
             "history": self.history.copy(),
@@ -218,26 +255,33 @@ class ReAct_Memory(BaseModel):
         return: err_code, (thought, action_name, args) 
         """
         for _ in range(self.max_retry):
-            llm_output = self.query_llm(prompt, stop=self.stop, temperature=0.5)
+            llm_output = self.query_llm(
+                prompt, stop=self.stop, temperature=0.5)
             # 1. parse the output
             err_code, parsed_res = self.parse_output(llm_output)
             if err_code == -1:
-                if self.debug: self.logger.error(f"error in parse_output: {llm_output}")
+                if self.debug:
+                    self.logger.error(f"error in parse_output: {llm_output}")
                 continue
             # 2. Action need to be valid
             thought, action_name, args = parsed_res
             if action_name not in self.tools:
-                if self.debug: self.logger.error(f"error action_name: {action_name}. llm_output: {llm_output}")
+                if self.debug:
+                    self.logger.error(
+                        f"error action_name: {action_name}. llm_output: {llm_output}")
                 continue
             # 3. if "Finish", try to parse LLM output
             if action_name == "Finish":
                 err_code, spo_list_pred = self.parse_llm_output(args)
                 if err_code == -1:
-                    if self.debug: self.logger.error(f"error in parse_llm_output: {args}. llm_output: {llm_output}")
+                    if self.debug:
+                        self.logger.error(
+                            f"error in parse_llm_output: {args}. llm_output: {llm_output}")
                     continue
             return 0, (thought, action_name, json.dumps(args, ensure_ascii=False))
         else:
-            self.logger.error(f"[ERROR] Failed to generate valid output after 5 iterations.")
+            self.logger.error(
+                f"[ERROR] Failed to generate valid output after 5 iterations.")
             return NO_VALID_RESULT_WITHIN_MAX_RETRY, (None, None, None)
 
     def record_correct_memory(self, sample):
@@ -252,23 +296,39 @@ class ReAct_Memory(BaseModel):
         else:
             raise Exception(f"Unknown sample type: {type(sample)}")
 
-    def get_reflexion(self, text, gloden, pred):
+    def get_reflexion(self, text, golden, pred):
         """ {text, xxx} """
-        # prompt = TEMPLATE_REFLEXION.format(text=text, golden=json.dumps(gloden, ensure_ascii=False), pred=json.dumps(pred, ensure_ascii=False))
-        prompt = self.prompter.get_reflexion_prompt(text, gloden, pred)
-        llm_output = self.query_llm(prompt, stop=self.stop, temperature=0).strip()
+        # prompt = TEMPLATE_REFLEXION.format(text=text, golden=json.dumps(golden, ensure_ascii=False), pred=json.dumps(pred, ensure_ascii=False))
+        prompt = self.prompter.get_reflexion_prompt(text, golden, pred)
+        llm_output = self.query_llm(
+            prompt, stop=self.stop, temperature=0).strip()
         reflexion = {
             "text": text,
-            "golden": gloden,
+            "golden": golden,
             "pred": pred,
             "reflexion": llm_output,
         }
-        return json.dumps(reflexion, ensure_ascii=False)
+        return reflexion  # json.dumps(reflexion, ensure_ascii=False)
+
+    def record_reflexion_memory(self, reflexion_sample):
+        """ 
+        sample: {text, golden, pred, reflexion} """
+        if isinstance(reflexion_sample, list):
+            index_texts = [format_reflexion_sample_str(
+                s) for s in reflexion_sample]
+            self.data_handler.reflexion_memory.add(index_texts)
+        elif isinstance(reflexion_sample, dict):
+            index_text = format_reflexion_sample_str(reflexion_sample)
+            self.data_handler.reflexion_memory.add(index_text)
+        else:
+            raise Exception(
+                f"Unknown reflexion sample type: {type(reflexion_sample)}")
 
     def get_summary(self, text, golden, history):
         """ {text, golden, history} """
         prompt = self.prompter.get_summary_prompt(text, golden, history)
-        llm_output = self.query_llm(prompt, stop=self.stop, temperature=0).strip()
+        llm_output = self.query_llm(
+            prompt, stop=self.stop, temperature=0).strip()
         return json.dumps(llm_output, ensure_ascii=False)
 
     def get_eval_result(self, golden, pred):
@@ -285,7 +345,8 @@ class ReAct_Memory(BaseModel):
         return f1
 
     def generate_prompt(self, text):
-        tools_desc = "\n".join([f"- {tool.name}: {tool.get_description()}" for tool in self.tools.values()])
+        tools_desc = "\n".join(
+            [f"- {tool.name}: {tool.get_description()}" for tool in self.tools.values()])
         task_description = self.tools['GetTaskDescription'].call()
         retrieved_examples = self.tools['RetrieveCorrectMemory'].call(text)
         prompt = self.prompter.get_react_prompt(text, tools_desc) + \
@@ -301,8 +362,14 @@ class ReAct_Memory(BaseModel):
                 self.logger.info(f"Observation: {task_description}")
                 self.logger.info(f"Action: RetrieveCorrectMemory({text})")
                 self.logger.info(f"Observation: {retrieved_examples}")
-        for history in self.history[self.num_pre_history * 2:]:             # Action+Observation
-            prompt += history + "\n" 
+        # Action+Observation
+        # for history in self.history[self.num_pre_history * 2:]:
+        if len(self.history) >= self.num_pre_history * 2:
+            retrieved_reflexion_examples = self.tools['RetrieveReflexionMemory'].call(
+                text)
+            prompt += self.prompter.get_reflexion_step(
+                text, retrieved_reflexion_examples)
+            # prompt += history + "\n"
         prompt += self.prompter.get_react_suffix()
         return prompt
 
@@ -319,5 +386,3 @@ class ReAct_Memory(BaseModel):
 
         except Exception as e:
             return -1, None
-
-

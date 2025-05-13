@@ -6,6 +6,7 @@ ipywidgets
 evaluate
 langchain
 langchain_openai
+faiss-gpu
 openapi_pydantic
 serpapi
 google-search-results

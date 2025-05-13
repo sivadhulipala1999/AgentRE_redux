@@ -1,5 +1,5 @@
 TEMPLATE_REACT_EN = \
-"""Do your best to identify the relation triples that meet the standard format requirements from the given sentence.
+    """Do your best to identify the relation triples that meet the standard format requirements from the given sentence.
 
 You can use the following tools:
 {tools}
@@ -15,29 +15,35 @@ Begin!
 The input sentence is `{text}`\n
 """
 FIRST_STEP_EN = \
-"""Thought: First, I need to know more about the definition and output format of the relation triple extraction task.
+    """Thought: First, I need to know more about the definition and output format of the relation triple extraction task.
 Action: GetTaskDescription
 ActionInput:
 Observation: {task_description}\n"""
 SECOND_STEP_EN = \
-"""Thought: I can first observe some already labeled relation triples to better understand this task.
+    """Thought: I can first observe some already labeled relation triples to better understand this task.
 Action: RetrieveExamples
 ActionInput: {text}
 Observation: {retrieved_examples}\n"""
 SUFFIX = """Thought: """
 
 SECOND_STEP_MEMORY_EN = \
-"""Thought: I can find some examples from the existing correct examples to help me understand this task.
+    """Thought: I can find some examples from the existing correct examples to help me understand this task.
 Action: RetrieveCorrectMemory
 ActionInput: {text}
 Observation: {retrieved_examples}\n"""
 
+REFLEXION_STEP_EN = \
+    """Thought: I can review my previous reflections for the given text to improve my prediction.
+Action: RetrieveReflexionMemory
+ActionInput: {text}
+Observation: {retrieved_examples}\n"""
+
 TEMPLATE_REFLEXION_EN = \
-"""In the relation extraction task, for the input sentence `{text}`, the correct result should be `{golden}`. But the model's output result is `{pred}`.
+    """In the relation extraction task, for the input sentence `{text}`, the correct result should be `{golden}`. But the model's output result is `{pred}`.
 Please summarize the reason for the error in one sentence: """
 
 TEMPLATE_SUMMAY_EN = \
-"""In the relation extraction task, for the input sentence `{text}`, the correct result should be `{golden}`. Here is the extraction process that can be referred to:
+    """In the relation extraction task, for the input sentence `{text}`, the correct result should be `{golden}`. Here is the extraction process that can be referred to:
 ```
 {history}
 ```

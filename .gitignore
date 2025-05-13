@@ -15,3 +15,7 @@ log/
 ref/
 data/
 *cache/
+
+# venv 
+agentre_redux_env/
+.venv/

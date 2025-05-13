@@ -19,7 +19,7 @@ train:
 data:
   type: re
   name: DuIE2.0
-  language: zh
+  language: en # zh
   num_samples: 20
   num_samples_index: 1000
 

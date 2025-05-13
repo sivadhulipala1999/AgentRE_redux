@@ -1,7 +1,8 @@
 """ 
 modified from https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/information_extraction/DuIE
 """
-import re, json
+import re
+import json
 # from logging import getLogger
 # logger = getLogger('train_logger')
 
@@ -19,11 +20,12 @@ class EvaluatorBase(FormatorUtils):
         _init_audit: 初始化审计项目
     get_metric: 获取指标
     """
+
     def __init__(self):
         self.last = dict()
         self._init_audit()
         self._init_metric()
-    
+
     def _init_metric(self):
         # must be overrided to init self.metric
         self.metric = MetricBase()
@@ -47,7 +49,7 @@ class EvaluatorBase(FormatorUtils):
             AuditRetard(),
             AuditWhatever()
         ]
-    
+
     def _update_audit(self):
         # override if necessary
         for audit in self.audit:
@@ -74,7 +76,7 @@ class EvaluatorBase(FormatorUtils):
         self.last['metric'] = self.metric
 
         self._update_audit()
-    
+
     def add_batch(self, json_data, predict):
         for i, j in zip(json_data, predict):
             self.add(i, j)
@@ -88,9 +90,10 @@ class EvaluatorBase(FormatorUtils):
     def get_audit_report(self):
         '获取所有审计项结果报告，返回一个json-like object'
         return {
-            a.get_name() : a.get_report()
+            a.get_name(): a.get_report()
             for a in self.audit
         }
+
     def dump_audit_report(self, fpath):
         with open(fpath, 'w', encoding='utf-8') as f:
             json.dump(self.get_audit_report(), f, indent=4, ensure_ascii=False)
@@ -98,6 +101,7 @@ class EvaluatorBase(FormatorUtils):
 
 class EvaluatorRE(EvaluatorBase):
     keys = ['subject', 'predicate', 'object']
+
     def _init_metric(self):
         self.metric = MetricF1()
 
@@ -112,7 +116,10 @@ class EvaluatorRE(EvaluatorBase):
     #     return y_truth, y_pred
 
     def _format_triplet(self, triplet):
-        triplet_ = [triplet[k] for k in self.keys]
+        # triplet_ = [triplet[k] for k in self.keys]
+        # reorganize the triplet to have subject, predicate and then object
+        triplet_ = [triplet['subject'],
+                    triplet['predicate'], triplet['object']]
         triplet_str = "|".join(triplet_)
         return triplet_str
 

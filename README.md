@@ -1,34 +1,11 @@
 
-# AgentRE
+# AgentRE - redux 
 
-This repository contains code for paper "**AgentRE: An Agent-Based Framework for Navigating Complex Information Landscapes in Relation Extraction**".
+This repository is based on the paper "**AgentRE: An Agent-Based Framework for Navigating Complex Information Landscapes in Relation Extraction**". Go to <a href="https://github.com/Lightblues/AgentRE/"> AgentRE's original repo </a> for a better overview of what was done. 
 
-## Run
+As a part of my master thesis, my aim is to improve upon the original AgentRE architecture for extracting supply chain information from raw text. Additional experiments will be done to see what changes contribute the most to the model's increase in performance, as per the GenRES framework. 
 
-1. download the datasets: you can download `SciERC` from [here](http://nlp.cs.washington.edu/sciIE/) and `DuIE2.0` from [here](https://aistudio.baidu.com/competition/detail/65/0/introduction).
-2. process the datasets: see [data_preprocessor.py](src/data_utils/data_preprocessor.py).
-3. prepare the python environment: see [requirements.txt](requirements.txt).
-4. config and run: select or make your own config file in `src/config` folder, and run with [main.py](src/main.py).
+Prior to this, the following discrepancies between the code and the paper will be addressed. 
+<li>The reflexion memory mechanism does not contribute in any way to the response generation process. This will be changed by adding a reflection step in the ReAct prompt-set and the model will be made to focus on the reflection in case of an incorrect response.</li>
+<li>The relevant information retrieval mechanism which extracts information about the entities in the query to include as part of its context, does not actually work as part of the ReAct prompt. This will be fixed by including a step to do the extraction before proceeding with the response generation, thus enhancing the CoT process.</li>
 
-```sh
-# a sample bash script to run
-bash run.sh
-```
-
-
-## Cite
-
-```bib
-@inproceedings{shi2024agentre,
-  author = {Yuchen Shi and Guochao Jiang and Tian Qiu and Deqing Yang},
-  title = {AgentRE: An Agent-Based Framework for Navigating Complex Information Landscapes in Relation Extraction},
-  booktitle = {Proceedings of the 33rd ACM International Conference on Information and Knowledge Management (CIKM '24)},
-  year = {2024},
-  month = {October},
-  publisher = {ACM},
-  address = {Boise, ID, USA},
-  doi = {10.1145/3627673.3679791},
-  isbn = {979-8-4007-0436-9/24/10},
-}
-
-```

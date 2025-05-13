@@ -3,11 +3,12 @@ repo: https://github.com/openai/openai-python
 API: https://platform.openai.com/docs/guides/text-generation
 """
 
+from config.configurator import configs
 from diskcache import Cache
 cache = Cache('./cache/gpt.cache')
-from config.configurator import configs
 
 GENERATIVE_MODELAS = ["gpt-3.5-turbo-instruct", ]
+
 
 class OpenAIClient:
     model_name: str = "gpt-3.5-turbo"
@@ -19,17 +20,21 @@ class OpenAIClient:
     use_cache: bool = configs['llm']['use_cache'] if 'use_cache' in configs['llm'] else False
     # cache_key: str = configs['llm']['cache_key'] if 'cache_key' in configs['llm'] else 'default_cache_key'
 
-    def __init__(self, model_name:str=None, temperature:float=None, max_tokens:int=None):
+    def __init__(self, model_name: str = None, temperature: float = None, max_tokens: int = None):
         from openai import OpenAI
-        self.client = OpenAI()
-        if model_name: self.model_name = model_name
-        if temperature: self.temperature = temperature
-        if max_tokens: self.max_tokens = max_tokens
+        self.client = OpenAI(
+            api_key="")
+        if model_name:
+            self.model_name = model_name
+        if temperature:
+            self.temperature = temperature
+        if max_tokens:
+            self.max_tokens = max_tokens
         self.is_generative_model = self.model_name in GENERATIVE_MODELAS
 
     def query_chat(self, text, stop=None, temperature=None) -> str:
         chat_completion = self.client.chat.completions.create(
-            messages=[{ "role": "user", "content": text,}],
+            messages=[{"role": "user", "content": text, }],
             model=self.model_name,
             temperature=self.temperature if temperature is None else temperature,
             max_tokens=self.max_tokens,
@@ -54,15 +59,17 @@ class OpenAIClient:
             return cache.get(cache_key_)
         else:
             if self.is_generative_model:
-                res = self.query_generative(text, stop=stop, temperature=temperature)
+                res = self.query_generative(
+                    text, stop=stop, temperature=temperature)
             else:
                 res = self.query_chat(text, stop=stop, temperature=temperature)
             cache.set(cache_key_, res)
         return res
+
     def query_one_stream(self, text) -> None:
         """ Just for test! """
         stream = self.client.chat.completions.create(
-            messages=[{ "role": "user", "content": text,}],
+            messages=[{"role": "user", "content": text, }],
             model=self.model_name,
             temperature=self.temperature,
             stream=True,
@@ -87,7 +94,7 @@ class OpenAIClient:
     def clear_history(self):
         self.history = []
 
-    def chat_with_history(self, history:list, stop=None, temperature=None) -> str:
+    def chat_with_history(self, history: list, stop=None, temperature=None) -> str:
         chat_completion = self.client.chat.completions.create(
             messages=history,
             model=self.model_name,

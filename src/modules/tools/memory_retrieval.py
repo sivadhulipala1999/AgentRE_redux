@@ -1,6 +1,7 @@
 from modules.tools.base_tool import BaseTool
 from config.configurator import configs
 
+
 class RetrieveCorrectMemory(BaseTool):
     """ see['memory']['CorrectMemory'] """
     name: str = "RetrieveCorrectMemory"
@@ -13,6 +14,7 @@ class RetrieveCorrectMemory(BaseTool):
     def call(self, query):
         return self.correct_memory.query(query)
 
+
 class RetrieveReflexionMemory(BaseTool):
     """ see ['memory']['ReflexionMemory'] """
     name: str = "RetrieveReflexionMemory"
@@ -24,4 +26,3 @@ class RetrieveReflexionMemory(BaseTool):
 
     def call(self, query):
         return self.reflexion_memory.query(query)
-

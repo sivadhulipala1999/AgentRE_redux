@@ -1,6 +1,7 @@
 from modules.retrieval.index import DummyIndex, SimCSEIndex, BGEIndex, BaseIndex, MODE2INDEX
 from config.configurator import configs
 
+
 class BaseMemory:
     """ memory ~ RetrieveExamples
     variables
@@ -43,11 +44,13 @@ class BaseMemory:
         matched_idxs = self.index.query_indexs(query, top_k)
         return self.index.get_texts(matched_idxs)
 
+
 class CorrectMemory(BaseMemory):
     def init(self):
         self.memory_idx_mode = configs['memory']['CorrectMemory']['mode']
         self.memory_k = configs['memory']['CorrectMemory']['k']
         self.index = MODE2INDEX[self.memory_idx_mode]()
+
 
 class ReflexionMemory(BaseMemory):
     def init(self):

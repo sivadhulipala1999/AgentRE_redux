@@ -8,10 +8,9 @@ import json
 from typing import List
 
 
-
 class BasePormpter:
     def __init__(self, data_handler):
-        self.data_handler:DataHandlerRE = data_handler
+        self.data_handler: DataHandlerRE = data_handler
         self.logger = getLogger('train_logger')
         self.language = data_handler.data_meta.language
 
@@ -33,12 +32,15 @@ class PrompterReActFSL(BasePormpter):
             raise ValueError(f"Unsupported language: {self.language}")
         self.SUFFIX = SUFFIX
 
-    def get_react_prompt(self, text:str, tools_desc:str):
+    def get_react_prompt(self, text: str, tools_desc: str):
         return self.TEMPLATE_REACT.format(tools=tools_desc, text=text)
-    def get_react_first_step(self, task_description:str):
+
+    def get_react_first_step(self, task_description: str):
         return self.FIRST_STEP.format(task_description=task_description)
-    def get_react_second_step(self, text:str, retrieved_examples:str):
+
+    def get_react_second_step(self, text: str, retrieved_examples: str):
         return self.SECOND_STEP.format(text=text, retrieved_examples=retrieved_examples)
+
     def get_react_suffix(self):
         return SUFFIX
 
@@ -48,6 +50,7 @@ class PrompterReActMemory(BasePormpter):
     - second step 中的召回接口不同
     - 增加 Refelxion
     """
+
     def __init__(self, data_handler):
         super().__init__(data_handler)
         if self.language == "zh":
@@ -62,26 +65,33 @@ class PrompterReActMemory(BasePormpter):
             self.FIRST_STEP = FIRST_STEP_EN
             self.SECOND_STEP = SECOND_STEP_MEMORY_EN
             self.TEMPLATE_SUMMAY = TEMPLATE_SUMMAY_EN
+            self.REFLEXION_STEP = REFLEXION_STEP_EN
         else:
             raise ValueError(f"Unsupported language: {self.language}")
         self.SUFFIX = SUFFIX
 
-    def get_react_prompt(self, text:str, tools_desc:str):
+    def get_react_prompt(self, text: str, tools_desc: str):
         return self.TEMPLATE_REACT.format(tools=tools_desc, text=text)
-    def get_react_first_step(self, task_description:str):
+
+    def get_react_first_step(self, task_description: str):
         return self.FIRST_STEP.format(task_description=task_description)
-    def get_react_second_step(self, text:str, retrieved_examples:str):
+
+    def get_react_second_step(self, text: str, retrieved_examples: str):
         return self.SECOND_STEP.format(text=text, retrieved_examples=retrieved_examples)
+
+    def get_reflexion_step(self, text: str, retrieved_reflexion_samples: str):
+        return self.REFLEXION_STEP.format(text=text, retrieved_examples=retrieved_reflexion_samples)
+
     def get_react_suffix(self):
         return SUFFIX
 
-    def get_reflexion_prompt(self, text:str, golden:str, pred:str):
-        golden, pred = json.dumps(golden, ensure_ascii=False), json.dumps(pred, ensure_ascii=False)
+    def get_reflexion_prompt(self, text: str, golden: str, pred: str):
+        golden, pred = json.dumps(golden, ensure_ascii=False), json.dumps(
+            pred, ensure_ascii=False)
         return self.TEMPLATE_REFLEXION.format(text=text, golden=golden, pred=pred)
-    def get_summary_prompt(self, text:str, golden:str, history:List[str]):
+
+    def get_summary_prompt(self, text: str, golden: str, history: List[str]):
         if isinstance(golden, list):
             golden = json.dumps(golden, ensure_ascii=False)
         history = "\n".join(history)
         return self.TEMPLATE_SUMMAY.format(text=text, golden=golden, history=history)
-
-

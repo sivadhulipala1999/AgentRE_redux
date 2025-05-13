@@ -1,11 +1,11 @@
+from datasets import Dataset
+import json
 from modules.tools.base_tool import BaseTool
 from config.configurator import configs
 from modules.retrieval.index import DummyIndex, SimCSEIndex, BGEIndex, BaseIndex, MODE2INDEX
 from modules.module_utils import format_sample, format_sample_str
 from logging import getLogger
 logger = getLogger('train_logger')
-import json
-from datasets import Dataset
 
 
 class RetrieveExamples(BaseTool):
@@ -16,28 +16,34 @@ class RetrieveExamples(BaseTool):
     mode: str               # dummy/simcse/bge
     k: int                  # the max k for retrieval
     ds_index = None         # dataset for retrieval
-    index:BaseIndex = None  # the index model
+    index: BaseIndex = None  # the index model
 
     def init(self):
-        self.mode = configs['tools']['RetrieveExamples']['mode']     # dummy/simcse/bge
-        self.k = configs['tools']['RetrieveExamples']['k'] 
+        # dummy/simcse/bge
+        self.mode = configs['tools']['RetrieveExamples']['mode']
+        self.k = configs['tools']['RetrieveExamples']['k']
 
         self.ds_index = self.data_handler.ds_index
-        logger.info(f"RetrieveExamples: mode={self.mode}, k={self.k}, ds_index={len(self.ds_index)}")
+        logger.info(
+            f"RetrieveExamples: mode={self.mode}, k={self.k}, ds_index={len(self.ds_index)}")
         self.build_index()
         logger.info(f"RetrieveExamples: index built.")
-    
+
     def build_index(self):
         index_texts = self.generate_index_texts(self.ds_index)
         self.index = MODE2INDEX[self.mode]()
         self.index.add(index_texts)
 
-    def generate_index_texts(self, ds:Dataset):
+    def generate_index_texts(self, ds: Dataset):
         index_texts = [format_sample_str(i) for i in ds]
         return index_texts
 
     def call(self, query):
         matched_idxs = self.index.query_indexs(query, top_k=self.k)
-        samples = self.ds_index.select(matched_idxs)
+        matched_idxs2 = []
+        for idx in matched_idxs:
+            if idx != -1:
+                matched_idxs2.append(idx)
+        samples = self.ds_index.select(matched_idxs2)
         samples_str = [format_sample(i) for i in samples]
         return json.dumps(samples_str, ensure_ascii=False)

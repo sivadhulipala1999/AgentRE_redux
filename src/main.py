@@ -8,10 +8,11 @@ from data_utils.data_handler_re import DataHandlerRE
 from models.build_model import build_model
 from trainer.build_trainer import build_trainer
 
+
 def main():
     # First Step: Create data_handler
     init_seed()
-    data_handler:DataHandlerRE = build_data_handler()
+    data_handler: DataHandlerRE = build_data_handler()
     data_handler.load_data()
 
     # Second Step: Create model
@@ -21,7 +22,7 @@ def main():
     logger = Logger()
 
     # Fourth Step: Create trainer
-    trainer:Trainer = build_trainer(data_handler, logger)
+    trainer: Trainer = build_trainer(data_handler, logger)
 
     # train
     if configs['train']['if_train']:
@@ -36,6 +37,5 @@ def main():
     if configs['train']['if_evaluate']:
         trainer.evaluate(model)
 
+
 main()
-
-
