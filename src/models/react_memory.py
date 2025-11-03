@@ -222,6 +222,9 @@ class ReAct_Memory(BaseModel):
                 # If not "Finish", exec and generate observation
                 if action_name == "Finish":
                     continue
+                if action_name is None:
+                    self.logger.warn("No action detected")
+                    continue
                 observation = self.tools[action_name].call(args)
                 self.history.append(f"Action: {action_name}({args})")
                 self.history.append(f"Observation: {observation}")
@@ -252,7 +255,7 @@ class ReAct_Memory(BaseModel):
 
     def get_single_step(self, prompt):
         """ Try get single step action with self.max_retry
-        return: err_code, (thought, action_name, args) 
+        return: err_code, (thought, action_name, args)
         """
         for _ in range(self.max_retry):
             llm_output = self.query_llm(
@@ -285,7 +288,7 @@ class ReAct_Memory(BaseModel):
             return NO_VALID_RESULT_WITHIN_MAX_RETRY, (None, None, None)
 
     def record_correct_memory(self, sample):
-        """ 
+        """
         sample: {text, spo_list} """
         if isinstance(sample, list):
             index_texts = [format_sample_str(s) for s in sample]
@@ -332,8 +335,8 @@ class ReAct_Memory(BaseModel):
         return json.dumps(llm_output, ensure_ascii=False)
 
     def get_eval_result(self, golden, pred):
-        """ 
-        return: 
+        """
+        return:
             triplet_correct, triplet_wrong ?
         """
         self.evaluator.add(golden, pred)
@@ -349,19 +352,26 @@ class ReAct_Memory(BaseModel):
             [f"- {tool.name}: {tool.get_description()}" for tool in self.tools.values()])
         task_description = self.tools['GetTaskDescription'].call()
         retrieved_examples = self.tools['RetrieveCorrectMemory'].call(text)
+        entity_info = self.tools['RetrieveRelevantInfo'].call(text)
         prompt = self.prompter.get_react_prompt(text, tools_desc) + \
             self.prompter.get_react_first_step(task_description) + \
-            self.prompter.get_react_second_step(text, retrieved_examples)
+            self.prompter.get_react_second_step(
+                text, retrieved_examples)  # + \
+        # self.prompter.get_entity_info_step(text, entity_info)
         if len(self.history) == 0:
             self.history.append(f"Action: GetTaskDescription()")
             self.history.append(f"Observation: {task_description}")
             self.history.append(f"Action: RetrieveCorrectMemory({text})")
             self.history.append(f"Observation: {retrieved_examples}")
+            self.history.append(f"Action: RetrieveRelevantInfo({text})")
+            self.history.append(f"Observation: {entity_info}")
             if self.debug:
                 self.logger.info(f"Action: GetTaskDescription()")
                 self.logger.info(f"Observation: {task_description}")
                 self.logger.info(f"Action: RetrieveCorrectMemory({text})")
                 self.logger.info(f"Observation: {retrieved_examples}")
+                self.logger.info(f"Action: RetrieveRelevantInfo({text})")
+                self.logger.info(f"Observation: {entity_info}")
         # Action+Observation
         # for history in self.history[self.num_pre_history * 2:]:
         if len(self.history) >= self.num_pre_history * 2:
@@ -369,20 +379,26 @@ class ReAct_Memory(BaseModel):
                 text)
             prompt += self.prompter.get_reflexion_step(
                 text, retrieved_reflexion_examples)
-            # prompt += history + "\n"
+            for hist_event in self.history:
+                prompt += str(hist_event)
+            prompt += "\n"
         prompt += self.prompter.get_react_suffix()
         return prompt
 
     def parse_output(self, llm_output: str):
         try:
             # regex = r"(.*?)\nAction:(.*?)\nActionInput:[\s]*(.*)"
-            regex = r"(.*?)Action:(.*?)\nActionInput:[\s]*(.*)"
-            match = re.search(regex, llm_output, re.DOTALL)
-            thought = match.group(1).strip()
-            action = match.group(2).strip()
-            args = match.group(3).strip()
-            thought = json.dumps(thought, ensure_ascii=False)
-            return 0, (thought, action, args)
+            react_regex = r"(.*?)Action:(.*?)\nActionInput:[\s]*(.*)"
+            result_regex = r"(.*?)spo_list(.*))"
+            match = re.search(react_regex, llm_output, re.DOTALL)
+            if match:
+                thought = match.group(1).strip()
+                action = match.group(2).strip()
+                args = match.group(3).strip()
+                thought = json.dumps(thought, ensure_ascii=False)
+                return 0, (thought, action, args)
+            else:
+                return 0, ("", "Finish", llm_output)
 
         except Exception as e:
             return -1, None

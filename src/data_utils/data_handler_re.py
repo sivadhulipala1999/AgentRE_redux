@@ -17,6 +17,7 @@ class DataName(Enum):
     """ standardized data name """
     DuIE2_0 = "DuIE2.0"
     SciERC = "SciERC"
+    Wikidata = "Wikidata"
 
 
 class DataMeta:
@@ -62,6 +63,15 @@ class DatMetaSciERC(DataMeta):
         self.language = "en"
 
 
+class DatMetaWikidata(DataMeta):
+    ddir = f"{rdir}/src/data/Wikidata"
+    odir = f"{rdir}/out/Wikidata"
+
+    def __init__(self, model_name):
+        super().__init__(model_name)
+        self.language = "en"
+
+
 class DataHandlerRE:
     num_samples: int = -1           # Only use partial data, for debug
     num_samples_index: int = -1     # number of samples for index
@@ -84,6 +94,9 @@ class DataHandlerRE:
         elif configs['data']['name'] == "SciERC":
             self.data_meta = DatMetaSciERC(model_name=model_name)
             self.data_name = DataName.SciERC
+        elif configs['data']['name'] == "Wikidata":
+            self.data_meta = DatMetaWikidata(model_name=model_name)
+            self.data_name = DataName.Wikidata
         else:
             raise Exception(f"Unknown dataset name {configs['data']['name']}")
         if 'num_samples' in configs['data'] and configs['data']['num_samples'] > 0:

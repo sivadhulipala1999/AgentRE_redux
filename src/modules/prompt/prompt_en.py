@@ -48,3 +48,10 @@ TEMPLATE_SUMMAY_EN = \
 {history}
 ```
 If you cannot perform these actions in the extraction process and need to directly generate the extraction result, please give your reasoning in one sentence and give the final JSON extraction result: """
+
+
+ENTITY_INFO_STEP_EN = \
+    """Thought: I can extract information about the entities to further improve my prediction. The format is 'entity---entity_info'.
+Action: RetrieveRelevantInfo
+ActionInput: {text}
+Observation: {entity_info}\n"""

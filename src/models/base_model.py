@@ -1,10 +1,13 @@
 
 from config.configurator import configs
-from clients.openai_client import OpenAIClient
+# from clients.openai_client import OpenAIClient
+from clients.new_client_langchain import OpenAIClient
 from data_utils.data_handler_re import DataHandlerRE
 from modules.prompt.prompter import BasePormpter
-import re, json
+import re
+import json
 from logging import getLogger
+
 
 class BaseModel:
     """ 
@@ -45,8 +48,10 @@ class BaseModel:
         """
         try:
             json_str = re.search(r'\{.*\}', text, flags=re.DOTALL).group()
-            parsed = json.loads(json_str)           # JSON parse to get structured data
-            spo_list = parsed['spo_list']           # update: result -> spo_list
+            # JSON parse to get structured data
+            parsed = json.loads(json_str)
+            # update: result -> spo_list
+            spo_list = parsed['spo_list']
             return 0, spo_list
         except Exception as e:
             spo_list = []
@@ -73,7 +78,6 @@ class BaseModel:
         """
         raise NotImplementedError
 
-
     def train_sample(self, samle, idx):
         raise NotImplementedError
 
@@ -92,4 +96,3 @@ class BaseModel:
 
     def log_prompt(self, prompt):
         self.logger.info(f"\n{'='*200}\nPrompt: {prompt}\n{'='*200}")
-

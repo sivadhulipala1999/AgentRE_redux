@@ -12,9 +12,13 @@ wandb/
 flagged/
 out/
 log/
+logs/
 ref/
 data/
 *cache/
+
+# results 
+captures/
 
 # venv 
 agentre_redux_env/

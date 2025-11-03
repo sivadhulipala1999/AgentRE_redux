@@ -14,6 +14,10 @@ tools:
     open: true
   GetRelationDefinition:
     open: true
+  # SearchGoogle:
+  #   open: true
+  RetrieveRelevantInfo:
+    open: true
   # RetrieveExamples:   # changed to -> CorrectMemory
   #   open: false
   #   mode: bge
@@ -37,11 +41,16 @@ train:
 
 data:
   type: re
-  name: SciERC
+  # name: SciERC
+  name: Wikidata
   num_samples: 100
 
 llm:
   model_name: gpt-4-turbo-preview
+  # model_name: meta-llama-3.1-70b-instruct
+  # model_name: qwen3-235b-a22b
+  # model_name: gpt-oss-120b # okay 
+  client: openai # academic 
   temperature: 0
   max_tokens: 4096
 

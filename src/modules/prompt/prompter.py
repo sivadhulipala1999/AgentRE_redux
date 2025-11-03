@@ -65,6 +65,7 @@ class PrompterReActMemory(BasePormpter):
             self.FIRST_STEP = FIRST_STEP_EN
             self.SECOND_STEP = SECOND_STEP_MEMORY_EN
             self.TEMPLATE_SUMMAY = TEMPLATE_SUMMAY_EN
+            self.ENTITY_INFO_STEP = ENTITY_INFO_STEP_EN
             self.REFLEXION_STEP = REFLEXION_STEP_EN
         else:
             raise ValueError(f"Unsupported language: {self.language}")
@@ -81,6 +82,9 @@ class PrompterReActMemory(BasePormpter):
 
     def get_reflexion_step(self, text: str, retrieved_reflexion_samples: str):
         return self.REFLEXION_STEP.format(text=text, retrieved_examples=retrieved_reflexion_samples)
+
+    def get_entity_info_step(self, text: str, entity_info: str):
+        return self.ENTITY_INFO_STEP.format(text=text, entity_info=entity_info)
 
     def get_react_suffix(self):
         return SUFFIX

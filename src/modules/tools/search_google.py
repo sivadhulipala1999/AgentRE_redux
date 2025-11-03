@@ -1,7 +1,9 @@
 from serpapi import GoogleSearch
-from .base_tool import BaseTool
+from modules.tools.base_tool import BaseTool
 import os
-SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY")
+# os.getenv("SERPAPI_API_KEY")
+SERPAPI_API_KEY = "944b1068e62d31837dd9e4e43065018df76fef5235536ecdee9b747bcdfdd660"
+
 
 class SearchGoogle(BaseTool):
     name = "SearchGoogle"
