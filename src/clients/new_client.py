@@ -12,8 +12,6 @@ GENERATIVE_MODELS = ["gpt-3.5-turbo-instruct"]
 
 MODELS = ["gpt-3.5-turbo-instruct", "meta-llama-3.1-8b-instruct"]
 
-
-# api_key = '8e29d53ff9bd440c52460896f05c2605'  # Replace with your API key
 # base_url = "https://chat-ai.academiccloud.de/v1"
 # model = "meta-llama-3.1-8b-instruct"  # Choose any available model
 
