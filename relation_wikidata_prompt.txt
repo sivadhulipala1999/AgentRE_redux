@@ -1,0 +1,59 @@
+Role: You are a Supply Chain Ontology Engineer and Knowledge Graph Architect.
+
+Objective: Generate a curated list of Wikidata properties to construct a Knowledge Graph that covers the full depth of a modern digital supply chain, grounded in the SCOR-DS and Enterprise Ontology frameworks.
+
+Context (Guardrails):
+Use the following frameworks as your strict validation criteria. Every property you select must map directly to one of these specific concepts or phases.
+
+1. SCOR-DS (Digital Standard) Processes:
+
+Orchestrate: Governance, business rules, ESG, compliance, and structural hierarchy (e.g., regulatory bodies, parent/child structures).
+Plan: Synchronizing supply/demand (e.g., capacity planning, resource allocation).
+Order: Order lifecycle management (e.g., contracts, purchase requirements, client relationships).
+Source: Procurement of goods/services (e.g., raw materials, energy inputs, supplier selection).
+Transform: Converting inputs into finished products (e.g., manufacturing, chemical processing, assembly, branding).
+Fulfill: Logistics and flow to customer (e.g., distribution centers, shipping methods, physical locations).
+Return: Reverse flow (e.g., waste management, recycling, repairs).
+
+2. Enterprise Ontology (Business Concepts):
+
+Activity: Plan, Resource, Doer, Authority, Capability.
+Organisation: Corporation, Partnership, Legal Entity, Ownership, Stakeholder, Employment Contract.
+Strategy: Goal, Objective, Mission, Risk, Decision.
+Marketing: Vendor, Customer, Reseller, Product, Market Segment, Competitor, Brand Image.
+Time: Time Interval, Time Point.
+Task:
+Identify valid Wikidata properties (wdt:P...) that serve as the edges in a supply chain knowledge graph.
+
+Critical Requirements:
+
+1. Enforce Heterogeneity: You must look beyond "Organization-to-Organization" links. You are required to find properties that connect Organizations to:
+	Products (e.g., what they make).
+	Materials (e.g., what they use).
+	Locations (e.g., where they operate).
+	Standards/Regulations (e.g., what they comply with).
+	Waste/Recycling (e.g., what they recycle).
+	
+2. Avoid Generic Noise: Exclude generic properties like "instance of" (P31) or "country" (P17) unless they specifically denote a supply chain function (e.g., "country of origin" for a product).
+
+Selection Criteria:
+
+1. Relevance: The property must concretely map to a specific SCOR-DS phase or Enterprise Ontology concept.
+2. Validity: Must be a real, functioning Wikidata property.
+3. Generalizability: Must be applicable across industries (tech, automotive, retail).
+
+Output Format: 
+	(Strictly one per line):wdt:[P-Code] ([relation label])
+	
+Example Output:
+wdt:P176 (manufacturer)
+wdt:P186 (material used)
+wdt:P1056 (product or material produced)
+
+
+
+
+##### NOTES #######
+- The prompt was used in multiple openly available chat models in January 2026, GPT-5.0, Deepseek V-3.2, Gemini Flash 2.5 
+- Relations that were completely irrelevant were removed based on manual interpretation. And those that were unique in a certain model's response were added to the master list. 
+- All labels were verified in wikidata to verify if the PIDs were valid or not. 

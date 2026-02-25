@@ -8,6 +8,8 @@ from data_utils.data_handler_re import DataHandlerRE
 from models.build_model import build_model
 from trainer.build_trainer import build_trainer
 
+import os
+
 
 def main():
     # First Step: Create data_handler
@@ -36,6 +38,14 @@ def main():
     # evaluate
     if configs['train']['if_evaluate']:
         trainer.evaluate(model)
+
+    if os.path.exists(f"error_triplets.json"):
+        try:
+            code_version = f"_{configs['llm']['code_version']}"
+        except KeyError:
+            code_version = ""
+        os.rename(f"error_triplets.json",
+                  f"error_triplets_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}{code_version}.json")
 
 
 main()

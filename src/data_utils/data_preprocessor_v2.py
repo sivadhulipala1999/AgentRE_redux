@@ -10,44 +10,62 @@ import os
 import sys
 import json
 
+# Updates to process DuIE and SciERC datasets into standardized format as the original code does not work with the files downloaded
+# Add logic to process Wikidata dataset as well
+
 
 class Processor:
 
     @staticmethod
     def f_process_duie_sample(sample):
         spo_list_new = []
-        for spo in sample['spo_list']:
+        for spo in sample['relations']:
             spo_list_new.append({
-                "subject": spo['subject'],
-                "predicate": spo['predicate'],
-                "object": spo['object']['@value']
+                "subject": spo['head']['name'],
+                "predicate": spo['type'],
+                "object": spo['tail']['name']
             })
-        return {'spo_list': spo_list_new}
+        return {'text': sample['sentence'], 'spo_list': spo_list_new}
 
     @staticmethod
-    def f_process_duie_schema(schema) -> None:
-        schema['object_type'] = schema['object_type']['@value']
+    def f_process_duie_schema(sample):
+        schema = []
+        for spo in sample['relations']:
+            schema.append({
+                "predicate": spo['type'],
+                "subject_type": spo['head']['type'],
+                "object_type": spo['tail']['type']
+            })
         return schema
 
+    # @staticmethod
+    # def f_process_duie_schema(schema) -> None:
+    #     schema['object_type'] = schema['object_type']['@value']
+    #     return schema
+
     def process_duie(self):
-        ddir = "/home/ubuntu/work/agent/AgentIE/data/DuIE2.0"
-        for fn in ['duie_sample.json', 'duie_dev.json']:
+        ddir = "src/data/DuIE2.0"
+        for fn in ['train.json', 'dev.json']:
             ofn = f"{ddir}/std_{fn}"
             if os.path.exists(ofn):
                 continue
             # ds = Dataset.from_json(f"{ddir}/{fname}")     # has bug!!!
-            df = pd.read_json(f"{ddir}/{fn}", lines=True)
+            df = pd.read_json(f"{ddir}/{fn}", lines=False)
             ds = Dataset.from_pandas(df)
             ds_processed = ds.map(self.f_process_duie_sample)
             ds_processed.to_json(ofn, orient="records",
                                  lines=True, force_ascii=False)
             print(f"Saved to {ofn}")
-        fn_schema = f"duie_schema.json"
-        ds_schema = Dataset.from_json(f"{ddir}/{fn_schema}")
-        ds_schema_processed = ds_schema.map(self.f_process_duie_schema)
+        # fn_schema = f"duie_schema.json"
+        # ds_schema = Dataset.from_json(f"{ddir}/{fn_schema}")
+        schema_name_list = utils.LoadJson(f"{ddir}/labels.json")
+        ds_schema = Dataset.from_dict({
+            "predicate": schema_name_list
+        })
+        ds_schema_processed = ds_schema.map(self.f_process_scierc_schema)
         ds_schema_processed.to_json(
-            f"{ddir}/std_{fn_schema}", orient="records", lines=True, force_ascii=False)
-        print(f"Saved to {ddir}/std_{fn_schema}")
+            f"{ddir}/std_schema.json", orient="records", lines=True, force_ascii=False)
+        print(f"Saved to {ddir}/std_schema.json")
 
     @staticmethod
     def f_process_scierc_sample(sample):
@@ -145,8 +163,36 @@ class Processor:
             f"{ddir_tmp}/std_schema.json", orient="records", lines=True, force_ascii=False)
         print(f"Saved to {ddir_tmp}/std_schema.json")
 
+    def process_wikidata(self):
+        root = os.getcwd().replace("\\", "/")
+        # ddir = root + "/src/data/Wikidata/abstracts"
+        ddir = root + "/src/data/Wikidata/wikidata_v2"
+        labels = []
+        for fn in ['std_train.json', 'std_test.json']:
+            with open(f"{ddir}/{fn}", 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+                for item in data:
+                    # Iterate over each triplet in the 'spo_list'
+                    for triplet in item.get('spo_list', []):
+                        # Get the predicate, if it exists
+                        predicate = triplet.get('predicate')
+                        if predicate:
+                            if predicate not in labels:
+                                labels.append(predicate)
+
+        utils.SaveJson(labels, f"{ddir}/labels.json")
+        schema_name_list = utils.LoadJson(f"{ddir}/labels.json")
+        ds_schema = Dataset.from_dict({
+            "predicate": schema_name_list
+        })
+        ds_schema_processed = ds_schema.map(self.f_process_scierc_schema)
+        ds_schema_processed.to_json(
+            f"{ddir}/std_schema.json", orient="records", lines=True, force_ascii=False)
+        print(f"Saved to {ddir}/std_schema.json")
+
 
 processor = Processor()
 # processor.process_duie()
-processor.process_sciERC()
+processor.process_wikidata()
 print("Done!")

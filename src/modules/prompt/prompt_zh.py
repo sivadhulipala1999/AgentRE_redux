@@ -1,5 +1,5 @@
 TEMPLATE_REACT_ZH = \
-"""尽你所能, 从给定的句子中识别出符合规范格式要求的关系三元组. 
+    """尽你所能, 从给定的句子中识别出符合规范格式要求的关系三元组. 
 
 你可以使用以下的工具: 
 {tools}
@@ -15,30 +15,43 @@ Begin!
 输入的句子是 `{text}`\n
 """
 FIRST_STEP_ZH = \
-"""Thought: 首先，我需要了解更多关于关系三元组抽取任务的定义和输出格式的信息。
+    """Thought: 首先，我需要了解更多关于关系三元组抽取任务的定义和输出格式的信息。
 Action: GetTaskDescription
 ActionInput:
 Observation: {task_description}\n"""
 SECOND_STEP_ZH = \
-"""Thought: 我可以先观察一些已经标注好的关系三元组，以便更好地理解这个任务。
+    """Thought: 我可以先观察一些已经标注好的关系三元组，以便更好地理解这个任务。
 Action: RetrieveExamples
 ActionInput: {text}
 Observation: {retrieved_examples}\n"""
 SUFFIX = """Thought: """
 
 SECOND_STEP_MEMORY_ZH = \
-"""Thought: 我可以找到已有的正确的例子来帮助我理解这个任务。
+    """Thought: 我可以找到已有的正确的例子来帮助我理解这个任务。
 Action: RetrieveCorrectMemory
 ActionInput: {text}
 Observation: {retrieved_examples}\n"""
 
 TEMPLATE_REFLEXION_ZH = \
-"""在关系抽取任务中, 对于输入的句子 `{text}`, 正确的结果应该是 `{golden}`. 但模型输出的结果是 `{pred}`. 
+    """在关系抽取任务中, 对于输入的句子 `{text}`, 正确的结果应该是 `{golden}`. 但模型输出的结果是 `{pred}`. 
 请你用一句话来总结错误的原因: """
 
 TEMPLATE_SUMMAY_ZH = \
-"""在关系抽取任务中, 对于输入的句子 `{text}`, 正确的结果应该是 `{golden}`. 下面是可以参考的抽取过程: 
+    """在关系抽取任务中, 对于输入的句子 `{text}`, 正确的结果应该是 `{golden}`. 下面是可以参考的抽取过程: 
 ```
 {history}
 ```
 假如你无法在抽取过程中执行这些 Action, 需要直接生成抽取结果, 请用一句话给出你的推理依据, 并给出最终的JSON抽取结果: """
+
+ENTITY_INFO_STEP_ZH = \
+    """Thought: 我可以提取关于实体的信息，以进一步改进我的预测。格式如下: 'entity---entity_info'.
+
+Action: RetrieveRelevantInfo
+ActionInput: {text}         
+Observation: {entity_info}\n"""
+
+REFLEXION_STEP_ZH = \
+    """Thought: 我可以回顾之前对给定文本的思考，以提高我的预测能力。
+Action: RetrieveReflexionMemory         
+ActionInput: {text}
+Observation: {retrieved_examples}\n"""

@@ -1,7 +1,8 @@
 
 from config.configurator import configs
 from models.base_model import BaseModel
-import re, json
+import re
+import json
 import importlib
 from data_utils.data_handler_re import DataHandlerRE
 from modules.module_utils import format_sample_str
@@ -12,7 +13,6 @@ NO_RESULT_WITHIN_MAX_ITERATIONS = -1
 NO_VALID_RESULT_WITHIN_MAX_RETRY = -2
 
 
-
 class ReAct_FSL(BaseModel):
     mode: str = configs["model"]["mode"] if "mode" in configs["model"] else "dummy"
     stop: str = ["Output:", "Observation:"]        # LLM stop
@@ -21,7 +21,6 @@ class ReAct_FSL(BaseModel):
     history: list = []
     tools: dict = {}
     prompter: PrompterReActFSL
-
 
     def __init__(self, data_handler):
         super().__init__(data_handler)
@@ -45,31 +44,47 @@ class ReAct_FSL(BaseModel):
     def extract(self, text, idx):
         debug = True
 
-        text = json.dumps(text.strip(), ensure_ascii=False) 
-        if debug: self.logger.info(f"[idx={idx}] Input: {text}")
+        text = json.dumps(text.strip(), ensure_ascii=False)
+        if debug:
+            self.logger.info(f"[idx={idx}] Input: {text}")
         self.history = []
 
         for _ in range(self.max_iterations):
             prompt = self.generate_prompt(text)
-            if idx < 5: self.log_prompt(prompt)
+            if idx < 5:
+                self.log_prompt(prompt)
             for _ in range(self.max_retry):
-                llm_output = self.query_llm(prompt, stop=self.stop, temperature=0.5)
+                llm_output = self.query_llm(
+                    prompt, stop=self.stop, temperature=0.5)
+                if configs['data']['input_trace']:
+                    self.llm_inputs.append({
+                        "idx": idx,
+                        "prompt": prompt,
+                        "llm_output": llm_output,
+                    })
                 err_code, parsed_res = self.parse_output(llm_output)
                 if err_code == -1:
-                    if debug: self.logger.error(f"error in parse_output: {llm_output}")
+                    if debug:
+                        self.logger.error(
+                            f"error in parse_output: {llm_output}")
                     continue
                 thought, action_name, args = parsed_res
                 if action_name not in self.tools:
-                    if debug: self.logger.error(f"error action_name: {action_name}. llm_output: {llm_output}")
+                    if debug:
+                        self.logger.error(
+                            f"error action_name: {action_name}. llm_output: {llm_output}")
                     continue
                 if action_name == "Finish":
                     err_code, spo_list = self.parse_llm_output(args)
                     if err_code == -1:
-                        if debug: self.logger.error(f"error in parse_llm_output: {args}. llm_output: {llm_output}")
+                        if debug:
+                            self.logger.error(
+                                f"error in parse_llm_output: {args}. llm_output: {llm_output}")
                         continue
                 break
             else:
-                self.logger.error(f"[ERROR] Failed to generate valid output after 5 iterations.")
+                self.logger.error(
+                    f"[ERROR] Failed to generate valid output after 5 iterations.")
                 return {
                     "spo_list_pred": [],
                     "history": self.history.copy(),
@@ -78,13 +93,15 @@ class ReAct_FSL(BaseModel):
                 }
 
             self.history.append(f"Thought: {thought}")
-            if debug: self.logger.info(f"Thought: {thought}")
+            if debug:
+                self.logger.info(f"Thought: {thought}")
             if action_name == "Finish":
                 err_code, spo_list = self.parse_llm_output(args)
 
                 finish_output = json.dumps(args, ensure_ascii=False)
                 self.history.append(f"Finish: {finish_output}")
-                if debug: self.logger.info(f"Finish: {finish_output}")
+                if debug:
+                    self.logger.info(f"Finish: {finish_output}")
                 return {
                     "spo_list_pred": spo_list,
                     "history": self.history.copy(),
@@ -99,7 +116,8 @@ class ReAct_FSL(BaseModel):
                     self.logger.info(f"Action: {action_name}({args})")
                     self.logger.info(f"Observation: {observation}")
         else:
-            self.logger.error(f"[ERROR] Failed to generate valid output after 5 iterations.")
+            self.logger.error(
+                f"[ERROR] Failed to generate valid output after 5 iterations.")
             return {
                 "spo_list_pred": [],
                 "history": self.history.copy(),
@@ -108,14 +126,15 @@ class ReAct_FSL(BaseModel):
             }
 
     def generate_prompt(self, text):
-        tools_desc = "\n".join([f"- {tool.name}: {tool.get_description()}" for tool in self.tools.values()])
+        tools_desc = "\n".join(
+            [f"- {tool.name}: {tool.get_description()}" for tool in self.tools.values()])
         task_description = self.tools['GetTaskDescription'].call()
         retrieved_examples = self.tools['RetrieveExamples'].call(text)
         prompt = self.prompter.get_react_prompt(text, tools_desc) + \
             self.prompter.get_react_first_step(task_description) + \
             self.prompter.get_react_second_step(text, retrieved_examples)
         for history in self.history:
-            prompt += history + "\n" 
+            prompt += history + "\n"
         prompt += self.prompter.get_react_suffix()
         return prompt
 
@@ -132,5 +151,3 @@ class ReAct_FSL(BaseModel):
 
         except Exception as e:
             return -1, None
-
-

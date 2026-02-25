@@ -59,6 +59,8 @@ class PrompterReActMemory(BasePormpter):
             self.FIRST_STEP = FIRST_STEP_ZH
             self.SECOND_STEP = SECOND_STEP_MEMORY_ZH
             self.TEMPLATE_SUMMAY = TEMPLATE_SUMMAY_ZH
+            self.ENTITY_INFO_STEP = ENTITY_INFO_STEP_ZH
+            self.REFLEXION_STEP = REFLEXION_STEP_ZH
         elif self.language == "en":
             self.TEMPLATE_REFLEXION = TEMPLATE_REFLEXION_EN
             self.TEMPLATE_REACT = TEMPLATE_REACT_EN

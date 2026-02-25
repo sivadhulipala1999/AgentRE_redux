@@ -118,9 +118,18 @@ class EvaluatorRE(EvaluatorBase):
     def _format_triplet(self, triplet):
         # triplet_ = [triplet[k] for k in self.keys]
         # reorganize the triplet to have subject, predicate and then object
-        triplet_ = [triplet['subject'],
-                    triplet['predicate'], triplet['object']]
-        triplet_str = "|".join(triplet_)
+        try:
+            triplet_ = [triplet['subject'],
+                        triplet['predicate'], triplet['object']]
+            triplet_str = "|".join(triplet_)
+        except Exception as e:
+            print(f"Error formatting triplet: {triplet}, error: {e}")
+            triplet_str = [str(value) for value in triplet.values()]
+            triplet_str = "|".join(triplet_str)
+            triplet_str = triplet_str + "    this is an error triplet.\n"
+            with open("error_triplets.json", 'a', encoding='utf-8') as f:
+                json.dump(f"\n{triplet}", f,
+                          indent=4, ensure_ascii=False)
         return triplet_str
 
     def _extract(self, golden_list, predict_str):

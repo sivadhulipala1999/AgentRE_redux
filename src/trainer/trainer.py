@@ -13,6 +13,7 @@ from data_utils.data_handler_re import DataHandlerRE
 from models.base_model import BaseModel as Model            # just for lint
 # from models.react_memory import ReAct_Memory as Model     # just for lint
 
+
 def init_seed(seed=0):
     if 'seed' in configs['model']:
         seed = configs['model']['seed']
@@ -25,21 +26,23 @@ def init_seed(seed=0):
     torch.backends.cudnn.deterministic = True
     return seed
 
+
 class Trainer(object):
     """ 
     属性: 
         logger: Logger, 同时输出到文件和控制台
     """
-    data_handler:DataHandlerRE
-    logger:Logger
-    evaluator:EvaluatorRE = EvaluatorRE()
-    def __init__(self, data_handler:DataHandlerRE, logger:Logger):
+    data_handler: DataHandlerRE
+    logger: Logger
+    evaluator: EvaluatorRE = EvaluatorRE()
+
+    def __init__(self, data_handler: DataHandlerRE, logger: Logger):
         self.data_handler = data_handler
         self.logger = logger
 
     @log_exceptions
-    def predict(self, model:Model):
-        ds_test:Dataset = self.data_handler.ds_test
+    def predict(self, model: Model):
+        ds_test: Dataset = self.data_handler.ds_test
 
         self.logger.info(f"Start predicting with {len(ds_test)} samples.")
         # ds_pred = ds.map(model.process_sample, with_indices=True, load_from_cache_file=False)     # 禁止使用 datasets 的缓存
@@ -52,19 +55,32 @@ class Trainer(object):
             self.evaluator.add(golden, pred)
             metric_dict = self.evaluator.get_metric_dict()
             self.logger.info(f"idx={idx}, metric_dict={metric_dict}")
-        df_pred = pd.concat([pd.DataFrame(proces_res), ds_test.to_pandas()], axis=1)
+        if configs['data']['input_trace']:
+            try:
+                code_type = configs['llm']['code_version']
+            except KeyError:
+                code_type = ""
+            self.logger.info(
+                f"Saving LLM input trace to input_trace_{configs['data']['name']}/llm_input_trace_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}_{code_type}.json...")
+            with open(f"input_trace_{configs['data']['name']}/llm_input_trace_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}_{code_type}.json", "w", encoding="utf-8") as f:
+                json.dump(model.llm_inputs, f,
+                          ensure_ascii=False, indent=4)
+
+        df_pred = pd.concat(
+            [pd.DataFrame(proces_res), ds_test.to_pandas()], axis=1)
         ds_pred = Dataset.from_pandas(df_pred)
         self.logger.info(f"Finish predicting with {len(ds_pred)} samples.")
-        self.evaluator.dump_audit_report(self.data_handler.data_meta.ofn_report)
+        self.evaluator.dump_audit_report(
+            self.data_handler.data_meta.ofn_report)
 
         self.data_handler.ds_pred = ds_pred
         self.data_handler.save_results()
         return ds_pred
 
     @log_exceptions
-    def train(self, model:Model):
+    def train(self, model: Model):
         """ 对于带有 memory 的模型, 用这个接口 """
-        ds_test:Dataset = self.data_handler.ds_test
+        ds_test: Dataset = self.data_handler.ds_test
 
         self.logger.info(f"Start predicting with {len(ds_test)} samples.")
         proces_res = []
@@ -77,10 +93,12 @@ class Trainer(object):
             self.evaluator.add(golden, pred)
             metric_dict = self.evaluator.get_metric_dict()
             self.logger.info(f"idx={idx}, metric_dict={metric_dict}")
-        df_pred = pd.concat([pd.DataFrame(proces_res), ds_test.to_pandas()], axis=1)
+        df_pred = pd.concat(
+            [pd.DataFrame(proces_res), ds_test.to_pandas()], axis=1)
         ds_pred = Dataset.from_pandas(df_pred)
         self.logger.info(f"Finish predicting with {len(ds_pred)} samples.")
-        self.evaluator.dump_audit_report(self.data_handler.data_meta.ofn_report)
+        self.evaluator.dump_audit_report(
+            self.data_handler.data_meta.ofn_report)
 
         self.data_handler.ds_pred = ds_pred
         self.data_handler.save_results()    # TODO: 和 predict 保存到不同路径
@@ -112,7 +130,7 @@ class Trainer(object):
 
         self.logger.info("Loading results...")
         self.data_handler.load_results()
-        
+
         self.logger.info("Evaluating...")
         spo_list_pred = self.data_handler.ds_pred['spo_list_pred']
         spo_list_golden = self.data_handler.ds_test['spo_list']
@@ -126,4 +144,3 @@ class Trainer(object):
 
         evaluator.dump_audit_report(self.data_handler.data_meta.ofn_report)
         return ret_info
-

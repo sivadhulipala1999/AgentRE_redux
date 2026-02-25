@@ -50,8 +50,8 @@ class DatMetaDuIE2_0(DataMeta):
 
     def __init__(self, model_name):
         super().__init__(model_name)
-        self.fn_test = f"{self.ddir}/std_sample.json"
-        self.fn_train = f"{self.ddir}/std_dev.json"
+        self.fn_test = f"{self.ddir}/std_dev.json"
+        self.fn_train = f"{self.ddir}/std_train.json"
 
 
 class DatMetaSciERC(DataMeta):
@@ -64,7 +64,7 @@ class DatMetaSciERC(DataMeta):
 
 
 class DatMetaWikidata(DataMeta):
-    ddir = f"{rdir}/src/data/Wikidata"
+    ddir = f"{rdir}/src/data/Wikidata/abstracts"
     odir = f"{rdir}/out/Wikidata"
 
     def __init__(self, model_name):
@@ -107,14 +107,22 @@ class DataHandlerRE:
     def load_data(self) -> None:
         # load evaluation data
         if self.num_samples > 0:                # Faster when only loading a few samples
-            df_test = pd.read_json(self.data_meta.fn_test, lines=False)
+            if configs['data']['name'] == "DuIE2.0":
+                df_test = pd.read_json(self.data_meta.fn_test, lines=True)
+            else:
+                df_test = pd.read_json(self.data_meta.fn_test, lines=False)
+            df_test = df_test[:self.num_samples]
             self.ds_test = Dataset.from_pandas(df_test)
         else:
             self.ds_test = Dataset.from_json(self.data_meta.fn_test)
         # load index data
         if self.num_samples_index > 0:
-            df_index = pd.read_json(
-                self.data_meta.fn_train, lines=False)
+            if configs['data']['name'] == "DuIE2.0":
+                df_index = pd.read_json(self.data_meta.fn_train, lines=True)
+                # for DuIE, only use 10000 samples for index
+                df_index = df_index[:self.num_samples_index]
+            else:
+                df_index = pd.read_json(self.data_meta.fn_train, lines=False)
             self.ds_index = Dataset.from_pandas(df_index)
         else:
             self.ds_index = Dataset.from_json(self.data_meta.fn_train)

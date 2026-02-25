@@ -52,24 +52,45 @@ class SimCSEIndex(BaseIndex):
     model for encode: SimCSE("princeton-nlp/sup-simcse-roberta-large"); 
     model for index: faiss.IndexFlatIP
     """
+    # Changes made here because simcse package could not be installed
 
     def __init__(self, init_texts=None) -> None:
-        from simcse import SimCSE
-        self.encoder = SimCSE("princeton-nlp/sup-simcse-roberta-large")
+        # from simcse import SimCSE
+        # self.encoder = SimCSE("princeton-nlp/sup-simcse-roberta-large")
+        # if init_texts is not None:
+        #     self.add(init_texts)
+        # self.index = faiss.IndexFlatL2(self.encoder.encode(
+        #     "Hello World").shape[0])        # DEBUG: any API?
+
+        from sentence_transformers import SentenceTransformer
+        self.encoder = SentenceTransformer(
+            'princeton-nlp/sup-simcse-roberta-large')
         if init_texts is not None:
             self.add(init_texts)
-        self.index = faiss.IndexFlatL2(self.encoder.encode(
-            "Hello World").shape[0])        # DEBUG: any API?
+        self.index = faiss.IndexFlatIP(
+            self.encoder.get_sentence_embedding_dimension())
 
     def add(self, texts):
         super().add(texts)
+        # embeddings = self.encoder.encode(
+        #     texts, batch_size=128, normalize_to_unit=True, return_numpy=True)
         embeddings = self.encoder.encode(
-            texts, batch_size=128, normalize_to_unit=True, return_numpy=True)
+            texts,
+            batch_size=128,
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
         self.index.add(embeddings)
 
     def query_indexs(self, query, top_k=5):
+        # query_embedding = self.encoder.encode(
+        #     [query], batch_size=128, normalize_to_unit=True, return_numpy=True)
         query_embedding = self.encoder.encode(
-            [query], batch_size=128, normalize_to_unit=True, return_numpy=True)
+            [query],
+            batch_size=128,
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
         D, I = self.index.search(query_embedding, top_k)
         return I[0]
 

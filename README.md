@@ -9,3 +9,8 @@ Prior to this, the following discrepancies between the code and the paper will b
 <li>The reflexion memory mechanism does not contribute in any way to the response generation process. This will be changed by adding a reflection step in the ReAct prompt-set and the model will be made to focus on the reflection in case of an incorrect response.</li>
 <li>The relevant information retrieval mechanism which extracts information about the entities in the query to include as part of its context, does not actually work as part of the ReAct prompt. This will be fixed by including a step to do the extraction before proceeding with the response generation, thus enhancing the CoT process.</li>
 
+
+## Dataset
+DuIE2.0 obtained from <a href="https://huggingface.co/datasets/hccngu/Viscacha-Chinese-IE/tree/main/DuIE2.0">HuggingFace</a>
+SciERC obtained from <a href="https://www.kaggle.com/datasets/hectorrabago/scierc-processed">Kaggle</a>
+Note that the size of SciERC being small for tests, resulted in lower performances.

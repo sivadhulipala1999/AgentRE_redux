@@ -23,3 +23,7 @@ captures/
 # venv 
 agentre_redux_env/
 .venv/
+
+# files 
+*.csv
+*.json

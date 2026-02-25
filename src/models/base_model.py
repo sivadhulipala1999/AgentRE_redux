@@ -29,6 +29,7 @@ class BaseModel:
     def __init__(self, data_handler=None):
         self.llm = self.load_llm()
         self.data_handler = data_handler
+        self.llm_inputs = []
 
     def extract(self, text, idx):
         """ the main function for extraction

@@ -1,0 +1,72 @@
+Examples selected: 1, 2, 16, 39, 100
+
+
+
+
+
+ ################################################################ Golden labels ############################################################
+
+
+
+
+
+Example 1 
+
+ 
+"sentence":""Scarlet Heart" is adapted from the eponymous Qing dynasty time-travel novel by renowned author Tong Hua. "Empresses in the Palace" is adapted from the eponymous novel by Liu Lianzi. The TV series "Silent Love in the Palace" is adapted from the eponymous novel by Gu Man. "The Journey of Flower" is adapted from the eponymous novel by Fresh Guo Guo.Naked Marriage Era is an emotional novel by Yue Ying Lan Xi. The Legend of Zhen Huan is adapted from the web novel of the same name by Hai Yan. The Palace: The Empress's Revenge, also known as The Palace and Snow Leopard,The drama is adapted from the web novel "Special Forces Pioneer." "I Am a Special Forces Soldier" is adapted from the wildly popular novel "The Last Bullet Is for Me." The TV series "Too Late to Say I Love You" is adapted from Fei Wo Si Cun's novel of the same name.
+
+"spo_list":[{"object":"Gu Man","predicate":"Author","subject":"Why We Get Married"},{"object":"The Last Bullet Is for Me","predicate":"Adapted from","subject":"I Am a Special Forces Soldier"},{"object":"Tong Hua","predicate":"Author","subject":"Scarlet Heart"},{"object":"Liu Lianzi","predicate":"Author","subject":"Empresses in the Palace"},{"object":"Fresh Guo Guo","predicate":"Author","subject":"Bones of Flowers"},{"object":"Yue Ying Lan Xi","predicate":"Author","subject":"Naked Marriage Era"},{"object":"Hai Yan","predicate":"Author","subject":"The Legend of Zhen Huan"},{"object":"Special Forces Pioneer","predicate":"Adapted from","subject":"Snow Leopard"},{"object":"Too Late to Say I Love You","predicate":"Adapted from","subject":"Too Late to Say I Love You"},{"object":"Fei Wo Si Cun","predicate":"Author","subject":"Too Late to Say I Love You"}]}
+
+"spo_list_pred":[{"object":"《Step by Step Heartache》","predicate":"Adapted from","subject":"《Step by Step Heartache》"},{"object":"《The Legend of Zhen Huan》","predicate":"Adapted from","subject":"The Legend of Zhen Huan"},{"object":"Why We Get Married","predicate":"Adapted from","subject":"Why We Get Married"},{"object":"The Journey of Flower","predicate":"Adapted from","subject":"The Journey of Flower"},{"object":"Yue Ying Lan Xi","predicate":"Author","subject":"Naked Marriage Era"},{"object":"The Legend of Zhen Huan","predicate":"Adapted from","subject":"The Legend of Zhen Huan"},{"object":"Palace","predicate":"Abbreviation","subject":"Palace Locked Heart Jade"},{"object":"Special Forces Pioneer","predicate":"Adapted from","subject":"Snow Leopard"},{"object":"The Last Bullet Is for Me","predicate":"Adapted from","subject":"I Am a Special Forces Soldier"},{"object":"Too Late to Say I Love You","predicate":"Adapted from","subject":"Too Late to Say I Love You"}
+
+
+
+Example 2 
+
+
+
+"sentence":"The Republic of Moldova (Moldovan: Republica Moldova, English: Republic of Moldova), commonly known as Moldova, is a landlocked country in Southeast Europe bordering Romania and Ukraine. Its capital is Chișinău."
+
+“spo_list”:[{“object”:“Chişinău”,“predicate”:“capital”,‘subject’:“Moldova”}]}
+
+"spo_list_pred":[{"object":"Moldova","predicate":"abbreviation","subject":"Republic of Moldova"},{"object":"Chișinău","predicate":"capital","subject":"Republic of Moldova"}]
+
+
+
+Example 3
+
+
+
+"sentence":"Jiaxing Zhongrun Optical Technology Co., Ltd. was registered and established on August 27, 2012 at the Economic Development Zone Branch of Jiaxing Administration for Industry and Commerce"
+
+"spo_list":[{"object":"August 27, 2012","predicate":"Establishment Date","subject":"Jiaxing Zhongrun Optical Technology Co., Ltd."}]}
+
+"spo_list_pred":[{"object":"August 27, 2012","predicate":"Establishment Date","subject":"Jiaxing Zhongrun Optical Technology Co., Ltd."}]
+
+
+
+
+
+Example 4 
+
+
+
+"sentence":"● CEO (2002) Directed by Wu Tianming, this film is based on the life of Zhang Ruimin, CEO of Haier Group. It chronicles the extraordinary journey of a group of outstanding Chinese individuals who, driven by a grand vision to revitalize national industry, worked tirelessly for 17 years to transform a small collective factory burdened with millions in debt and on the brink of collapse into a major multinational corporation with global sales reaching 60.2 billion RMB."
+
+"spo_list":[{"object":"Wu Tianming","predicate":"Director","subject":"The CEO"}]}
+
+"spo_list_pred":[{"object":"Wu Tianming","predicate":"Director","subject":"The CEO"},{"object":"Zhang Ruimin","predicate":"Lead Actor","subject":"The CEO"}]
+
+
+
+ Example 5 
+
+
+
+ "sentence":"Beijing News (Reporter Zhao Jiani) Yesterday, Zhengzhou Coal & Electricity, the first listed coal enterprise among state-owned companies, announced that Meng Zhongze, Chairman of the Board and Party Secretary of Zhengzhou Coal Group, has been placed under ”two regulations“ by the Henan Provincial Commission for Discipline Inspection. This marks at least the ninth energy sector SOE executive investigated since the second half of this year."
+ 
+ 
+ "spo_list":[{"object":"Meng Zhongze","predicate":"Chairman","subject":"Zhengzhou Coal & Electricity"},{"object":"Meng Zhongze","predicate":"Chairman","subject":"Zhengzhou Coal Group"},{"object":"Meng Zhongze","predicate":"Chairman","subject":"Company"}]}
+
+
+“spo_list_pred”:[{“object”:“Zhengzhou Coal Mining Group”,“predicate”:“Chairman”,‘subject’:“Meng Zhongze”},{ “object”:“Zhengzhou Coal & Electricity”,“predicate”:“Chairman”,“subject”:“Meng Zhongze”}

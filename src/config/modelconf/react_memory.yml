@@ -35,23 +35,58 @@ memory:
     k: 3
 
 train:
-  if_train: true
-  if_predict: false
+  if_train: false
+  if_predict: true
   if_evaluate: true
 
 data:
   type: re
   # name: SciERC
-  name: Wikidata
-  num_samples: 100
+  # name: Wikidata
+  name: DuIE2.0
+  num_samples: 50
+  language: zh
+  input_trace: True   # if save the input and output of LLM
 
 llm:
-  model_name: gpt-4-turbo-preview
+  # model_name: gpt-4-turbo-preview
+  # model_name: gpt-3.5-turbo
   # model_name: meta-llama-3.1-70b-instruct
   # model_name: qwen3-235b-a22b
+  # model_name: qwq-32b
+  # model_name: mistral-large-instruct
   # model_name: gpt-oss-120b # okay 
-  client: openai # academic 
+  # model_name: llama-3.1-sauerkrautlm-70b-instruct
+
+
+  # model_name: qwen3-235b-a22b
+  # model_name: llama-3.3-70b-instruct
+  # model_name: gemma-3-27b-it
+  # model_name: teuken-7b-instruct-research
+  # model_name: qwen3-32b
+  # model_name: codestral-22b - deprecated 
+  # model_name: internvl2.5-8b - deprecated 
+  # model_name: qwen2.5-vl-72b-instruct - deprecated 
+  # model_name: mistral-large-instruct - deprecated 
+  # model_name: gpt-oss-120b - deprecated 
+  # model_name: apertus-70b-instruct-2509
+  # model_name: devstral-2-123b-instruct-2512
+  # model_name: deepseek-r1-distill-llama-70b
+  model_name: glm-4.7
+  # model_name: internvl3.5-30b-a3b
+  # model_name: llama-3.1-sauerkrautlm-70b-instruct
+  # model_name: medgemma-27b-it
+  # model_name: meta-llama-3.1-8b-instruct
+  # model_name: mistral-large-3-675b-instruct-2512
+  # model_name: qwen3-30b-a3b-instruct-2507
+  # model_name: qwen3-30b-a3b-thinking-2507
+  # model_name: qwen3-coder-30b-a3b-instruct
+  # model_name: qwen3-omni-30b-a3b-instruct
+  # model_name: qwen3-vl-30b-a3b-instruct - doesnt work 
+
+  client: academic # openai 
   temperature: 0
   max_tokens: 4096
+  code_version: AgentRE  # AgentRE_redux
 
   use_cache: false    # for random

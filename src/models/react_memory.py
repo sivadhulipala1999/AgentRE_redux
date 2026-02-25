@@ -101,6 +101,12 @@ class ReAct_Memory(BaseModel):
                 # can try different parameters
                 llm_output = self.query_llm(
                     prompt, stop=self.stop, temperature=0.5)
+                if configs['data']['input_trace']:
+                    self.llm_inputs.append({
+                        "idx": idx,
+                        "prompt": prompt,
+                        "llm_output": llm_output,
+                    })
                 err_code, parsed_res = self.parse_output(llm_output)
                 if err_code == -1:
                     if debug:
@@ -348,41 +354,64 @@ class ReAct_Memory(BaseModel):
         return f1
 
     def generate_prompt(self, text):
-        tools_desc = "\n".join(
-            [f"- {tool.name}: {tool.get_description()}" for tool in self.tools.values()])
-        task_description = self.tools['GetTaskDescription'].call()
-        retrieved_examples = self.tools['RetrieveCorrectMemory'].call(text)
-        entity_info = self.tools['RetrieveRelevantInfo'].call(text)
-        prompt = self.prompter.get_react_prompt(text, tools_desc) + \
-            self.prompter.get_react_first_step(task_description) + \
-            self.prompter.get_react_second_step(
-                text, retrieved_examples)  # + \
-        # self.prompter.get_entity_info_step(text, entity_info)
-        if len(self.history) == 0:
-            self.history.append(f"Action: GetTaskDescription()")
-            self.history.append(f"Observation: {task_description}")
-            self.history.append(f"Action: RetrieveCorrectMemory({text})")
-            self.history.append(f"Observation: {retrieved_examples}")
-            self.history.append(f"Action: RetrieveRelevantInfo({text})")
-            self.history.append(f"Observation: {entity_info}")
-            if self.debug:
-                self.logger.info(f"Action: GetTaskDescription()")
-                self.logger.info(f"Observation: {task_description}")
-                self.logger.info(f"Action: RetrieveCorrectMemory({text})")
-                self.logger.info(f"Observation: {retrieved_examples}")
-                self.logger.info(f"Action: RetrieveRelevantInfo({text})")
-                self.logger.info(f"Observation: {entity_info}")
-        # Action+Observation
-        # for history in self.history[self.num_pre_history * 2:]:
-        if len(self.history) >= self.num_pre_history * 2:
-            retrieved_reflexion_examples = self.tools['RetrieveReflexionMemory'].call(
-                text)
-            prompt += self.prompter.get_reflexion_step(
-                text, retrieved_reflexion_examples)
-            for hist_event in self.history:
-                prompt += str(hist_event)
-            prompt += "\n"
-        prompt += self.prompter.get_react_suffix()
+        if configs['llm']['code_version'] == 'AgentRE':
+            tools_desc = "\n".join(
+                [f"- {tool.name}: {tool.get_description()}" for tool in self.tools.values()])
+            task_description = self.tools['GetTaskDescription'].call()
+            retrieved_examples = self.tools['RetrieveCorrectMemory'].call(text)
+            prompt = self.prompter.get_react_prompt(text, tools_desc) + \
+                self.prompter.get_react_first_step(task_description) + \
+                self.prompter.get_react_second_step(text, retrieved_examples)
+            if len(self.history) == 0:
+                self.history.append(f"Action: GetTaskDescription()")
+                self.history.append(f"Observation: {task_description}")
+                self.history.append(f"Action: RetrieveCorrectMemory({text})")
+                self.history.append(f"Observation: {retrieved_examples}")
+                if self.debug:
+                    self.logger.info(f"Action: GetTaskDescription()")
+                    self.logger.info(f"Observation: {task_description}")
+                    self.logger.info(f"Action: RetrieveCorrectMemory({text})")
+                    self.logger.info(f"Observation: {retrieved_examples}")
+            # Action+Observation
+            for history in self.history[self.num_pre_history * 2:]:
+                prompt += history + "\n"
+            prompt += self.prompter.get_react_suffix()
+        elif configs['llm']['code_version'] == 'AgentRE_redux':
+            tools_desc = "\n".join(
+                [f"- {tool.name}: {tool.get_description()}" for tool in self.tools.values()])
+            task_description = self.tools['GetTaskDescription'].call()
+            retrieved_examples = self.tools['RetrieveCorrectMemory'].call(text)
+            entity_info = self.tools['RetrieveRelevantInfo'].call(text)
+            prompt = self.prompter.get_react_prompt(text, tools_desc) + \
+                self.prompter.get_react_first_step(task_description) + \
+                self.prompter.get_react_second_step(
+                    text, retrieved_examples)  # + \
+            # self.prompter.get_entity_info_step(text, entity_info)
+            if len(self.history) == 0:
+                self.history.append(f"Action: GetTaskDescription()")
+                self.history.append(f"Observation: {task_description}")
+                self.history.append(f"Action: RetrieveCorrectMemory({text})")
+                self.history.append(f"Observation: {retrieved_examples}")
+                self.history.append(f"Action: RetrieveRelevantInfo({text})")
+                self.history.append(f"Observation: {entity_info}")
+                if self.debug:
+                    self.logger.info(f"Action: GetTaskDescription()")
+                    self.logger.info(f"Observation: {task_description}")
+                    self.logger.info(f"Action: RetrieveCorrectMemory({text})")
+                    self.logger.info(f"Observation: {retrieved_examples}")
+                    self.logger.info(f"Action: RetrieveRelevantInfo({text})")
+                    self.logger.info(f"Observation: {entity_info}")
+            # Action+Observation
+            # for history in self.history[self.num_pre_history * 2:]:
+            if len(self.history) >= self.num_pre_history * 2:
+                retrieved_reflexion_examples = self.tools['RetrieveReflexionMemory'].call(
+                    text)
+                prompt += self.prompter.get_reflexion_step(
+                    text, retrieved_reflexion_examples)
+                for hist_event in self.history:
+                    prompt += str(hist_event)
+                prompt += "\n"
+            prompt += self.prompter.get_react_suffix()
         return prompt
 
     def parse_output(self, llm_output: str):
