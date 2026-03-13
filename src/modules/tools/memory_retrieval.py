@@ -26,3 +26,16 @@ class RetrieveReflexionMemory(BaseTool):
 
     def call(self, query):
         return self.reflexion_memory.query(query)
+
+
+class RetrieveIncorrectMemory(BaseTool):
+    """ see ['memory']['IncorrectMemory'] """
+    name: str = "RetrieveIncorrectMemory"
+    description_en: str = "Retrieve examples from IncorrectMemory which can help to learn from wrong experiments. The input is a sentence. "
+    description_zh: str = "从IncorrectMemory中检索示例, 这些示例有助于从错误实验中学习。输入是一个句子。"
+
+    def init(self):
+        self.incorrect_memory = self.data_handler.incorrect_memory
+
+    def call(self, query):
+        return self.incorrect_memory.query(query)

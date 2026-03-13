@@ -4,7 +4,7 @@ model:
   max_iterations: 5   # maximum iterations for agent
   max_retry: 5        # for LLM calling
   use_summary: true   # if use summary! generate CoT results for SLLM
-  num_pre_history: 2  # the number of fixed actions
+  num_pre_history: 4  # the number of fixed actions
   debug: true         # if print debug info
 
 tools:
@@ -16,8 +16,8 @@ tools:
     open: true
   # SearchGoogle:
   #   open: true
-  RetrieveRelevantInfo:
-    open: true
+  # RetrieveRelevantInfo:
+  #   open: true
   # RetrieveExamples:   # changed to -> CorrectMemory
   #   open: false
   #   mode: bge
@@ -27,16 +27,19 @@ memory:
   CorrectMemory:
     open: true
     mode: bge
-    k: 3
-    num_samples_init: 100
+    k: 5
+    num_samples_init: 0
   ReflexionMemory:
-    open: true
+    open: false
     mode: bge
-    k: 3
-
+    k: 5
+  IncorrectMemory:
+    open: false
+    mode: bge
+    k: 5
 train:
-  if_train: false
-  if_predict: true
+  if_train: true
+  if_predict: true 
   if_evaluate: true
 
 data:
@@ -44,7 +47,8 @@ data:
   # name: SciERC
   # name: Wikidata
   name: DuIE2.0
-  num_samples: 50
+  num_samples: 100
+  train_num_samples: 50
   language: zh
   input_trace: True   # if save the input and output of LLM
 
@@ -87,6 +91,6 @@ llm:
   client: academic # openai 
   temperature: 0
   max_tokens: 4096
-  code_version: AgentRE  # AgentRE_redux
+  code_version: AgentRE  # AgentRE
 
   use_cache: false    # for random

@@ -8,4 +8,5 @@ from .relevant_info_retrieval import *
 MEMORY_NAME2TOOL = {
     "CorrectMemory": "RetrieveCorrectMemory",
     "ReflexionMemory": "RetrieveReflexionMemory",
+    "IncorrectMemory": "RetrieveIncorrectMemory",
 }

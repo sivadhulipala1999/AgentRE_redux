@@ -55,7 +55,7 @@ class ReAct_FSL(BaseModel):
                 self.log_prompt(prompt)
             for _ in range(self.max_retry):
                 llm_output = self.query_llm(
-                    prompt, stop=self.stop, temperature=0.5)
+                    prompt, stop=self.stop, temperature=0)
                 if configs['data']['input_trace']:
                     self.llm_inputs.append({
                         "idx": idx,

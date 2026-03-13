@@ -17,7 +17,10 @@ class RetrieveRelevantInfo(BaseTool):
     description_zh: str = "檢索與使用者輸入相關的資訊。輸入是一個句子。"
 
     def init(self):
-        self.entity_recognizer = spacy.load("en_core_web_sm")
+        if configs['data']['language'] == 'en':
+            self.entity_recognizer = spacy.load("en_core_web_sm")
+        elif configs['data']['language'] == 'zh':
+            self.entity_recognizer = spacy.load("zh_core_web_sm")
         logger.info("RetrieveRelevantInfo: Entity Recognizer initialized")
 
     def extract_entities(self, text):
@@ -25,9 +28,14 @@ class RetrieveRelevantInfo(BaseTool):
         return list({ent.text for ent in doc.ents})
 
     def wiki_summary(self, entity):
-        url = (
-            f"https://en.wikipedia.org/api/rest_v1/page/summary/{urllib.parse.quote(entity)}"
-        )
+        if configs['data']['language'] == 'en':
+            url = (
+                f"https://en.wikipedia.org/api/rest_v1/page/summary/{urllib.parse.quote(entity)}"
+            )
+        elif configs['data']['language'] == 'zh':
+            url = (
+                f"https://zh.wikipedia.org/api/rest_v1/page/summary/{urllib.parse.quote(entity)}"
+            )
         res = requests.get(
             url, headers={"User-Agent": "AgentREEntityLookup/0.1"}, timeout=10).json()
         return res["extract"] if res.get("extract") else ''

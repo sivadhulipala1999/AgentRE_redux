@@ -39,15 +39,35 @@ class Trainer(object):
     def __init__(self, data_handler: DataHandlerRE, logger: Logger):
         self.data_handler = data_handler
         self.logger = logger
+        if 'train_num_samples' in configs['data']:
+            self.train_num_samples = configs['data']['train_num_samples']
+        else:
+            self.train_num_samples = 0
+        self.num_samples = configs['data']['num_samples']
 
     @log_exceptions
     def predict(self, model: Model):
-        ds_test: Dataset = self.data_handler.ds_test
+        # Reset evaluator and input trace so training metrics don't bleed in
+        self.evaluator = EvaluatorRE()
+        model.llm_inputs = []
 
-        self.logger.info(f"Start predicting with {len(ds_test)} samples.")
+        if 'memory' in configs:
+            if configs['memory']['CorrectMemory']['open']:
+                model.data_handler.correct_memory.load_memory()
+            if configs['memory']['IncorrectMemory']['open']:
+                model.data_handler.incorrect_memory.load_memory()
+            if configs['memory']['ReflexionMemory']['open']:
+                model.data_handler.reflexion_memory.load_memory()
+
+        ds_full: Dataset = self.data_handler.ds_test
+        start_idx = self.train_num_samples
+        end_idx = min(self.num_samples, len(ds_full))
+        ds_predict = ds_full.select(range(start_idx, end_idx))
+
+        self.logger.info(f"Start predicting with {len(ds_predict)} samples (indices {start_idx}..{end_idx-1}).")
         # ds_pred = ds.map(model.process_sample, with_indices=True, load_from_cache_file=False)     # 禁止使用 datasets 的缓存
         proces_res = []
-        for idx, sample in enumerate(ds_test):
+        for idx, sample in enumerate(ds_predict):
             res = model.process_sample(sample, idx)
             proces_res.append(res)
             golden = sample['spo_list']
@@ -67,7 +87,7 @@ class Trainer(object):
                           ensure_ascii=False, indent=4)
 
         df_pred = pd.concat(
-            [pd.DataFrame(proces_res), ds_test.to_pandas()], axis=1)
+            [pd.DataFrame(proces_res), ds_predict.to_pandas()], axis=1)
         ds_pred = Dataset.from_pandas(df_pred)
         self.logger.info(f"Finish predicting with {len(ds_pred)} samples.")
         self.evaluator.dump_audit_report(
@@ -80,11 +100,15 @@ class Trainer(object):
     @log_exceptions
     def train(self, model: Model):
         """ 对于带有 memory 的模型, 用这个接口 """
-        ds_test: Dataset = self.data_handler.ds_test
+        ds_full: Dataset = self.data_handler.ds_test
+        end_idx = min(self.train_num_samples, len(ds_full))
+        ds_train = ds_full.select(range(end_idx))
 
-        self.logger.info(f"Start predicting with {len(ds_test)} samples.")
+        self.evaluator = EvaluatorRE() # reset so that it does not carry previous metrics
+
+        self.logger.info(f"Start training with {len(ds_train)} samples (indices 0..{end_idx-1}).")
         proces_res = []
-        for idx, sample in enumerate(ds_test):
+        for idx, sample in enumerate(ds_train):
             res = model.train_sample(sample, idx)
             proces_res.append(res)
             # NEW: 增加评估器的评估
@@ -94,11 +118,29 @@ class Trainer(object):
             metric_dict = self.evaluator.get_metric_dict()
             self.logger.info(f"idx={idx}, metric_dict={metric_dict}")
         df_pred = pd.concat(
-            [pd.DataFrame(proces_res), ds_test.to_pandas()], axis=1)
+            [pd.DataFrame(proces_res), ds_train.to_pandas()], axis=1)
         ds_pred = Dataset.from_pandas(df_pred)
-        self.logger.info(f"Finish predicting with {len(ds_pred)} samples.")
+        self.logger.info(f"Finish training with {len(ds_pred)} samples.")
         self.evaluator.dump_audit_report(
             self.data_handler.data_meta.ofn_report)
+
+        if configs['data']['input_trace']:
+            try:
+                code_type = configs['llm']['code_version']
+            except KeyError:
+                code_type = ""
+            self.logger.info(
+                f"Saving LLM input trace to input_trace_{configs['data']['name']}/llm_input_trace_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}_{code_type}_train.json...")
+            with open(f"input_trace_{configs['data']['name']}/llm_input_trace_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}_{code_type}_train.json", "w", encoding="utf-8") as f:
+                json.dump(model.llm_inputs, f,
+                          ensure_ascii=False, indent=4)
+        
+        if configs['memory']['CorrectMemory']['open']:
+            model.data_handler.correct_memory.dump_memory()
+        if configs['memory']['IncorrectMemory']['open']:
+            model.data_handler.incorrect_memory.dump_memory()
+        if configs['memory']['ReflexionMemory']['open']:
+            model.data_handler.reflexion_memory.dump_memory()
 
         self.data_handler.ds_pred = ds_pred
         self.data_handler.save_results()    # TODO: 和 predict 保存到不同路径
@@ -131,9 +173,14 @@ class Trainer(object):
         self.logger.info("Loading results...")
         self.data_handler.load_results()
 
+
+        start_idx = self.train_num_samples
+        end_idx = min(self.num_samples, len(self.data_handler.ds_test))
+        ds_predict = self.data_handler.ds_test.select(range(start_idx, end_idx))
+
         self.logger.info("Evaluating...")
         spo_list_pred = self.data_handler.ds_pred['spo_list_pred']
-        spo_list_golden = self.data_handler.ds_test['spo_list']
+        spo_list_golden = ds_predict['spo_list']
         # spo_list_golden = [eval(x) for x in spo_list_golden]
         assert len(spo_list_pred) == len(spo_list_golden)
         for pred, golden in zip(spo_list_pred, spo_list_golden):

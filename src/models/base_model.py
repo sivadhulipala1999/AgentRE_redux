@@ -3,7 +3,7 @@ from config.configurator import configs
 # from clients.openai_client import OpenAIClient
 from clients.new_client_langchain import OpenAIClient
 from data_utils.data_handler_re import DataHandlerRE
-from modules.prompt.prompter import BasePormpter
+from modules.prompt.prompter import BasePrompter
 import re
 import json
 from logging import getLogger
@@ -23,7 +23,7 @@ class BaseModel:
     """
     logger = getLogger('train_logger')
     data_handler: DataHandlerRE           # data handler
-    prompter: BasePormpter                # prompter
+    prompter: BasePrompter               # prompter
     # is_training = True
 
     def __init__(self, data_handler=None):

@@ -17,11 +17,10 @@ class BaseIndex:
     properties
         num_indexed_items:
     """
-    texts = []
-    index = None
 
     def __init__(self) -> None:
-        pass
+        self.texts = []
+        self.index = None
 
     def add(self, texts):
         self.texts.extend(texts)
@@ -55,6 +54,7 @@ class SimCSEIndex(BaseIndex):
     # Changes made here because simcse package could not be installed
 
     def __init__(self, init_texts=None) -> None:
+        super().__init__()
         # from simcse import SimCSE
         # self.encoder = SimCSE("princeton-nlp/sup-simcse-roberta-large")
         # if init_texts is not None:
@@ -102,6 +102,7 @@ class BGEIndex(BaseIndex):
     """
 
     def __init__(self, init_texts=None) -> None:
+        super().__init__()
         from transformers import AutoModel, AutoTokenizer
         model_id = "BAAI/bge-large-zh-v1.5"
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)

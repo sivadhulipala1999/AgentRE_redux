@@ -32,8 +32,18 @@ Action: RetrieveCorrectMemory
 ActionInput: {text}
 Observation: {retrieved_examples}\n"""
 
+SECOND_STEP_MEMORY_ZH_REDUX = \
+    """Thought: 我可以从现有的正确示例中找到一些例子来帮助我理解这项任务。但必须指出，这些示例可能仅代表文本中全部三元组的子集，因为它们是从模型的先前预测中筛选出来的。
+Action: RetrieveCorrectMemory
+ActionInput: {text}
+Observation: {retrieved_examples}\n"""
+
 TEMPLATE_REFLEXION_ZH = \
     """在关系抽取任务中, 对于输入的句子 `{text}`, 正确的结果应该是 `{golden}`. 但模型输出的结果是 `{pred}`. 
+请你用一句话来总结错误的原因: """
+
+TEMPLATE_REFLEXION_ZH_REDUX = \
+    """在关系抽取任务中, 对于输入的句子 `{text}`, 正确的结果应该是 `{golden}`. 但该模型的预测结果与实际情况不符，其中预测错误的三元组为 `{pred}`.
 请你用一句话来总结错误的原因: """
 
 TEMPLATE_SUMMAY_ZH = \
@@ -53,5 +63,18 @@ Observation: {entity_info}\n"""
 REFLEXION_STEP_ZH = \
     """Thought: 我可以回顾之前对给定文本的思考，以提高我的预测能力。
 Action: RetrieveReflexionMemory         
+ActionInput: {text}
+Observation: {retrieved_examples}\n"""
+
+REFLEXION_STEP_ZH_REDUX = \
+    """Thought: 我可以回顾自己对该文本先前错误预测的反思，以此改进当前的预测。
+Action: RetrieveReflexionMemory
+ActionInput: {text}
+Observation: {retrieved_examples}\n"""
+
+
+INCORRECT_MEMORY_STEP_ZH = \
+    """Thought: 我能够找出在先前步骤中错误预测的三元组，以此来修正当前的预测结果。
+Action: RetrieveIncorrectMemory
 ActionInput: {text}
 Observation: {retrieved_examples}\n"""

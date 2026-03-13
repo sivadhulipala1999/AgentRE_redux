@@ -31,6 +31,24 @@ def main():
         # model.set_is_training(True)
         trainer.train(model)
 
+        if os.path.exists(f"error_triplets.json"):
+            try:
+                code_version = f"_{configs['llm']['code_version']}_train"
+            except KeyError:
+                code_version = "_train"
+            os.rename(f"error_triplets.json",
+                  f"error_triplets_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}{code_version}.json")
+
+        if os.path.exists(f"out/{configs['data']['name']}/{configs['model']['name']}/pred.json"):
+            try:
+                code_version = f"_{configs['llm']['code_version']}_train"
+            except KeyError:
+                code_version = "_train"
+            os.rename(f"out/{configs['data']['name']}/{configs['model']['name']}/pred.json",
+                    f"out/{configs['data']['name']}/{configs['model']['name']}/pred_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}{code_version}.json")
+            os.rename(f"out/{configs['data']['name']}/{configs['model']['name']}/audit_report.json",
+                    f"out/{configs['data']['name']}/{configs['model']['name']}/audit_report_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}{code_version}.json")
+
     # predict
     if configs['train']['if_predict']:
         trainer.predict(model)
@@ -46,6 +64,16 @@ def main():
             code_version = ""
         os.rename(f"error_triplets.json",
                   f"error_triplets_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}{code_version}.json")
+
+    if os.path.exists(f"out/{configs['data']['name']}/{configs['model']['name']}/pred.json"):
+        try:
+            code_version = f"_{configs['llm']['code_version']}"
+        except KeyError:
+            code_version = ""
+        os.rename(f"out/{configs['data']['name']}/{configs['model']['name']}/pred.json",
+                  f"out/{configs['data']['name']}/{configs['model']['name']}/pred_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}{code_version}.json")
+        os.rename(f"out/{configs['data']['name']}/{configs['model']['name']}/audit_report.json",
+                  f"out/{configs['data']['name']}/{configs['model']['name']}/audit_report_{configs['model']['name']}_{configs['llm']['model_name']}_{configs['data']['name']}{code_version}.json")
 
 
 main()

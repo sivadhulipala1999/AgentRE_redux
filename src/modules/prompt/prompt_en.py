@@ -32,14 +32,36 @@ Action: RetrieveCorrectMemory
 ActionInput: {text}
 Observation: {retrieved_examples}\n"""
 
+SECOND_STEP_MEMORY_EN_REDUX = \
+    """Thought: I can find some examples from the existing correct examples to help me understand this task. However, I must note that these examples may only represent a partial set of the total triples present in the text, as they are filtered from the model's prior predictions.
+Action: RetrieveCorrectMemory
+ActionInput: {text}
+Observation: {retrieved_examples}\n"""
+
 REFLEXION_STEP_EN = \
     """Thought: I can review my previous reflections for the given text to improve my prediction.
 Action: RetrieveReflexionMemory
 ActionInput: {text}
 Observation: {retrieved_examples}\n"""
 
+REFLEXION_STEP_EN_REDUX = \
+    """Thought: I can review my previous reflections on my incorrect predictions for the given text to improve my current prediction.
+Action: RetrieveReflexionMemory
+ActionInput: {text}
+Observation: {retrieved_examples}\n"""
+
+INCORRECT_MEMORY_STEP_EN = \
+    """Thought: I can find the triples I incorrectly predicted in the previous steps to help me correct my current prediction.
+Action: RetrieveIncorrectMemory
+ActionInput: {text}
+Observation: {retrieved_examples}\n"""
+
 TEMPLATE_REFLEXION_EN = \
     """In the relation extraction task, for the input sentence `{text}`, the correct result should be `{golden}`. But the model's output result is `{pred}`.
+Please summarize the reason for the error in one sentence: """
+
+TEMPLATE_REFLEXION_EN_REDUX = \
+    """In the relation extraction task, for the input sentence `{text}`, the correct result should be `{golden}`. But the model's prediction did not match it, with the incorrectly predicted triples being `{pred}`.
 Please summarize the reason for the error in one sentence: """
 
 TEMPLATE_SUMMAY_EN = \

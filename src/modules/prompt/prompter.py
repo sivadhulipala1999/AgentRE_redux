@@ -2,20 +2,21 @@
 from modules.tools import GetTaskDescription
 from logging import getLogger
 from data_utils.data_handler_re import DataHandlerRE
+from config.configurator import configs
 from .prompt_zh import *
 from .prompt_en import *
 import json
 from typing import List
 
 
-class BasePormpter:
+class BasePrompter:
     def __init__(self, data_handler):
         self.data_handler: DataHandlerRE = data_handler
         self.logger = getLogger('train_logger')
         self.language = data_handler.data_meta.language
 
 
-class PrompterReActFSL(BasePormpter):
+class PrompterReActFSL(BasePrompter):
     def __init__(self, data_handler):
         super().__init__(data_handler)
         if self.language == "zh":
@@ -45,7 +46,7 @@ class PrompterReActFSL(BasePormpter):
         return SUFFIX
 
 
-class PrompterReActMemory(BasePormpter):
+class PrompterReActMemory(BasePrompter):
     """ 相较于 PrompterReActFSL
     - second step 中的召回接口不同
     - 增加 Refelxion
@@ -54,21 +55,23 @@ class PrompterReActMemory(BasePormpter):
     def __init__(self, data_handler):
         super().__init__(data_handler)
         if self.language == "zh":
-            self.TEMPLATE_REFLEXION = TEMPLATE_REFLEXION_ZH
+            self.TEMPLATE_REFLEXION = TEMPLATE_REFLEXION_ZH if configs['llm']['code_version'] == 'AgentRE' else TEMPLATE_REFLEXION_ZH_REDUX
             self.TEMPLATE_REACT = TEMPLATE_REACT_ZH
             self.FIRST_STEP = FIRST_STEP_ZH
-            self.SECOND_STEP = SECOND_STEP_MEMORY_ZH
+            self.SECOND_STEP = SECOND_STEP_MEMORY_ZH if configs['llm']['code_version'] == 'AgentRE' else SECOND_STEP_MEMORY_ZH_REDUX
             self.TEMPLATE_SUMMAY = TEMPLATE_SUMMAY_ZH
             self.ENTITY_INFO_STEP = ENTITY_INFO_STEP_ZH
-            self.REFLEXION_STEP = REFLEXION_STEP_ZH
+            self.REFLEXION_STEP = REFLEXION_STEP_ZH if configs['llm']['code_version'] == 'AgentRE' else REFLEXION_STEP_ZH_REDUX
+            self.INCORRECT_MEMORY_STEP = INCORRECT_MEMORY_STEP_ZH if configs['llm']['code_version'] == 'AgentRE_redux' else ''
         elif self.language == "en":
-            self.TEMPLATE_REFLEXION = TEMPLATE_REFLEXION_EN
+            self.TEMPLATE_REFLEXION = TEMPLATE_REFLEXION_EN if configs['llm']['code_version'] == 'AgentRE' else TEMPLATE_REFLEXION_EN_REDUX
             self.TEMPLATE_REACT = TEMPLATE_REACT_EN
             self.FIRST_STEP = FIRST_STEP_EN
-            self.SECOND_STEP = SECOND_STEP_MEMORY_EN
+            self.SECOND_STEP = SECOND_STEP_MEMORY_EN if configs['llm']['code_version'] == 'AgentRE' else SECOND_STEP_MEMORY_EN_REDUX
             self.TEMPLATE_SUMMAY = TEMPLATE_SUMMAY_EN
             self.ENTITY_INFO_STEP = ENTITY_INFO_STEP_EN
-            self.REFLEXION_STEP = REFLEXION_STEP_EN
+            self.REFLEXION_STEP = REFLEXION_STEP_EN if configs['llm']['code_version'] == 'AgentRE' else REFLEXION_STEP_EN_REDUX
+            self.INCORRECT_MEMORY_STEP = INCORRECT_MEMORY_STEP_EN if configs['llm']['code_version'] == 'AgentRE_redux' else ''
         else:
             raise ValueError(f"Unsupported language: {self.language}")
         self.SUFFIX = SUFFIX
@@ -87,6 +90,9 @@ class PrompterReActMemory(BasePormpter):
 
     def get_entity_info_step(self, text: str, entity_info: str):
         return self.ENTITY_INFO_STEP.format(text=text, entity_info=entity_info)
+    
+    def get_incorrect_memory_step(self, text: str, retrieved_incorrect_examples: str):
+        return self.INCORRECT_MEMORY_STEP.format(text=text, retrieved_examples=retrieved_incorrect_examples)
 
     def get_react_suffix(self):
         return SUFFIX
