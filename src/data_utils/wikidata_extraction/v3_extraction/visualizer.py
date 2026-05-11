@@ -60,13 +60,11 @@ for _, row in filtered_df.iterrows():
 
 # 4. Improved Save and Display logic
 # Using a temporary file path that is less likely to conflict
-path = "tmp_visuals"
-if not os.path.exists(path):
-    os.makedirs(path)
+path = "src/data/Wikidata/wikidata_v3/"
 
-net.save_graph(f"{path}/temp_graph.html")
+net.save_graph(f"{path}/scred_visualization.html")
 
-with open(f"{path}/temp_graph.html", 'r', encoding='utf-8') as f:
+with open(f"{path}/scred_visualization.html", 'r', encoding='utf-8') as f:
     source_code = f.read()
 
 # Using scrolling=False but a higher height often looks cleaner

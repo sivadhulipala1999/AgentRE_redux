@@ -1,0 +1,190 @@
+id: https://example.org/scor-ds-ontology
+name: scor_ds_supply_chain_schema
+description: >
+  A formal schema mapping SCOR-DS processes to Wikidata-grounded 
+  entities and relations for supply chain knowledge graph construction.
+prefixes:
+  wd: http://www.wikidata.org/entity/
+  wdt: http://www.wikidata.org/prop/direct/
+  linkml: https://w3id.org/linkml/
+default_range: string
+
+# ──────────────────────────────────────────────────────────
+# 1. ENUMS (Specificity Ranks)
+# ──────────────────────────────────────────────────────────
+enums:
+  SpecificityLevel:
+    description: "Ranking of entity types from specific functional roles to abstract classes."
+    permissible_values:
+      1:
+        description: "Functional/Specific: High-signal supply chain roles." 
+      2:
+        description: "Defining Characteristics: Mid-level classification." 
+      3:
+        description: "Abstract/Generic: Broad top-level categories." 
+
+# ──────────────────────────────────────────────────────────
+# 2. SLOTS (SCOR-DS Relations)
+# ──────────────────────────────────────────────────────────
+slots:
+  # Orchestrate Process 
+  parent_company:
+    slot_uri: wdt:P127
+    domain: CoreEnterprise
+    range: OrganizationalUnit
+    description: "Indicates that one company is the parent of another internal division or organizational unit (control or ownership relationship)."
+  child_organization:
+    slot_uri: wdt:P355
+    domain: CoreEnterprise
+    range: OrganizationalUnit
+    description: "Indicates that an internal division or organizational unit is a subsidiary or child of a core company."
+  partnership_with:
+    slot_uri: wdt:P2652
+    domain: CoreEnterprise
+    range: OrganizationalUnit
+    description: "Indicates a formal partnership or strategic alliance between a core company and another organization."
+  regulated_by:
+    slot_uri: wdt:P3719
+    domain: CoreEnterprise
+    range: OrganizationalUnit
+    description: "Indicates that a company is regulated, supervised, or governed by a regulatory or oversight body."
+  investor:
+    slot_uri: wdt:P1951
+    domain: CoreEnterprise
+    range: CoreEnterprise
+    description: "Indicates that one company or investment entity invests in or holds a stake in another company."
+  owner_of:
+    slot_uri: wdt:P1830
+    domain: CoreEnterprise
+    range: ProductMaterial
+    description: "Indicates that a company owns a product, material, or asset (e.g., rights, inventory, or IP)."
+
+  # Plan / Order Process [cite: 4, 5]
+  distributed_by:
+    slot_uri: wdt:P750
+    domain: ProductMaterial
+    range: SupplyChainPartner
+    description: "Indicates that a product or material is distributed or resold by a partner (distributor, reseller, or channel)."
+  commissioned_by:
+    slot_uri: wdt:P88
+    domain: ProductMaterial
+    range: CoreEnterprise
+    description: "Indicates that a product or material was commissioned, ordered, or specified by a particular company."
+  supplied_by:
+    domain: ProductMaterial
+    range: SupplyChainPartner
+    description: "Custom Relation: Indicates that a product or material is supplied or provided by a specific supplier or upstream partner."
+  buys_from:
+    domain: CoreEnterprise
+    range: SupplyChainPartner
+    description: "Custom relation: Indicates that a core company purchases products, materials, or services from a particular supplier or partner."
+
+  # Source Process 
+  typically_sells:
+    slot_uri: wdt:P7163
+    domain: CoreEnterprise
+    range: ProductMaterial
+    description: "Indicates that a company typically sells or offers a given product or material as part of its business."
+  energy_sourced_from:
+    slot_uri: wdt:P618
+    domain: ProductMaterial
+    range: SupplyChainEntity # Covers CoreEnterprise/Material 
+    description: "Indicates that the energy used for a product or process is sourced from a particular energy provider, resource, or facility."
+
+  # Transform Process 
+  manufactured_by:
+    slot_uri: wdt:P176
+    domain: ProductMaterial
+    range: CoreEnterprise
+    description: “Indicates that a product or material is manufactured or produced by a specific company.”
+  made_from_material:
+    slot_uri: wdt:P186
+    domain: ProductMaterial
+    range: ProductMaterial
+    description: “Indicates that one product or material is made from or composed of another material or component.”
+  designed_by:
+    slot_uri: wdt:P287
+    domain: ProductMaterial
+    range: CoreEnterprise
+    description: “Indicates that a product or material was designed or developed by a particular company or design organization.”
+  raw_material_processed:
+    slot_uri: wdt:P10672
+    domain: SupplyChainEntity # Covers CoreEnterprise/Partner 
+    range: ProductMaterial
+    description: “Indicates that a company or partner processes raw materials into an intermediate or final product.”
+  assembles:
+    description: "Custom relation: Core Enterprise assembles product"
+    domain: CoreEnterprise
+    range: ProductMaterial
+    description: “Indicates that a company assembles components into a finished product.”
+
+  # Fulfill Process 
+  stored_at:
+    description: "Custom relation: Storage location"
+    domain: ProductMaterial
+    range: SupplyChainEntity # Covers Warehouse/Partner 
+    description: “Indicates that a product or material is stored at or held in a particular warehouse, facility, or partner location.”
+
+  # Return Process 
+  maintained_by:
+    slot_uri: wdt:P126
+    domain: ProductMaterial
+    range: CoreEnterprise
+    description: “Indicates that a product is maintained, serviced, or repaired by a particular company after delivery.”
+
+# ──────────────────────────────────────────────────────────
+# 3. CLASSES (Meta-Classes & Specific Types)
+# ──────────────────────────────────────────────────────────
+classes:
+  SupplyChainEntity:
+    abstract: true
+    slots: [id, label, specificity_rank]
+
+  CoreEnterprise:
+    is_a: SupplyChainEntity
+    description: "Profit-seeking core of the supply chain." 
+    class_uri: wd:Q4830453
+
+  SupplyChainPartner:
+    is_a: SupplyChainEntity
+    description: "External dependencies defining supply chain inputs/services." 
+    class_uri: wd:Q228830
+
+  OrganizationalUnit:
+    is_a: SupplyChainEntity
+    description: "Internal hierarchy and regulatory actors." 
+
+  MarketActor:
+    is_a: SupplyChainEntity
+    description: "Demand boundary actors (customers, competitors)." 
+
+  ProductMaterial:
+    is_a: SupplyChainEntity
+    description: "Physical or digital goods flowing through the chain." 
+    class_uri: wd:Q2424752
+
+  # ─── Example Sub-Classes for Extension ───
+
+  LogisticsCompany:
+    is_a: CoreEnterprise
+    class_uri: wd:Q1468664
+    annotations:
+      specificity: 1 
+
+  PublicCompany:
+    is_a: CoreEnterprise
+    class_uri: wd:Q891723
+    annotations:
+      specificity: 3 
+
+  Manufacturer:
+    is_a: SupplyChainPartner
+    class_uri: wd:Q13235160
+    annotations:
+      specificity: 1 
+
+  Software:
+    is_a: ProductMaterial
+    class_uri: wd:Q7397
+    annotations:
+      specificity: 1 
