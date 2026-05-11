@@ -1,0 +1,16 @@
+Act as a Knowledge Graph Engineer. I am building a Relation Extraction dataset based on SCOR-DS and Enterprise Ontology.
+I have the following seed Q-codes:
+Actors: business (Q4830453), enterprise (Q688151), corporation (Q167037), vendor (Q11270215), third-party source (Q11832159), subsidiary (Q355209), government agency (Q327333), customer (Q22855), competitor (Q476635), retailer (Q200552).
+Products and Materials:  product (Q2424752), goods (Q28877), manufactured product (Q1836700), raw material (Q192355), intermediate good (Q3955017)
+
+Task: Identify 20-30 additional Wikidata Q-codes that represent:
+
+	- Functional Roles: (e.g., 'Wholesaler', 'Freight Forwarder', 'OEM', 'Contract Manufacturer', '3PL').
+	- Products & Materials: (e.g., 'Intermediate good', 'Raw material', 'Electronic component', 'Finished good', 'Commodity').
+	- For each code, provide its Superclass QID to ensure it falls under either the 'Organization/Economic Entity' hierarchy or the 'Product/Physical Object' hierarchy.
+
+Organization/Constraint:
+
+	- Group the results into my 5 meta-categories: Core Enterprise, Supply Chain Partner, Organizational Unit, Market Actor, and Product & Material.
+	- Exclude generic abstract classes like 'Entity' or 'Object'.
+	- Priority: Only provide classes that are high-level enough to have significant instances with Wikipedia pages.

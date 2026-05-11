@@ -1,0 +1,28 @@
+relation_expansion_prompt
+
+Orchestrate
+parent company (P127) -- Core Enterprise -- Organizational Unit
+child organization (P355) -- Core Enterprise -- Organizational Unit
+partnership with (P2652) -- Core Enterprise -- Organizational Unit
+regulated by (P3719) -- Core Enterprise -- Organizational Unit
+investor (P1951) -- Core Enterprise -- Core Enterprise
+
+
+Plan / Order
+distributed by (P750) -- Product -- Supply Chain Partner
+commissioned by (P88) -- Product/Material -- Core Enterprise
+
+Source
+typically sells (P7163) (equivalent to company sells product relation) -- Core Enterprise -- Product
+
+Transform
+manufactured by (P176) -- Product -- Core Enterprise
+made from material (P186) -- Product -- Product & Material
+
+Fulfill
+distributed by (P750) -- Supply Chain Partner -- Market Actor
+
+Return
+Nothing
+
+As you can see the relations are few and far between. There are no major valid relations I can rely on apart from organisation to organisation relations. As such, I would like you to help me find real relations that at least resemble the topics in SCOR-DS (Plan/Order, Source, Transform, Fulfill, Return, Orchestrate) so that I can go ahead with them. Make sure you do not hallucinate.
