@@ -41,3 +41,6 @@ Error Analysis in on both datasets was also done, where we picked error examples
 - What each stage does is explained the README file in that folder. But run the scripts in order. 
 - Once done you will get std_test and std_train files in 'src/data/wikidata_v3/'
 - 'visualizer.py' in the wikidata_v3 folder will give you an HTML file showing exactly how the nodes are connected giving you an overview of the knowledge graph 
+
+# Issues 
+- If something does not work, please raise an issue. I will try to get the notifications up and will try to respond to every single query. 
