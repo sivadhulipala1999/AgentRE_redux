@@ -53,6 +53,9 @@ class OpenAIClient:
         chat_completion = self.client.chat.completions.create(**kwargs)
         return chat_completion.choices[0].message.content
 
+    def query_chat_scagent(self): 
+        raise NotImplementedError("query_chat_scagent not implemented in this client")
+
     def query_generative(self, text, stop=None, temperature=None) -> str:
         kwargs = {
             "prompt": text,

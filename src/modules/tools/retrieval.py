@@ -1,5 +1,7 @@
 from datasets import Dataset
 import json
+from pathlib import Path 
+import hashlib 
 from modules.tools.base_tool import BaseTool
 from config.configurator import configs
 from modules.retrieval.index import DummyIndex, SimCSEIndex, BGEIndex, BaseIndex, MODE2INDEX
@@ -18,6 +20,33 @@ class RetrieveExamples(BaseTool):
     ds_index = None         # dataset for retrieval
     index: BaseIndex = None  # the index model
 
+    
+    def get_cache_dir(self):
+        base_dir = Path("./cache/retrieve_examples")
+        base_dir.mkdir(parents=True, exist_ok=True)
+
+        dataset_size = len(self.ds_index)
+        mode = self.mode
+        fingerprint = hashlib.md5(f"{mode}_{dataset_size}".encode()).hexdigest()[:12]
+
+        return base_dir / fingerprint
+
+    def try_load_index(self):
+        cache_dir = self.get_cache_dir()
+        index_path = cache_dir / "index.faiss"
+        texts_path = cache_dir / "texts.json"
+
+        if not index_path.exists() or not texts_path.exists():
+            return False
+
+        self.index = MODE2INDEX[self.mode]()
+        self.index.load(str(cache_dir))
+        return True
+
+    def save_index(self):
+        cache_dir = self.get_cache_dir()
+        self.index.save(str(cache_dir))
+
     def init(self):
         # dummy/simcse/bge
         self.mode = configs['tools']['RetrieveExamples']['mode']
@@ -25,9 +54,16 @@ class RetrieveExamples(BaseTool):
 
         self.ds_index = self.data_handler.ds_index
         logger.info(
-            f"RetrieveExamples: mode={self.mode}, k={self.k}, ds_index={len(self.ds_index)}")
-        self.build_index()
-        logger.info(f"RetrieveExamples: index built.")
+            f"RetrieveExamples: mode={self.mode}, k={self.k}, ds_index={len(self.ds_index)}"
+        )
+
+        if self.try_load_index():
+            logger.info("RetrieveExamples: loaded persisted index.")
+        else:
+            self.build_index()
+            self.save_index()
+            logger.info("RetrieveExamples: built and saved index.")
+    
 
     def build_index(self):
         index_texts = self.generate_index_texts(self.ds_index)
@@ -46,4 +82,8 @@ class RetrieveExamples(BaseTool):
                 matched_idxs2.append(idx)
         samples = self.ds_index.select(matched_idxs2)
         samples_str = [format_sample(i) for i in samples]
+        return json.dumps(samples_str, ensure_ascii=False)
+    
+    def call_static_example(self):
+        samples_str = [format_sample(self.ds_index[0])]
         return json.dumps(samples_str, ensure_ascii=False)

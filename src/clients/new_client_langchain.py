@@ -110,6 +110,21 @@ class OpenAIClient:
         # Use LangChain's .invoke() method
         response = self.llm.invoke(messages, **kwargs)
         return _get_content(response)
+    
+    def query_chat_scagent(self, system_prompt, user_prompt, stop=None, temperature=None) -> str:    
+        kwargs = {
+            "temperature": self.temperature if temperature is None else temperature,
+            "stop": stop
+        }
+        
+        messages = [
+            SystemMessage(content=system_prompt),
+            HumanMessage(content=user_prompt)
+        ]
+
+        # Use LangChain's .invoke() method
+        response = self.llm.invoke(messages, **kwargs)
+        return _get_content(response)
 
     def query_generative(self, text, stop=None, temperature=None) -> str:
         """Internal query for legacy generative models."""

@@ -12,8 +12,8 @@ combined_data = []
 for file_path in INPUT_FILES:
     with open(file_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-        triplet_list = []
         for ent in data:
+            triplet_list = []
             for triplet in ent['triplets']:
                 triplet_list.append({
                     "subject": triplet[0],

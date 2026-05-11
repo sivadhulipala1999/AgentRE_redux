@@ -64,12 +64,14 @@ class DatMetaSciERC(DataMeta):
 
 
 class DatMetaWikidata(DataMeta):
-    ddir = f"{rdir}/src/data/Wikidata/abstracts"
+    ddir = f"{rdir}/src/data/Wikidata/wikidata_v3"
     odir = f"{rdir}/out/Wikidata"
 
     def __init__(self, model_name):
         super().__init__(model_name)
         self.language = "en"
+        if configs['model']['study'] == 'ablation':
+            self.fn_test = f"{self.ddir}/std_test_ablation.json"
 
 
 class DataHandlerRE:
@@ -119,10 +121,9 @@ class DataHandlerRE:
         if self.num_samples_index > 0:
             if configs['data']['name'] == "DuIE2.0":
                 df_index = pd.read_json(self.data_meta.fn_train, lines=True)
-                # for DuIE, only use 10000 samples for index
-                df_index = df_index[:self.num_samples_index]
             else:
                 df_index = pd.read_json(self.data_meta.fn_train, lines=False)
+            df_index = df_index[:self.num_samples_index]
             self.ds_index = Dataset.from_pandas(df_index)
         else:
             self.ds_index = Dataset.from_json(self.data_meta.fn_train)

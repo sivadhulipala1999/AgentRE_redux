@@ -1,0 +1,44 @@
+import: base_config.yml
+model:
+  name: sc_agent
+  max_iterations: 2
+  max_retry: 2
+  chunking: false 
+  study: complete
+  mode: direct # setup c 
+  retrieval_switch: true # setup b
+  no_examples: false # setup a 
+
+tools:
+  Finish:
+    open: true
+  RetrieveExamples:
+    open: true
+    mode: bge # simcse    # simcse, bge, dummy
+    k: 3 # Number of samples to retrieve from memory 
+
+train:
+  if_train: false
+  if_predict: true
+  if_evaluate: true
+  trainer: trainer_sc_agent
+
+data:
+  type: re
+  name: Wikidata
+
+  # For Wikidata
+  num_samples: 150
+  train_num_samples: 0
+  language: en
+  input_trace: True
+
+
+llm:
+  model_name: glm-4.7
+  temperature: 0
+  max_tokens: 4096
+  client: academic # openai 
+
+  # use_cache: true
+  use_cache: false    # for random

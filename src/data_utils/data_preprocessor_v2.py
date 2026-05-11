@@ -166,7 +166,7 @@ class Processor:
     def process_wikidata(self):
         root = os.getcwd().replace("\\", "/")
         # ddir = root + "/src/data/Wikidata/abstracts"
-        ddir = root + "/src/data/Wikidata/wikidata_v2"
+        ddir = root + "/src/data/Wikidata/wikidata_v3"
         labels = []
         for fn in ['std_train.json', 'std_test.json']:
             with open(f"{ddir}/{fn}", 'r', encoding='utf-8') as f:

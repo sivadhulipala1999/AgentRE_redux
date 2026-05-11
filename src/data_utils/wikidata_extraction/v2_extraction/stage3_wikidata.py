@@ -164,7 +164,7 @@ if __name__ == "__main__":
     ROOT = "src/data/Wikidata/wikidata_v2"
     INPUT_FILES = glob.glob(f"{ROOT}/stage2_*.csv")
     # OUTPUT_FILE = f"{ROOT}/stage3_grouped_dataset_v2.json"
-    OUTPUT_FILE = f"{ROOT}/stage3_grouped_dataset_v2.json"
+    OUTPUT_FILE = f"{ROOT}/stage3_grouped_dataset_v3.json"
     SLEEP_SECONDS = 0.5
     ABSTRACT_ONLY = True
 

@@ -5,6 +5,7 @@ from data_utils.data_handler_re import DataHandlerRE
 from config.configurator import configs
 from .prompt_zh import *
 from .prompt_en import *
+from .prompt_scagent_en import *
 import json
 from typing import List
 
@@ -14,6 +15,43 @@ class BasePrompter:
         self.data_handler: DataHandlerRE = data_handler
         self.logger = getLogger('train_logger')
         self.language = data_handler.data_meta.language
+
+class PrompterSCAgent(BasePrompter):
+    def __init__(self, data_handler):
+        super().__init__(data_handler)
+        if self.language == "en":
+            self.SYSTEM_PROMPT = SYSTEM_PROMPT 
+            self.SYSTEM_PROMPT_C = SYSTEM_PROMPT_C
+            self.USER_PROMPT_A = USER_PROMPT_A
+            self.USER_PROMPT_B = USER_PROMPT_B
+            self.USER_PROMPT = USER_PROMPT 
+            self.RETRIEVER_OUTPUT_TEMPLATE = RETRIEVER_OUTPUT_TEMPLATE
+        else:
+            raise ValueError(f"Unsupported language: {self.language}")
+
+    def get_react_prompt(self, text: str, tools_desc: str):
+        return self.TEMPLATE_REACT.format(tools=tools_desc, text=text)
+    
+    def get_system_prompt(self):
+        return self.SYSTEM_PROMPT # Complete setup
+
+    def get_system_prompt_c(self): 
+        return self.SYSTEM_PROMPT_C # Flat FSL, no staged detection, let the model decide
+    
+    def format_retrieved_examples(self, retrieved_examples: List[dict]):
+        output = "" 
+        for idx, example in enumerate(retrieved_examples):
+            output += "\n\n" + self.RETRIEVER_OUTPUT_TEMPLATE.format(i=idx+1, text=example['text'], spo_list=example['spo_list'])
+        return output
+
+    def get_user_prompt(self, retrieved_examples: str, chunk_text: str):
+        return self.USER_PROMPT.format(retrieved_examples=retrieved_examples, chunk_text=chunk_text)
+    
+    def get_static_user_prompt(self, static_example: str, chunk_text: str):
+        return self.USER_PROMPT_B.format(static_example=static_example, chunk_text=chunk_text)
+    
+    def get_static_user_prompt_no_examples(self, chunk_text: str):
+        return self.USER_PROMPT_A.format(chunk_text=chunk_text)
 
 
 class PrompterReActFSL(BasePrompter):

@@ -27,3 +27,6 @@ agentre_redux_env/
 # files 
 *.csv
 *.json
+
+# lib 
+lib/

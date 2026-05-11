@@ -90,7 +90,7 @@ class ReAct_Memory(BaseModel):
         text = json.dumps(text.strip(), ensure_ascii=False)
         if debug:
             self.logger.info(f"[idx={idx}] Input: {text}")
-        history = []       # clear the history!
+        self.history = []       # clear the history!
 
         # ReAct-fashion
         for _ in range(self.max_iterations):
@@ -132,31 +132,31 @@ class ReAct_Memory(BaseModel):
                     f"[ERROR] Failed to generate valid output after 5 iterations.")
                 return {
                     "spo_list_pred": [],
-                    "history": history.copy(),
+                    "history": self.history.copy(),
                     "final_output": llm_output,
                     "errorCode": NO_VALID_RESULT_WITHIN_MAX_RETRY,
                 }
 
-            history.append(f"Thought: {thought}")
+            self.history.append(f"Thought: {thought}")
             if debug:
                 self.logger.info(f"Thought: {thought}")
             if action_name == "Finish":
                 err_code, spo_list = self.parse_llm_output(args)
 
                 finish_output = json.dumps(args, ensure_ascii=False)
-                history.append(f"Finish: {finish_output}")
+                self.history.append(f"Finish: {finish_output}")
                 if debug:
                     self.logger.info(f"Finish: {finish_output}")
                 return {
                     "spo_list_pred": spo_list,
-                    "history": history.copy(),
+                    "history": self.history.copy(),
                     "final_output": llm_output,
                     "errorCode": err_code,
                 }
             else:
                 observation = self.tools[action_name].call(args)
-                history.append(f"Action: {action_name}({args})")
-                history.append(f"Observation: {observation}")
+                self.history.append(f"Action: {action_name}({args})")
+                self.history.append(f"Observation: {observation}")
                 if debug:
                     self.logger.info(f"Action: {action_name}({args})")
                     self.logger.info(f"Observation: {observation}")
@@ -165,7 +165,7 @@ class ReAct_Memory(BaseModel):
                 f"[ERROR] Failed to generate valid output after 5 iterations.")
             return {
                 "spo_list_pred": [],
-                "history": history.copy(),
+                "history": self.history.copy(),
                 "final_output": llm_output,
                 "errorCode": NO_RESULT_WITHIN_MAX_ITERATIONS,
             }
@@ -306,7 +306,8 @@ class ReAct_Memory(BaseModel):
                         self.history.append(f"Reflexion: {reflexion_text}")
                         if self.debug:
                             self.logger.info(f"Reflexion: {reflexion_text}")
-                        self.record_reflexion_memory(reflexion_sample)
+                        if 'RetrieveReflexionMemory' in self.tools:
+                            self.record_reflexion_memory(reflexion_sample)
                     else:
                         pass 
                     # NOTE: break when Finsh?
@@ -329,7 +330,8 @@ class ReAct_Memory(BaseModel):
 
             # NEW: record into CorrectMemory!
             self.record_correct_memory_v2(sample, correct_triples)
-            self.record_incorrect_memory_v2(sample, incorrect_triples)
+            if 'RetrieveIncorrectMemory' in self.tools:
+                self.record_incorrect_memory_v2(sample, incorrect_triples)
 
             # NEW: summary!
             if self.use_summary:
@@ -569,13 +571,15 @@ class ReAct_Memory(BaseModel):
             task_description = self.tools['GetTaskDescription'].call()
             retrieved_examples = self.tools['RetrieveCorrectMemory'].call(text)
             entity_info = self.tools['RetrieveRelevantInfo'].call(text)
-            retrieved_incorrect_examples = self.tools['RetrieveIncorrectMemory'].call(text)
+            if 'RetrieveIncorrectMemory' in self.tools:
+                retrieved_incorrect_examples = self.tools['RetrieveIncorrectMemory'].call(text)
             prompt = self.prompter.get_react_prompt(text, tools_desc) + \
                 self.prompter.get_react_first_step(task_description) + \
                 self.prompter.get_react_second_step(
                     text, retrieved_examples) + \
-                self.prompter.get_entity_info_step(text, entity_info) + \
-                self.prompter.get_incorrect_memory_step(text, retrieved_incorrect_examples)
+                self.prompter.get_entity_info_step(text, entity_info) 
+            if 'RetrieveIncorrectMemory' in self.tools:
+                prompt += self.prompter.get_incorrect_memory_step(text, retrieved_incorrect_examples)
             if len(self.history) == 0:
                 self.history.append(f"Action: GetTaskDescription()")
                 self.history.append(f"Observation: {task_description}")
@@ -583,8 +587,9 @@ class ReAct_Memory(BaseModel):
                 self.history.append(f"Observation: {retrieved_examples}")
                 self.history.append(f"Action: RetrieveRelevantInfo({text})")
                 self.history.append(f"Observation: {entity_info}")
-                self.history.append(f"Action: RetrieveIncorrectMemory({text})")
-                self.history.append(f"Observation: {retrieved_incorrect_examples}")
+                if 'RetrieveIncorrectMemory' in self.tools:
+                    self.history.append(f"Action: RetrieveIncorrectMemory({text})")
+                    self.history.append(f"Observation: {retrieved_incorrect_examples}")
                 if self.debug:
                     self.logger.info(f"Action: GetTaskDescription()")
                     self.logger.info(f"Observation: {task_description}")
@@ -592,12 +597,13 @@ class ReAct_Memory(BaseModel):
                     self.logger.info(f"Observation: {retrieved_examples}")
                     self.logger.info(f"Action: RetrieveRelevantInfo({text})")
                     self.logger.info(f"Observation: {entity_info}")
-                    self.logger.info(f"Action: RetrieveIncorrectMemory({text})")
-                    self.logger.info(f"Observation: {retrieved_incorrect_examples}")
+                    if 'RetrieveIncorrectMemory' in self.tools:
+                        self.logger.info(f"Action: RetrieveIncorrectMemory({text})")
+                        self.logger.info(f"Observation: {retrieved_incorrect_examples}")
             # Action+Observation
             # everything prior to self.num_pre_history * 2 was just added in the previous len(self.history) == 0 block
             if len(self.history) > self.num_pre_history * 2:
-                if inference: 
+                if inference and ('RetrieveReflexionMemory' in self.tools): 
                     # No reflexions for inference so its not in the history by default
                     # We retrieve from the reflexion memory to add to the prompt.
                     retrieved_reflexion_examples = self.tools['RetrieveReflexionMemory'].call(

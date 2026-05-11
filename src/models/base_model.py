@@ -95,5 +95,9 @@ class BaseModel:
         res = self.llm.query_one(text, stop=stop, temperature=temperature)
         return res
 
+    def query_llm_scagent(self, system_prompt, user_prompt, stop=None, temperature=None) -> str:
+        res = self.llm.query_chat_scagent(system_prompt, user_prompt, stop=stop, temperature=temperature)
+        return res
+
     def log_prompt(self, prompt):
         self.logger.info(f"\n{'='*200}\nPrompt: {prompt}\n{'='*200}")

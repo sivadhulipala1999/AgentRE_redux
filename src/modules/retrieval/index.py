@@ -2,6 +2,8 @@ import faiss
 import time
 from tqdm import tqdm
 from abc import abstractmethod
+import os 
+import json 
 
 import torch
 device = torch.device("cuda:7" if torch.cuda.is_available() else "cpu")
@@ -135,7 +137,7 @@ class BGEIndex(BaseIndex):
             texts, padding=True, truncation=True, return_tensors='pt', max_length=512)
         embeddings = []
         # for i in tqdm(range(0, len(inputs_batch), batch_size)):
-        for i in range(0, len(inputs_batch), batch_size):
+        for i in range(0, len(inputs_batch['input_ids']), batch_size):
             inputs = {k: v[i:i+batch_size] for k, v in inputs_batch.items()}
             inputs = {k: v.to(device) for k, v in inputs.items()}
             with torch.no_grad():
@@ -146,6 +148,47 @@ class BGEIndex(BaseIndex):
         embeddings = torch.nn.functional.normalize(
             embeddings, p=2, dim=1).cpu()
         return embeddings
+    
+    def save(self, save_dir: str):
+        os.makedirs(save_dir, exist_ok=True)
+
+        faiss.write_index(self.index, os.path.join(save_dir, "index.faiss"))
+
+        with open(os.path.join(save_dir, "texts.json"), "w", encoding="utf-8") as f:
+            json.dump(self.texts, f, ensure_ascii=False)
+
+        meta = {
+            "model_id": 'BAAI/bge-large-zh-v1.5',
+            "dim": self.model.config.hidden_size,
+            "num_texts": len(self.texts)
+        }
+        with open(os.path.join(save_dir, "meta.json"), "w", encoding="utf-8") as f:
+            json.dump(meta, f, ensure_ascii=False, indent=2)
+
+    def load(self, save_dir: str):
+        # Assumes that the dataset has not changed 
+        # If you need an incremental index, this method needs to be updated
+        index_path = os.path.join(save_dir, "index.faiss")
+        texts_path = os.path.join(save_dir, "texts.json")
+        meta_path = os.path.join(save_dir, "meta.json")
+
+        if not os.path.exists(index_path):
+            raise FileNotFoundError(f"Missing FAISS index file: {index_path}")
+        if not os.path.exists(texts_path):
+            raise FileNotFoundError(f"Missing texts file: {texts_path}")
+
+        self.index = faiss.read_index(index_path)
+
+        with open(texts_path, "r", encoding="utf-8") as f:
+            self.texts = json.load(f)
+
+        if os.path.exists(meta_path):
+            with open(meta_path, "r", encoding="utf-8") as f:
+                meta = json.load(f)
+            if meta.get("dim") != self.model.config.hidden_size:
+                raise ValueError(
+                    f"Index dim {meta.get('dim')} != model dim {self.model.config.hidden_size}"
+                )
 
 
 MODE2INDEX = {

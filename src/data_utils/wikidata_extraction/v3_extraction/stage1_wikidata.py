@@ -389,7 +389,7 @@ def assign_source_target_labels(df: pd.DataFrame, qidtype_dict: dict[str, list[s
             labels, key=lambda x: int(x[1]))  # Sort by level
         if len(ordered_labels) == 0:
             return dummy_str
-        return ordered_labels[0]
+        return ordered_labels[0][0]
 
     df["target_type_ids"] = df["target_id"].map(qid_qidtype_dict)
     df["target_type"] = df["target_type_ids"].apply(get_target_label)
