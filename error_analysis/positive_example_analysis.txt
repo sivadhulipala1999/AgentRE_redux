@@ -1,0 +1,82 @@
+POSITIVE PREDICTIONS DUIE 2.0 
+
+AGENTRE - Total examples: 9 
+AGENTRE_REDUX_WITH_CORRECT_MEM - Total examples: 9
+AGENTRE_REDUX_WITH_ALL_MEM - Total examples: 10 
+AGENTRE_REDUX_WITHOUT_INCORRECT_MEM - Total examples: 12
+REACT_FSL - Total examples: 7 
+
+1. Prompt only 
+
+AGENTRE (Examples in this category: 6)
+- Attempt 1 Train Sample idx = 3 
+- Attempt 1 Train Sample idx = 18 - history check 
+- Attempt 1 Test Sample idx = 0 
+- Attempt 1 Test Sample idx = 24 - history check 
+- Attempt 2 Train Sample idx = 4 
+- Attempt 2 Test Sample idx = 5 
+
+AGENTRE_REDUX_WITH_CORRECT_MEM (Examples in this category: 6)
+- Attempt 3 Test Sample idx = 11 - history check 
+- Attempt 3 Test Sample idx = 17
+- Attempt 3 Test Sample idx = 25 
+- Attempt 2 Test Sample idx = 11 - tries a long thought first time, output parse fails, second time goes straight in 
+- Attempt 1 Train Sample idx = 12 
+- Attempt 1 Test Sample idx = 12 
+
+AGENTRE_REDUX_WITH_ALL_MEM (Examples in this category: 5)
+- Attempt 1 Train Sample idx = 4
+- Attempt 1 Test Sample idx = 10 
+- Attempt 2 Train Sample idx = 6 - Initial rambling and then settles into a routine 
+- Attempt 2 Test Sample idx = 3 - This is an interesting example, it does not have any tool calls in the final attempt but in the other attempt, it does simulate tool calls 
+- Attempt 3 Test Sample idx = 2
+
+AGENTRE_REDUX_WITHOUT_INCORRECT_MEM (Examples in this category: 3)
+- Attempt 1 Train Sample idx = 0 - simple output yes, but in the first attempt it does try tool calls 
+- Attempt 1 Train Sample idx = 14 
+- Attempt 2 Test Sample idx = 41 - erroneous examples are riddled by thought loops being terminated at the construction step but the right attempt is regular 
+
+REACT_FSL (Examples in this category: 2)
+- Attempt 2 Sample idx = 49  
+- Attempt 3 Sample idx = 4 
+
+
+
+
+2. Prompt plus tool call 
+
+AGENTRE (Examples in this category: 4)
+- Attempt 2 Train Sample idx = 30 - GetRelationDefinition call  
+- Attempt 2 Test Sample idx = 5 - It attempts to make a call but instead goes for a simulated observation 
+- Attempt 3 Train Sample idx = 18 - GetRelationDefinition call 
+- Attempt 3 Test Sample idx = 35 - simulated observation of attempted GetRelationDefinition tool call 
+
+AGENTRE_REDUX_WITH_CORRECT_MEM (Examples in this category: 3)
+- Attempt 2 Test Sample idx = 5 - GetRelationDefinition call 
+- Attempt 2 Train Sample idx = 7 - GetRelationDefinition call 
+- Attempt 2 Train Sample idx = 47 - GetRelationDefinition call 
+
+AGENTRE_REDUX_WITH_ALL_MEM (Examples in this category: 5)
+- Attempt 1 Test Sample idx = 14 - RetrieveReflexionMemory call  
+- Attempt 2 Train Sample idx = 11 - RetrieveReflexionMemory call 
+- Attempt 2 Test Sample idx = 17 - RetrieveReflexionMemory call 
+- Attempt 3 Train Sample idx = 9 - GetRelationDefinition call 
+- Attempt 3 Test Sample idx = 42 - GetRelationDefinition call 
+
+AGENTRE_REDUX_WITHOUT_INCORRECT_MEM (Examples in this category: 9)
+- Attempt 1 Test Sample idx = 5 - GetRelationDefinition call 
+- Attempt 1 Test Sample idx = 20 - GetRelationDefinition call 
+- Attempt 2 Train Sample idx = 6 - GetRelationDefinition call 
+- Attempt 2 Train Sample idx = 23 - GetRelationDefinition call 
+- Attempt 2 Test Sample idx = 14 - GetRelationDefinition call 
+- Attempt 3 Train Sample idx = 3 - GetRelationDefinition call 
+- Attempt 3 Train Sample idx = 19 - GetRelationDefinition call 
+- Attempt 3 Test Sample idx = 0 - GetRelationDefinition call 
+- Attempt 3 Test Sample idx = 24 - GetRelationDefinition call, erroneous attempts saw termination at the formulation step 
+
+REACT_FSL (Examples in this category: 5)
+- Attempt 1 Sample idx = 3 - GetRelationDefinition call 
+- Attempt 1 Sample idx = 9 - GetRelationDefinition call 
+- Attempt 1 Sample idx = 28 - GetRelationDefinition call 
+- Attempt 1 Sample idx = 37 - GetRelationDefinition call 
+- Attempt 3 Sample id = 43 - GetRelationDefinition call 

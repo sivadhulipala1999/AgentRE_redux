@@ -1,0 +1,58 @@
+{'model': {'name': 'sc_agent', 'max_iterations': 2, 'max_retry': 2, 'chunking': False, 'study': 'ablation', 'mode': 'direct', 'retrieval_switch': False, 'logname': 'sc_agent'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveExamples': {'open': True, 'mode': 'bge', 'k': 3}}, 'train': {'if_train': False, 'if_predict': True, 'if_evaluate': True, 'trainer': 'trainer_sc_agent'}, 'data': {'type': 're', 'name': 'Wikidata', 'language': 'en', 'num_samples': 50, 'num_samples_index': 1000, 'train_num_samples': 0, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic'}}
+Start predicting with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 1.0, 'recall': 1.0, 'precision': 1.0}
+idx=1, metric_dict={'f1': 0.0741, 'recall': 0.5, 'precision': 0.04}
+idx=2, metric_dict={'f1': 0.0714, 'recall': 0.3333, 'precision': 0.04}
+idx=3, metric_dict={'f1': 0.0571, 'recall': 0.25, 'precision': 0.0323}
+idx=4, metric_dict={'f1': 0.1081, 'recall': 0.4, 'precision': 0.0625}
+idx=5, metric_dict={'f1': 0.1053, 'recall': 0.3333, 'precision': 0.0625}
+idx=6, metric_dict={'f1': 0.1026, 'recall': 0.2857, 'precision': 0.0625}
+idx=7, metric_dict={'f1': 0.1395, 'recall': 0.375, 'precision': 0.0857}
+idx=8, metric_dict={'f1': 0.125, 'recall': 0.3333, 'precision': 0.0769}
+idx=9, metric_dict={'f1': 0.1176, 'recall': 0.25, 'precision': 0.0769}
+idx=10, metric_dict={'f1': 0.1154, 'recall': 0.2308, 'precision': 0.0769}
+idx=11, metric_dict={'f1': 0.1132, 'recall': 0.2143, 'precision': 0.0769}
+idx=12, metric_dict={'f1': 0.1091, 'recall': 0.1875, 'precision': 0.0769}
+idx=13, metric_dict={'f1': 0.1034, 'recall': 0.1765, 'precision': 0.0732}
+idx=14, metric_dict={'f1': 0.1111, 'recall': 0.25, 'precision': 0.0714}
+idx=15, metric_dict={'f1': 0.082, 'recall': 0.2381, 'precision': 0.0495}
+idx=16, metric_dict={'f1': 0.0769, 'recall': 0.2273, 'precision': 0.0463}
+idx=17, metric_dict={'f1': 0.0585, 'recall': 0.2174, 'precision': 0.0338}
+idx=18, metric_dict={'f1': 0.0552, 'recall': 0.2083, 'precision': 0.0318}
+idx=19, metric_dict={'f1': 0.0549, 'recall': 0.2, 'precision': 0.0318}
+idx=20, metric_dict={'f1': 0.0535, 'recall': 0.1786, 'precision': 0.0314}
+idx=21, metric_dict={'f1': 0.0529, 'recall': 0.1724, 'precision': 0.0312}
+idx=22, metric_dict={'f1': 0.0495, 'recall': 0.1613, 'precision': 0.0292}
+idx=23, metric_dict={'f1': 0.0361, 'recall': 0.1562, 'precision': 0.0204}
+idx=24, metric_dict={'f1': 0.0344, 'recall': 0.1515, 'precision': 0.0194}
+idx=25, metric_dict={'f1': 0.0405, 'recall': 0.1765, 'precision': 0.0229}
+idx=26, metric_dict={'f1': 0.0401, 'recall': 0.1714, 'precision': 0.0227}
+idx=27, metric_dict={'f1': 0.0465, 'recall': 0.1944, 'precision': 0.0264}
+idx=28, metric_dict={'f1': 0.0464, 'recall': 0.1892, 'precision': 0.0264}
+idx=29, metric_dict={'f1': 0.0462, 'recall': 0.1842, 'precision': 0.0264}
+idx=30, metric_dict={'f1': 0.0457, 'recall': 0.2, 'precision': 0.0258}
+idx=31, metric_dict={'f1': 0.051, 'recall': 0.2195, 'precision': 0.0288}
+idx=32, metric_dict={'f1': 0.0442, 'recall': 0.2093, 'precision': 0.0247}
+idx=33, metric_dict={'f1': 0.0485, 'recall': 0.2273, 'precision': 0.0272}
+idx=34, metric_dict={'f1': 0.0482, 'recall': 0.2222, 'precision': 0.027}
+idx=35, metric_dict={'f1': 0.0481, 'recall': 0.2174, 'precision': 0.027}
+idx=36, metric_dict={'f1': 0.0478, 'recall': 0.2128, 'precision': 0.027}
+idx=37, metric_dict={'f1': 0.0451, 'recall': 0.2083, 'precision': 0.0253}
+idx=38, metric_dict={'f1': 0.045, 'recall': 0.2041, 'precision': 0.0253}
+idx=39, metric_dict={'f1': 0.0484, 'recall': 0.22, 'precision': 0.0272}
+idx=40, metric_dict={'f1': 0.0481, 'recall': 0.2115, 'precision': 0.0272}
+idx=41, metric_dict={'f1': 0.048, 'recall': 0.2075, 'precision': 0.0272}
+idx=42, metric_dict={'f1': 0.0479, 'recall': 0.2037, 'precision': 0.0272}
+idx=43, metric_dict={'f1': 0.0513, 'recall': 0.2182, 'precision': 0.0291}
+idx=44, metric_dict={'f1': 0.0504, 'recall': 0.2143, 'precision': 0.0286}
+idx=45, metric_dict={'f1': 0.0534, 'recall': 0.2281, 'precision': 0.0302}
+idx=46, metric_dict={'f1': 0.0533, 'recall': 0.2241, 'precision': 0.0302}
+idx=47, metric_dict={'f1': 0.0525, 'recall': 0.2097, 'precision': 0.03}
+idx=48, metric_dict={'f1': 0.0452, 'recall': 0.2, 'precision': 0.0255}
+idx=49, metric_dict={'f1': 0.0451, 'recall': 0.197, 'precision': 0.0255}
+Saving LLM input trace to input_trace_Wikidata/llm_input_trace_sc_agent_glm-4.7_Wikidata_.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:00, 212.72 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.0451, 'recall': 0.197, 'precision': 0.0255}

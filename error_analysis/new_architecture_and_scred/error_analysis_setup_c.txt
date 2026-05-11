@@ -1,0 +1,24 @@
+ERROR ANALYSIS
+
+Total examples: 50 
+
+Setup C (Flat FSL + Retriever (k=1))
+- Attempt 1 (Retries: 13 examples)
+	- idx: 5, 9, 10, 16, 17, 18, 23, 24, 29, 35, 38, 46, 49 
+	- idx: 10, 17, 18,  - got the output eventually, in the 2nd attempt 
+	- idx: 5, 9, 16, 23, 24, 29, 35, 38, 46, 49 - triples did not finish generating after multiple iterations 
+
+- Attempt 2 (Retries: 13 examples) 
+	- idx: 5, 9, 15, 16, 18, 23, 24, 29, 35, 40, 46, 48, 49
+	- idx: 16, 18, 40, 48,   - got the output eventually, in the 2nd attempt 
+	- idx: 5, 9, 15, 23, 24, 29, 35, 46, 49  - triples did not finish generating after multiple iterations 
+
+- Attempt 3 (Retries: 15 examples)
+	- idx: 5, 9, 10, 15, 16, 17, 18, 23, 24, 29, 35, 38, 40, 46, 49
+	- idx: 10, 17, 38, 40, 48,   - got the output eventually, in the 2nd attempt 
+	- idx: 5, 9, 15, 16, 23, 24, 29, 35, 46, 49  - triples did not finish generating after multiple iterations 
+	- idx: 5, 9, 23, 24, 29,  - triples are being repeated, defining more rules about the entities to extract might make it easier because it extracted Fiat and Fiat Group as 2 separate entities 
+
+- Checking samples idxs: 5, 9, 46, 49 - since the triples did not finish generating consistently 
+	- idx: 5 (2194 words), idx: 9 (8488 words), idx: 46 (4444 words), idx: 49 (6466 words)
+	- idx: 40 (1659 words) - this worked well enough, so the limit for chunking can be considered as 1700 words. Fixed length chunking might be good. 

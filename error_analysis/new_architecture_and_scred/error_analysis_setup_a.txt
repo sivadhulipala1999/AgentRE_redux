@@ -1,0 +1,22 @@
+ERROR ANALYSIS 
+
+Setup A (Flat FSL + No examples)
+- Attempt 1 (Retries: 16 examples)
+	- idx: 5, 9, 10, 23, 24, 29, 34, 35, 38, 40, 43, 44, 46, 47, 48, 49
+	- idx: 5, 9, 10, 23, 29, 34, 35, 38, 43, 46, 48, 49 - did not finish generating triples
+	- idx: 24, 40, 44, 47,  - got the results in the 2nd attempt 
+	
+- Attempt 2 (Retries: 15 examples)
+	- idx: 5, 9, 10, 15, 16, 23, 24, 29, 32, 35, 37, 38, 41, 46, 49
+	- idx: 5, 9, 10, 15, 16, 23, 24, 35, 37, 38, 41, 46, 49 - did not finish generating triples
+	- idx: 29, 32 - got the results in the 2nd attempt  
+	
+- Attempt 3 (Retries: 12 examples) 
+	- idx: 9, 10, 15, 16, 22, 23, 32, 35, 38, 40, 46, 49  
+	- idx: 22 (1st attempt was also correct but it gave po_list instead of spo_list, very interesting) 
+	- idx: 22, 32, - got it in 2nd attempt 
+	- idx: 9, 10, 15, 16, 23, 35, 38, 40, 46, 49 - did not finish generating triples 
+
+- Example check 
+	- idx: 10 - 8204 words 
+	- idx: 24 (2007), idx: 40 (1660), idx: 44 (270), idx: 47 (577)

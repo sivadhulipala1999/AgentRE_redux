@@ -1,0 +1,27 @@
+REACT_FSL WIKIDATA ERROR ANALYSIS 
+
+- Total examples: 150 
+- Total recursion failures: 32 
+
+- ERR analysis 
+	- idx = 3 - statement by statement analysis (where each statement is something the model picks and it is not a true line by line analysis). These statements can be repeated too, chunking is absolutely needed. Self-correction also observed. 
+	- idx = 7 - relationships are identified and then triples are formulated based on identified relationships, even before the triples are formulated the output gets terminated. The triples themselves seem to be right and not hallucinated. 
+	- idx = 15 - statement by statement analysis, output ends before the analysis and formulation finishes 
+	- idx = 20 - statement by statement analysis, output ends before the analysis and formulation finishes 
+	- idx = 30 - statement by statement analysis, output ends before the analysis and formulation finishes, sometimes the formulation is terminated randomly - the CoT analysis failure  
+	- idx = 60 - relationships are identified and then statement by statement analysis, self-correction 
+	- idx = 73 - relationships are identified and then triples are identified based on relationships 
+	- idx = 86 - statement by statement analysis, triples formulation 
+	- idx = 109 - statement by statement analysis, triples formulated, self-correction, 
+	- idx = 124 - statement by statement analysis, triples formulated, self-correction, final formulation 
+	
+- Random sample analysis 
+	- idx = 0 - GetRelationDefinition calls and then final triple formulation 
+	- idx = 19 - No tool call and triple formulation on 720 words 
+	- idx = 25 - Recursion in the first attempt and then it tries again and gets the triples 
+	- idx = 29 - GetRelationDefinition tool call (with one not being formulated correctly Action(ActionInput) instead of Action and ActionInput), and then triple formulation 
+	- idx = 62 - statement wise analysis, followed by termination at the triplet construction step, then 2nd attempt succeeds 
+	- idx = 74 - No tool call and triplet formulation 
+	- idx = 81 - No tool call and triplet formulation 
+	- idx = 100 - recursive verification, then finalization 
+	- idx = 144 - It reaches the triplet construction step, continues and then runs out of output, sentence by sentence analysis and then done. Despite the input being extremely large (3630 words), we still dont see a lot of chaos in output generation. 

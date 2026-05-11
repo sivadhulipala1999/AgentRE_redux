@@ -1,0 +1,187 @@
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 2, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': False, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 50, 'num_samples_index': 1000, 'input_trace': True}, 'llm': {'model_name': 'gpt-3.5-turbo', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'openai', 'code_version': 'AgentRE'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 3, 'num_samples_init': 100}, 'ReflexionMemory': {'open': True, 'mode': 'bge', 'k': 3}}}
+Start predicting with 50 samples.
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=6, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=7, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=8, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=9, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=10, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=11, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=12, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=13, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=14, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=15, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=16, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=17, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=18, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=19, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=20, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=21, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=22, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=23, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=24, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=25, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=26, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=27, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=28, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=29, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=30, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=31, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=32, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=33, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=34, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=35, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=36, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=37, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=38, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=39, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=40, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=41, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=42, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=43, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=44, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=45, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=46, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=47, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=48, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=49, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+Saving LLM input trace to llm_input_trace_react_memory_gpt-3.5-turbo_DuIE2.0.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:00, 148.14 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0, 'recall': 0.0, 'precision': 0}
+
+
+
+===========================================================================================================================================
+
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 2, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': False, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 50, 'num_samples_index': 1000, 'input_trace': True}, 'llm': {'model_name': 'gpt-3.5-turbo', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'openai', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 3, 'num_samples_init': 100}, 'ReflexionMemory': {'open': True, 'mode': 'bge', 'k': 3}}}
+Start predicting with 50 samples.
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=6, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=7, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=8, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=9, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=10, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=11, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=12, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=13, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=14, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=15, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=16, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=17, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=18, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=19, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=20, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=21, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=22, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=23, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=24, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=25, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=26, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=27, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=28, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=29, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=30, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=31, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=32, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=33, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=34, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=35, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=36, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=37, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=38, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=39, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=40, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=41, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=42, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=43, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=44, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=45, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=46, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=47, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=48, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=49, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+Saving LLM input trace to llm_input_trace_react_memory_gpt-3.5-turbo_DuIE2.0.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:02, 18.35 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0, 'recall': 0.0, 'precision': 0}
+
+
+===========================================================================================================================================
+
+{'model': {'name': 'react_fsl', 'max_iterations': 5, 'max_retry': 5, 'logname': 'react_fsl'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveExamples': {'open': True, 'mode': 'bge', 'k': 3}}, 'train': {'if_train': False, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 50, 'num_samples_index': 1000, 'input_trace': True}, 'llm': {'model_name': 'gpt-3.5-turbo', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'openai'}}
+Start predicting with 50 samples.
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=6, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=7, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0}
+idx=8, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=9, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=10, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=11, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=12, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=13, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=14, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=15, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=16, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=17, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=18, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=19, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=20, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=21, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=22, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=23, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=24, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=25, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=26, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=27, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=28, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=29, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=30, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=31, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=32, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=33, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=34, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=35, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=36, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=37, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=38, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=39, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=40, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=41, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=42, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=43, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=44, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=45, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=46, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=47, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=48, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=49, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_fsl_gpt-3.5-turbo_DuIE2.0_.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:00, 73.08 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0, 'recall': 0.0, 'precision': 0.0}
+
+
+===========================================================================================================================================

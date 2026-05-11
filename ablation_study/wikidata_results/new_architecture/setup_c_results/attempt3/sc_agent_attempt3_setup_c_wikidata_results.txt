@@ -1,0 +1,168 @@
+{'model': {'name': 'sc_agent', 'max_iterations': 2, 'max_retry': 2, 'chunking': False, 'study': 'complete', 'mode': 'direct', 'retrieval_switch': True, 'no_examples': False, 'logname': 'sc_agent'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveExamples': {'open': True, 'mode': 'bge', 'k': 3}}, 'train': {'if_train': False, 'if_predict': True, 'if_evaluate': True, 'trainer': 'trainer_sc_agent'}, 'data': {'type': 're', 'name': 'Wikidata', 'language': 'en', 'num_samples': 150, 'num_samples_index': 1000, 'train_num_samples': 0, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic'}}       
+Start predicting with 150 samples (indices 0..149).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0.0299, 'recall': 0.1429, 'precision': 0.0167}
+idx=5, metric_dict={'f1': 0.027, 'recall': 0.0714, 'precision': 0.0167}
+idx=6, metric_dict={'f1': 0.0253, 'recall': 0.0625, 'precision': 0.0159}
+idx=7, metric_dict={'f1': 0.0244, 'recall': 0.0526, 'precision': 0.0159}
+idx=8, metric_dict={'f1': 0.0241, 'recall': 0.05, 'precision': 0.0159}
+idx=9, metric_dict={'f1': 0.0238, 'recall': 0.0476, 'precision': 0.0159}
+idx=10, metric_dict={'f1': 0.044, 'recall': 0.0909, 'precision': 0.029}
+idx=11, metric_dict={'f1': 0.0435, 'recall': 0.087, 'precision': 0.029}
+idx=12, metric_dict={'f1': 0.08, 'recall': 0.16, 'precision': 0.0533}
+idx=13, metric_dict={'f1': 0.064, 'recall': 0.1538, 'precision': 0.0404}
+idx=14, metric_dict={'f1': 0.0635, 'recall': 0.1481, 'precision': 0.0404}
+idx=15, metric_dict={'f1': 0.0625, 'recall': 0.1379, 'precision': 0.0404}
+idx=16, metric_dict={'f1': 0.062, 'recall': 0.1333, 'precision': 0.0404}
+idx=17, metric_dict={'f1': 0.0615, 'recall': 0.129, 'precision': 0.0404}
+idx=18, metric_dict={'f1': 0.0365, 'recall': 0.1176, 'precision': 0.0216}
+idx=19, metric_dict={'f1': 0.036, 'recall': 0.1143, 'precision': 0.0214}
+idx=20, metric_dict={'f1': 0.0299, 'recall': 0.1111, 'precision': 0.0172}
+idx=21, metric_dict={'f1': 0.0288, 'recall': 0.1081, 'precision': 0.0166}
+idx=22, metric_dict={'f1': 0.0269, 'recall': 0.1053, 'precision': 0.0154}
+idx=23, metric_dict={'f1': 0.0246, 'recall': 0.1026, 'precision': 0.014}
+idx=24, metric_dict={'f1': 0.0243, 'recall': 0.1, 'precision': 0.0138}
+idx=25, metric_dict={'f1': 0.023, 'recall': 0.0952, 'precision': 0.0131}
+idx=26, metric_dict={'f1': 0.0219, 'recall': 0.0909, 'precision': 0.0125}
+idx=27, metric_dict={'f1': 0.0272, 'recall': 0.1111, 'precision': 0.0155}
+idx=28, metric_dict={'f1': 0.0271, 'recall': 0.1064, 'precision': 0.0155}
+idx=29, metric_dict={'f1': 0.027, 'recall': 0.1042, 'precision': 0.0155}
+idx=30, metric_dict={'f1': 0.0269, 'recall': 0.102, 'precision': 0.0155}
+idx=31, metric_dict={'f1': 0.0267, 'recall': 0.1, 'precision': 0.0154}
+idx=32, metric_dict={'f1': 0.0258, 'recall': 0.098, 'precision': 0.0149}
+idx=33, metric_dict={'f1': 0.0258, 'recall': 0.0962, 'precision': 0.0149}
+idx=34, metric_dict={'f1': 0.0246, 'recall': 0.0909, 'precision': 0.0142}
+idx=35, metric_dict={'f1': 0.0284, 'recall': 0.1071, 'precision': 0.0164}
+idx=36, metric_dict={'f1': 0.0282, 'recall': 0.1017, 'precision': 0.0164}
+idx=37, metric_dict={'f1': 0.0328, 'recall': 0.1167, 'precision': 0.0191}
+idx=38, metric_dict={'f1': 0.0364, 'recall': 0.1311, 'precision': 0.0212}
+idx=39, metric_dict={'f1': 0.0357, 'recall': 0.129, 'precision': 0.0207}
+idx=40, metric_dict={'f1': 0.0356, 'recall': 0.127, 'precision': 0.0207}
+idx=41, metric_dict={'f1': 0.0397, 'recall': 0.1406, 'precision': 0.0231}
+idx=42, metric_dict={'f1': 0.0434, 'recall': 0.1538, 'precision': 0.0253}
+idx=43, metric_dict={'f1': 0.0333, 'recall': 0.1493, 'precision': 0.0188}
+idx=44, metric_dict={'f1': 0.0314, 'recall': 0.1471, 'precision': 0.0176}
+idx=45, metric_dict={'f1': 0.0335, 'recall': 0.1594, 'precision': 0.0187}
+idx=46, metric_dict={'f1': 0.0335, 'recall': 0.1571, 'precision': 0.0187}
+idx=47, metric_dict={'f1': 0.0364, 'recall': 0.169, 'precision': 0.0204}
+idx=48, metric_dict={'f1': 0.0359, 'recall': 0.1667, 'precision': 0.0201}
+idx=49, metric_dict={'f1': 0.0358, 'recall': 0.1644, 'precision': 0.0201}
+idx=50, metric_dict={'f1': 0.0348, 'recall': 0.1622, 'precision': 0.0195}
+idx=51, metric_dict={'f1': 0.0341, 'recall': 0.16, 'precision': 0.0191}
+idx=52, metric_dict={'f1': 0.034, 'recall': 0.1579, 'precision': 0.019}
+idx=53, metric_dict={'f1': 0.0366, 'recall': 0.1688, 'precision': 0.0205}
+idx=54, metric_dict={'f1': 0.0356, 'recall': 0.1605, 'precision': 0.02}
+idx=55, metric_dict={'f1': 0.0351, 'recall': 0.1585, 'precision': 0.0197}
+idx=56, metric_dict={'f1': 0.0349, 'recall': 0.1566, 'precision': 0.0196}
+idx=57, metric_dict={'f1': 0.0348, 'recall': 0.1548, 'precision': 0.0196}
+idx=58, metric_dict={'f1': 0.0346, 'recall': 0.1529, 'precision': 0.0195}
+idx=59, metric_dict={'f1': 0.0369, 'recall': 0.1591, 'precision': 0.0209}
+idx=60, metric_dict={'f1': 0.0359, 'recall': 0.1556, 'precision': 0.0203}
+idx=61, metric_dict={'f1': 0.0358, 'recall': 0.1538, 'precision': 0.0203}
+idx=62, metric_dict={'f1': 0.0358, 'recall': 0.1522, 'precision': 0.0203}
+idx=63, metric_dict={'f1': 0.0336, 'recall': 0.1613, 'precision': 0.0188}
+idx=64, metric_dict={'f1': 0.0336, 'recall': 0.1596, 'precision': 0.0188}
+idx=65, metric_dict={'f1': 0.0357, 'recall': 0.1684, 'precision': 0.02}
+idx=66, metric_dict={'f1': 0.0353, 'recall': 0.1667, 'precision': 0.0197}
+idx=67, metric_dict={'f1': 0.0348, 'recall': 0.1633, 'precision': 0.0195}
+idx=68, metric_dict={'f1': 0.0347, 'recall': 0.1616, 'precision': 0.0195}
+idx=69, metric_dict={'f1': 0.0347, 'recall': 0.16, 'precision': 0.0195}
+idx=70, metric_dict={'f1': 0.0343, 'recall': 0.1569, 'precision': 0.0193}
+idx=71, metric_dict={'f1': 0.0343, 'recall': 0.1553, 'precision': 0.0193}
+idx=72, metric_dict={'f1': 0.0331, 'recall': 0.1538, 'precision': 0.0186}
+idx=73, metric_dict={'f1': 0.0331, 'recall': 0.1524, 'precision': 0.0185}
+idx=74, metric_dict={'f1': 0.033, 'recall': 0.1509, 'precision': 0.0185}
+idx=75, metric_dict={'f1': 0.0348, 'recall': 0.1589, 'precision': 0.0195}
+idx=76, metric_dict={'f1': 0.0367, 'recall': 0.1667, 'precision': 0.0206}
+idx=77, metric_dict={'f1': 0.0363, 'recall': 0.1651, 'precision': 0.0204}
+idx=78, metric_dict={'f1': 0.038, 'recall': 0.1727, 'precision': 0.0213}
+idx=79, metric_dict={'f1': 0.0378, 'recall': 0.1681, 'precision': 0.0213}
+idx=80, metric_dict={'f1': 0.0352, 'recall': 0.1638, 'precision': 0.0197}
+idx=81, metric_dict={'f1': 0.0351, 'recall': 0.1624, 'precision': 0.0197}
+idx=82, metric_dict={'f1': 0.0351, 'recall': 0.161, 'precision': 0.0197}
+idx=83, metric_dict={'f1': 0.0367, 'recall': 0.1681, 'precision': 0.0206}
+idx=84, metric_dict={'f1': 0.0383, 'recall': 0.175, 'precision': 0.0215}
+idx=85, metric_dict={'f1': 0.038, 'recall': 0.1736, 'precision': 0.0213}
+idx=86, metric_dict={'f1': 0.0369, 'recall': 0.1721, 'precision': 0.0207}
+idx=87, metric_dict={'f1': 0.0369, 'recall': 0.1707, 'precision': 0.0207}
+idx=88, metric_dict={'f1': 0.0359, 'recall': 0.1694, 'precision': 0.0201}
+idx=89, metric_dict={'f1': 0.0354, 'recall': 0.168, 'precision': 0.0198}
+idx=90, metric_dict={'f1': 0.0353, 'recall': 0.1667, 'precision': 0.0197}
+idx=91, metric_dict={'f1': 0.0368, 'recall': 0.1732, 'precision': 0.0206}
+idx=92, metric_dict={'f1': 0.0384, 'recall': 0.1797, 'precision': 0.0215}
+idx=93, metric_dict={'f1': 0.0376, 'recall': 0.1742, 'precision': 0.0211}
+idx=94, metric_dict={'f1': 0.0375, 'recall': 0.1729, 'precision': 0.021}
+idx=95, metric_dict={'f1': 0.039, 'recall': 0.1791, 'precision': 0.0219}
+idx=96, metric_dict={'f1': 0.0389, 'recall': 0.1778, 'precision': 0.0218}
+idx=97, metric_dict={'f1': 0.0383, 'recall': 0.1765, 'precision': 0.0215}
+idx=98, metric_dict={'f1': 0.0378, 'recall': 0.1752, 'precision': 0.0212}
+idx=99, metric_dict={'f1': 0.0393, 'recall': 0.1812, 'precision': 0.022}
+idx=100, metric_dict={'f1': 0.0392, 'recall': 0.1799, 'precision': 0.022}
+idx=101, metric_dict={'f1': 0.0391, 'recall': 0.1786, 'precision': 0.0219}
+idx=102, metric_dict={'f1': 0.0406, 'recall': 0.1844, 'precision': 0.0228}
+idx=103, metric_dict={'f1': 0.0405, 'recall': 0.1831, 'precision': 0.0228}
+idx=104, metric_dict={'f1': 0.0403, 'recall': 0.1781, 'precision': 0.0227}
+idx=105, metric_dict={'f1': 0.0402, 'recall': 0.1745, 'precision': 0.0227}
+idx=106, metric_dict={'f1': 0.0415, 'recall': 0.18, 'precision': 0.0235}
+Error formatting triplet: {'subject': 'X Corp.', 'predicate': 'is the owner of'}, error: 'object'
+Error formatting triplet: {'subject': 'X Corp.', 'predicate': 'is the owner of'}, error: 'object'
+Error formatting triplet: {'subject': 'X Corp.', 'predicate': 'is the owner of'}, error: 'object'
+Error formatting triplet: {'subject': 'X Corp.', 'predicate': 'is the owner of'}, error: 'object'
+Error formatting triplet: {'subject': 'X Corp.', 'predicate': 'is the owner of'}, error: 'object'
+idx=107, metric_dict={'f1': 0.043, 'recall': 0.1854, 'precision': 0.0243}
+idx=108, metric_dict={'f1': 0.0428, 'recall': 0.1842, 'precision': 0.0242}
+idx=109, metric_dict={'f1': 0.043, 'recall': 0.1883, 'precision': 0.0243}
+idx=110, metric_dict={'f1': 0.043, 'recall': 0.1871, 'precision': 0.0243}
+idx=111, metric_dict={'f1': 0.0429, 'recall': 0.1859, 'precision': 0.0242}
+idx=112, metric_dict={'f1': 0.0427, 'recall': 0.1847, 'precision': 0.0242}
+idx=113, metric_dict={'f1': 0.0437, 'recall': 0.1899, 'precision': 0.0247}
+idx=114, metric_dict={'f1': 0.0436, 'recall': 0.1887, 'precision': 0.0247}
+idx=115, metric_dict={'f1': 0.0432, 'recall': 0.1875, 'precision': 0.0244}
+idx=116, metric_dict={'f1': 0.0431, 'recall': 0.1863, 'precision': 0.0244}
+idx=117, metric_dict={'f1': 0.043, 'recall': 0.1852, 'precision': 0.0243}
+idx=118, metric_dict={'f1': 0.0416, 'recall': 0.184, 'precision': 0.0235}
+idx=119, metric_dict={'f1': 0.0416, 'recall': 0.1829, 'precision': 0.0235}
+idx=120, metric_dict={'f1': 0.0414, 'recall': 0.1818, 'precision': 0.0234}
+idx=121, metric_dict={'f1': 0.0448, 'recall': 0.193, 'precision': 0.0253}
+idx=122, metric_dict={'f1': 0.0444, 'recall': 0.1919, 'precision': 0.0251}
+idx=123, metric_dict={'f1': 0.0444, 'recall': 0.1908, 'precision': 0.0251}
+idx=124, metric_dict={'f1': 0.0443, 'recall': 0.1875, 'precision': 0.0251}
+idx=125, metric_dict={'f1': 0.0442, 'recall': 0.1864, 'precision': 0.0251}
+idx=126, metric_dict={'f1': 0.0441, 'recall': 0.1854, 'precision': 0.025}
+idx=127, metric_dict={'f1': 0.0439, 'recall': 0.1844, 'precision': 0.0249}
+idx=128, metric_dict={'f1': 0.0434, 'recall': 0.1833, 'precision': 0.0246}
+idx=129, metric_dict={'f1': 0.0447, 'recall': 0.1878, 'precision': 0.0254}
+idx=130, metric_dict={'f1': 0.0441, 'recall': 0.1858, 'precision': 0.025}
+idx=131, metric_dict={'f1': 0.0441, 'recall': 0.1848, 'precision': 0.025}
+idx=132, metric_dict={'f1': 0.0433, 'recall': 0.1828, 'precision': 0.0245}
+idx=133, metric_dict={'f1': 0.0426, 'recall': 0.1809, 'precision': 0.0241}
+idx=134, metric_dict={'f1': 0.0423, 'recall': 0.1799, 'precision': 0.0239}
+idx=135, metric_dict={'f1': 0.0421, 'recall': 0.1789, 'precision': 0.0239}
+idx=136, metric_dict={'f1': 0.0419, 'recall': 0.178, 'precision': 0.0238}
+idx=137, metric_dict={'f1': 0.0416, 'recall': 0.1762, 'precision': 0.0236}
+idx=138, metric_dict={'f1': 0.041, 'recall': 0.1753, 'precision': 0.0232}
+idx=139, metric_dict={'f1': 0.041, 'recall': 0.1744, 'precision': 0.0232}
+idx=140, metric_dict={'f1': 0.0409, 'recall': 0.1735, 'precision': 0.0232}
+idx=141, metric_dict={'f1': 0.042, 'recall': 0.1777, 'precision': 0.0238}
+idx=142, metric_dict={'f1': 0.0419, 'recall': 0.1759, 'precision': 0.0238}
+idx=143, metric_dict={'f1': 0.0416, 'recall': 0.175, 'precision': 0.0236}
+idx=144, metric_dict={'f1': 0.0427, 'recall': 0.1791, 'precision': 0.0242}
+idx=145, metric_dict={'f1': 0.0425, 'recall': 0.1782, 'precision': 0.0241}
+idx=146, metric_dict={'f1': 0.0436, 'recall': 0.1823, 'precision': 0.0247}
+idx=147, metric_dict={'f1': 0.0436, 'recall': 0.1814, 'precision': 0.0247}
+idx=148, metric_dict={'f1': 0.0435, 'recall': 0.1805, 'precision': 0.0247}
+idx=149, metric_dict={'f1': 0.0435, 'recall': 0.1796, 'precision': 0.0247}
+Saving LLM input trace to input_trace_Wikidata/llm_input_trace_sc_agent_glm-4.7_Wikidata_.json...
+Finish predicting with 150 samples.
+Loading results...
+Generating train split: 150 examples [00:01, 138.91 examples/s]
+Evaluating...
+Error formatting triplet: {'object': None, 'predicate': 'is the owner of', 'subject': 'X Corp.'}, error: sequence item 2: expected str instance, NoneType found
+Error formatting triplet: {'object': None, 'predicate': 'is the owner of', 'subject': 'X Corp.'}, error: sequence item 2: expected str instance, NoneType found
+Error formatting triplet: {'object': None, 'predicate': 'is the owner of', 'subject': 'X Corp.'}, error: sequence item 2: expected str instance, NoneType found
+Error formatting triplet: {'object': None, 'predicate': 'is the owner of', 'subject': 'X Corp.'}, error: sequence item 2: expected str instance, NoneType found
+Error formatting triplet: {'object': None, 'predicate': 'is the owner of', 'subject': 'X Corp.'}, error: sequence item 2: expected str instance, NoneType found
+Evaluation result: {'f1': 0.0435, 'recall': 0.1796, 'precision': 0.0247}

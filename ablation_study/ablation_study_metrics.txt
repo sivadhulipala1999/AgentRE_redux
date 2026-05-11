@@ -1,0 +1,36 @@
+Number of samples for training/in-memory - 50, temperature - 0, test samples - 50 
+
+ReAct_Memory with only correct memory (AgentRE)
+Attempt 1: Train - 44.04%; Test - 48.86% (Errors: Train: 3, Test: 12)
+Attempt 2: Train - 29.81%; Test - 55.14% (Errors: Train: 6, Test: 10)
+Attempt 3: Train - 44.21%; Test - 39.76% (Errors: Train: 9, Test: 17)
+
+Avg: Train - 39.35%, Test - 47.92%
+
+ReAct_Memory with all memories 
+Attempt 1: Train - 16.74%; Test - 33.33% (Errors: Train: 0, Test: 7)
+Attempt 2: Train - 18.03%; Test - 30.6% (Errors: Train: 0, Test: 5)
+Attempt 3: Train - 17.17%; Test - 29.41% (Errors: Train: 0, Test: 11)
+
+Avg: Train - 23.04%, Test - 31.11%
+
+ReAct_Memory with correct and reflexion memories (no incorrect memory)
+Attempt 1: Train - 40.55%; Test - 59% (Errors: Train: 1, Test: 2)
+Attempt 2: Train - 23.32%; Test - 41% (Errors: Train: 3, Test: 4)
+Attempt 3: Train - 16.67%; Test - 54.74% (Errors: Train: 3, Test: 3)
+
+Avg: Train - 26.84%, Test - 51.58%
+
+ReAct_Memory with only correct memory (AgentRE_redux)
+Attempt 1: Train - 43.36%; Test - 49.02% (Errors: Train: 2, Test: 2)
+Attempt 2: Train - 41.28%; Test - 36.08% (Errors: Train: 2, Test: 3)
+Attempt 3: Train - 25.33%; Test - 34.34% (Errors: Train: 1, Test: 3)
+
+Avg: Train - 36.66%, Test - 39.81%
+
+ReAct_FSL 
+Attempt 1: Test - 49.16% (Errors: Test: 10)
+Attempt 2: Test - 53.71% (Errors: Test: 11)
+Attempt 3: Test - 51.72% (Errors: Test: 14)
+
+Avg: Test - 51.53%

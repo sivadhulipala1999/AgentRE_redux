@@ -1,0 +1,80 @@
+ERROR ANALYSIS 
+
+Total examples: 150 
+
+Setup C
+
+- Attempt 1 (Retries: 33, No output retries: 24, Output retries: 9)
+	- idx: 3, 7, 8, 9, 11, 15, 18, 20, 22, 28, 43, 62, 69, 70, 71, 72, 79, 87, 103, 105, 114, 123, 142, 149 - did not finish generating triples 
+	- idx: 12, 14, 34, 51, 80, 89, 118, 124, 132,   - got it in the 2nd try 
+	- A single error triplet was observed formulated as subject, predicate, subject
+		- "spo_list": [
+			{
+			  "subject": "JAB Holding Company S.à r.l.",
+			  "predicate": "is owned by",
+			  "object": "Reimann family"
+			},
+			{
+			  "subject": "Agnaten SE",
+			  "predicate": "has subsidiary",
+			  "subject": "Joh. A. Benckiser GmbH"
+			}
+		  ]
+
+- Attempt 2 (Retries: 37, No output retries: 31, Output retries: 6)
+	- idx: 3, 5, 7, 8, 9, 11, 14, 15, 18, 20, 28, 30, 33, 36, 43, 49, 57, 62, 64, 69, 70, 71, 79, 80, 87, 103, 105, 114, 123, 142, 149  - did not finish generating triples across retries 
+	- idx: 22, 55, 63, 82, 89, 140,   - got the output in the 2nd try 
+	- Again the same triplet does not work 
+		- {
+			"spo_list": [
+				{
+				  "subject": "JAB Holding Company S.à r.l.",
+				  "predicate": "is owned by",
+				  "object": "Reimann family"
+				},
+				{
+				  "subject": "Agnaten SE",
+				  "predicate": "has subsidiary",
+				  "subject": "Joh. A. Benckiser GmbH"
+				}
+			]
+		}
+
+- Attempt 3 (Retries: 36, No output retries: 28, Output retries: 8)
+	- idx: 3, 6, 7, 8, 9, 11, 14, 15, 28, 30, 33, 36, 49, 57, 62, 64, 69, 71, 79, 82, 87, 103, 105, 114, 123, 124, 142, 149 - did not finish generating triples across retries 
+	- idx: 2, 12, 18, 20, 22, 26, 43, 80,    - got the output in the 2nd try 
+	- Error in 4 triples, the same issue subject, predicate, subject instead of subject, predicate, object 
+	- {
+		  "spo_list": [
+			{
+			  "subject": "X Corp.",
+			  "predicate": "is owned by",
+			  "object": "xAI"
+			},
+			{
+			  "subject": "X",
+			  "predicate": "is the owner of",
+			  "subject": "X Corp."
+			},
+			{
+			  "subject": "trademarks of Twitter",
+			  "predicate": "is the owner of",
+			  "subject": "X Corp."
+			},
+			{
+			  "subject": "Vine",
+			  "predicate": "is the owner of",
+			  "subject": "X Corp."
+			},
+			{
+			  "subject": "Periscope",
+			  "predicate": "is the owner of",
+			  "subject": "X Corp."
+			},
+			{
+			  "subject": "X.com",
+			  "predicate": "is the owner of",
+			  "subject": "X Corp."
+			}
+		  ]
+		}

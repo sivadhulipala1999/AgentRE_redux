@@ -1,0 +1,165 @@
+ERROR ANALYSIS 
+
+Total examples: 50 
+
+Complete Setup 
+- Attempt 1 (Total Retries: 15, No output retries: 7, Output retries: 6, Tool calls in: 1 example (with an long thought that got terminated))
+	- idx: 5, 9, 10, 16, 19, 23, 29 (3 attempts), 35, 37, 38, 41, 46, 48, 49 
+	- idx: 29, 46 showed a long list of output triples which got truncated before completion, and since max_retries was set to 2, no solution could be reached here despite the retries. 
+	- idx: 5, 9, 10, 19, 23, 37 - got the output in the 2nd try 
+	- idx: 16, 35, 38, 41, 46, 48, 49  - did not finish generating triples across retries 
+	- idx: 9 - first attempt did not give the full list, the second could finish. Looking at this, we see that the actual output is better than the original label. The only issue is in the way we measure the metric. Demanding a different kind of measurement.  
+		- Predictions made 
+			- 	{'subject': 'Warner Music Group Corp.', 'predicate': 'is owned by', 'object': 'Access Industries'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is owned by', 'object': 'Time Warner'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is owned by', 'object': 'Tencent'}    
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Elektra'} 
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Reprise'} 
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Sire'}    
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner'}  
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Parlophone'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Atlantic'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Chappell Music'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Bros. Records'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Music India'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Arts Music'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Elektra Music Group'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Music Entertainment'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Classics'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'ADA Worldwide'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Music Middle East'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Music Finland'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Music Slovakia'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Music UK'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Music Russia'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'has subsidiary', 'object': 'Warner Music Group Corp.'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'MTV Networks'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'TikTok'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Canva'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Suno'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Netflix'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Sh-K-Boom/Ghostlight Records'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Build-A-Bear Workshop'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Mattel'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Sesame Workshop'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Cloudco Entertainment'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Imagine Entertainment'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Divo Music'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Doğan Media Group'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Rotana Records'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'BMG Rights Management'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Clear Channel Media'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Disney Music Group'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Sony Music'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Universal Music'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Google'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'YouTube'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Spotify'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'AmazonMP3'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is in partnership with', 'object': 'Roblox'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is an investor in', 'object': 'Hooch'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is an investor in', 'object': 'Roblox'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Elektra'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Reprise'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Sire'}   
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner'} 
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Parlophone'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Atlantic'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Chappell Music'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Bros. Records'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Music India'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Arts Music'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Elektra Music Group'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Music Entertainment'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Classics'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'ADA Worldwide'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Music Middle East'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Music Finland'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Music Slovakia'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Music UK'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Music Russia'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'is the owner of', 'object': 'Warner Music Group Corp.'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'typically sells', 'object': 'recorded music'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'typically sells', 'object': 'music publishing'}
+				{'subject': 'Warner Music Group Corp.', 'predicate': 'typically sells', 'object': 'merchandise'}
+			- Actual golden label: 
+				  {"subject": "Warner Music Group", "predicate": "is owned by", "object": "Access Industries"},
+				  {"subject": "Warner Music Group", "predicate": "is owned by", "object": "Tencent"},
+				  {"subject": "Warner Music Group", "predicate": "has subsidiary", "object": "EMI"}
+	- idx: 10, 16, 19, 23, 29, 37, 38, 46, 49 - also showed repetitions in similar form 
+	- idx: 29 - One example where the tool for retrieving more examples is called. 
+
+
+- Attempt 2 (Total retries: 12, No output retries: 8, Output retries: 4, Tool call: 0 examples)
+	- idx: 3, 5, 9, 23, 29, 37, 38, 43, 44, 46, 48, 49 
+	- idx: 9, 23, 29, 37, 38 (also long though 1st try), 44 (long thoughts), 46, 49 - did not finish generating output 
+	- idx: 3 (also long thought 1st try), 5, 43, 48 - got it in the 2nd try 
+	- idx: 3 - Again deception when doing actual comparison, F1 needs to be upgraded, also lack of proper labeling. 
+		- Prediction: 
+			{'subject': 'Mac286', 'predicate': 'is designed by', 'object': 'Phoenix Technologies'}
+			{'subject': 'Mac286', 'predicate': 'is distributed by', 'object': 'AST Research'}
+			{'subject': 'Mac286', 'predicate': 'is manufactured by', 'object': 'Orange Micro'}
+			{'subject': 'Mac286', 'predicate': 'is made from', 'object': 'Intel 80286'}
+			{'subject': 'Mac286', 'predicate': 'is made from', 'object': 'Intel 80287'}
+			{'subject': 'Mac286', 'predicate': 'is made from', 'object': 'NEC 765'}
+			{'subject': 'Mac86', 'predicate': 'is distributed by', 'object': 'AST'}
+			{'subject': 'Apple Computer', 'predicate': 'is the owner of', 'object': 'Macintosh II'}     
+			{'subject': 'Apple Computer', 'predicate': 'is the owner of', 'object': 'Macintosh SE'}     
+			{'subject': 'Apple Computer', 'predicate': 'is the owner of', 'object': 'Apple PC 5.25 Drive'}
+		- Golden label: 
+			{"subject": "Mac286", "predicate": "is manufactured by", "object": "AST Research"}
+	- idx: 5 
+		- Prediction: 
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': 'Volkswagen'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': 'General Motors'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': 'Guangxi Automobile Group'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': 'Charoen Pokphand'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': 'JSW Group'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': 'TTTech'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': 'Huawei'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': "Shanghai's Pudong New Area government"}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is in partnership with', 'object': 'Alibaba'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'has subsidiary', 'object': 'SAIC Motor Passenger Vehicle'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'has subsidiary', 'object': 'Shanghai Automobile Gear Works'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'has subsidiary', 'object': 'Nanjing Automobile Group'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'has subsidiary', 'object': 'SAIC Motor UK'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'has subsidiary', 'object': 'SAIC Motor Philippines, Inc.'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'has subsidiary', 'object': 'Shanghai Automotive Industries Corp USA, Inc.'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is an investor in', 'object': 'GM Daewoo'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is an investor in', 'object': 'SsangYong Motor'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is an investor in', 'object': 'Nanjing Iveco'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'IM Motors'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'Roewe'}    
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'MG'}       
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'Rising Auto'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'Maxus'}    
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'Baojun'}   
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'Wuling'}   
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'Hongyan'}  
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'Sunwin'}   
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is the owner of', 'object': 'SAIC'}     
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'IM Motors'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'Roewe'}    
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'MG'}       
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'Rising Auto'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'Maxus'}    
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'Baojun'}   
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'Wuling'}   
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'Hongyan'}  
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'Sunwin'}   
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'typically sells', 'object': 'SAIC'}     
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is manufactured by', 'object': 'SAIC Motor Corp., Ltd.'}
+			{'subject': 'SAIC Motor Corp., Ltd.', 'predicate': 'is designed by', 'object': 'SAIC Motor Corp., Ltd.'}
+		- Golden label:
+			{ "subject": "SAIC Motor", "predicate": "is the owner of", "object": "SAIC Volkswagen"}
+	- idx: 9, 29, 37, 38, 44, 46, 49  - did not finish generating triples across multiple retries 
+	- idx: 44 - observed that the long thought process of the model was present here despite clear instructions against it. This could be because of the extremely long input text but the model's thought process defaults to the one observed in the react_fsl mode 
+	- idx: 48 - got the triples in the 2nd attempt 
+
+- Attempt 3 (Total retries: 12, No output retries: 8, Output retries: 4, Tool calls: 0)
+	- idx: 3, 5, 9, 17, 29, 36, 38, 40, 41, 46, 48, 49 
+	- idx: 5, 9, 29, 46, 48, 49 - did not get the output across retries 
+	- idx: 3, 36 (1st attempt), 38 (1st attempt), 49 (1st attempt) - long thought process 
+	- idx: 36, 40, 41,  - got the output in the 2nd attempt  
+	- idx: 5, 9, 17, 29, 38, 46, 48, 49 - did not finish output generation 
+	- idx: 3, 36, 40, 41, - got it in the 2nd try 

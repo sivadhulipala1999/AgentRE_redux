@@ -1,0 +1,25 @@
+REACT_FSL WIKIDATA ERROR ANALYSIS 
+
+Attempt 3 
+- Total examples: 150 
+- Total recursion failures: 35 (regex: ERROR - react_fsl\.py - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3} - \[ERROR\] Failed to generate valid output after \d+ iterations\.\r?\nINFO - logger\.py - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3} - idx=\d+, metric_dict=\{.*?\}
+)
+
+ERR analysis: 
+	- idx = 9: statement by statement analysis, tries every single time to analyse all sentences, runs out of output budget, fails. It also attempts scanning the predicates through the sentences once but yeah same result
+	- idx = 30: statement by statement analysis again, but sometimes it outputs the subject, object, predicate per sentence and other times it formulates the triples in (s, p, o) format  
+	- idx = 73: again statement by statement analysis
+	- idx = 87: statement by statement analysis 
+	- idx = 111: again the same statement by statement analysis 
+	- idx = 114: first statement by statement analysis, tries to formulate the triples but runs out of output, then it does it again but formulates the triples and goes into the self-correction loop
+	- idx = 134: extracts a small subset of sentences first and sees it as the whole input, scans for triples, filters and corrects, then runs out of output 
+	
+Random sample analysis: 
+	- idx = 27: hyperfocuses on a specific triple two times, and then decides to come up with the output 
+	- idx = 39: regular sample 
+	- idx = 40: says that based on the examples these are the triples for the input, probably referring to the relevant examples and nothing else, 2nd attempt is also interesting because there is random termination of the output which could be the CoT controllability failure and all this happens after a short statement by statement analysis, then goes for the output 
+	- idx = 80: first statement by statement analysis, and then eventually outputs the triple list 
+	- idx = 86: regular sample 
+	- idx = 104: statement wise analysis, triple formulation, recursive verification, 2nd attempt makes a tool call for GetRelationDefinition, and then outputs the spo_list 
+	- idx = 145: regular sample 
+

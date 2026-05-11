@@ -1,0 +1,23 @@
+REACT_FSL WIKIDATA ERROR ANALYSIS 
+
+Attempt 2 
+- Total examples: 150 
+- Total recursion failures: 41 (Regex used: ERROR - react_fsl\.py - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3} - \[ERROR\] Failed to generate valid output after \d+ iterations\.\r?\nINFO - logger\.py - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3} - idx=\d+, metric_dict=\{.*?\}
+)
+
+- ERR analysis 
+	- idx = 7: statement by statement analysis
+	- idx = 15: statement by statement analysis 
+	- idx = 31: multiple terminations of CoT, input size small 
+	- idx = 55: statement by statement analysis 
+	- idx = 87: statement by statement analysis 
+	- idx = 103: statement by statement analysis 
+	- idx = 128: statement by statement analysis 
+	- idx = 2: rigorously corrects its triples after analysing a few statements from a long input text  
+
+- Random Sample Analysis 
+	- idx = 3: just a regular spo_list, no structural issues
+	- idx = 30: statement by statement analysis, but the output does come after many iterations 
+	- idx = 50: potential relations then triples then recursive verification, but an output does show up
+	- idx = 98: statement by statement analysis 
+	- idx = 140: regular example nothing special to see here 

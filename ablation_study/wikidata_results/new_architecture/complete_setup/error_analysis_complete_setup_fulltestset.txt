@@ -1,0 +1,24 @@
+ERROR ANALYSIS COMPLETE SETUP 
+
+Total examples: 150 
+
+- Attempt 1 (Retry Examples: 35, No output Retries: 20, Output retries: 9, Tool call: 6) 
+	- idx: 0, 92, 98, 116, 121, 126 - Tool call 
+	- idx: 5, 7, 22, 33, 37, 43, 46, 51, 55, 64, 67, 69, 70, 71, 79, 118, 124, 140, 142, 149 - triple generation did not finish across retries 
+	- idx: 8, 9, 17, 18, 66, 87, 89, 90, 99 - got it in the 2nd try 
+
+- Attempt 2 (Retry examples: 37, No output retries: 22, output retries: 12, Tool call: 2)
+	- idx: 0, 16,  - Tool call 
+	- idx: 3, 5, 7, 8, 9, 18, 20, 22, 35, 43, 51, 64, 66, 67, 69, 71, 79, 83, 103, 118, 123, 142,  - triple generation did not finish across retries 
+	- idx: 15, 24, 33, 46, 49, 50, 73, 78, 87, 99, 124, 145,  - got it in the 2nd try 
+	- idx: 16 (rambled in the first attempt and then did the tool call, 3 tries)
+	- idx: 24, 50, 99, 145,  - similar examples exist where the model thinks for long in the first attempt and then keeps it short the next, there could be a pattern here which can be investigated in future work)
+	- idx: 35 - attempt 1 saw the model producing an output but then continuing the thought loop then running out of tokens, attempt 2 was a long thought 
+	- idx: 64, 67, 83,  - long thoughts both attempts 
+	
+- Attempt 3 (Retry examples: 32, No output retries: 20, output retries: 11, tool call: 1)
+	- idx: 10 - Tool call 
+	- idx: 3, 5, 7, 8, 9, 37, 43, 49, 50, 51, 57, 67, 69, 70, 71, 103, 118, 123, 140, 149    - output did not finish after multiple iterations/no output
+	- idx: 14, 20, 30, 46, 47, 65, 73, 78, 79, 119, 142,   - got it in the 2nd try 
+	- idx: 7 - special case cause it started the spo_list fine, but then the object became a full length text in each spo and this led to the exhaustion, have not seen this before 
+	- idx: 37 - both attempts long thoughts 

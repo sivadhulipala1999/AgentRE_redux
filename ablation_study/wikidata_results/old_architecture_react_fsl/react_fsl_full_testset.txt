@@ -1,0 +1,7 @@
+REACT_FSL FULL TEST SET RESULTS
+
+Attempt 1 - {'f1': 0.0737, 'recall': 0.2524, 'precision': 0.0431}
+Attempt 2 - {'f1': 0.0644, 'recall': 0.2233, 'precision': 0.0376}
+Attempt 3 - {'f1': 0.0685, 'recall': 0.2573, 'precision': 0.0395}
+
+Average F1: 0.0688

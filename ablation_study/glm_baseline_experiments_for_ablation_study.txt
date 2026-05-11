@@ -1,0 +1,1614 @@
+AGENTRE_REDUX WITH ALL MEMORIES 
+
+# Attempt 1 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 4, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': True, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': True, 'mode': 'bge', 'k': 5}}}
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0.0625, 'recall': 0.0667, 'precision': 0.0588}
+idx=5, metric_dict={'f1': 0.0513, 'recall': 0.0526, 'precision': 0.05}
+idx=6, metric_dict={'f1': 0.0909, 'recall': 0.0909, 'precision': 0.0909}
+idx=7, metric_dict={'f1': 0.1304, 'recall': 0.1304, 'precision': 0.1304}
+idx=8, metric_dict={'f1': 0.0938, 'recall': 0.0968, 'precision': 0.0909}
+idx=9, metric_dict={'f1': 0.1212, 'recall': 0.125, 'precision': 0.1176}
+idx=10, metric_dict={'f1': 0.1176, 'recall': 0.1212, 'precision': 0.1143}
+idx=11, metric_dict={'f1': 0.1389, 'recall': 0.1389, 'precision': 0.1389}
+idx=12, metric_dict={'f1': 0.1316, 'recall': 0.1316, 'precision': 0.1316}
+idx=13, metric_dict={'f1': 0.1299, 'recall': 0.1282, 'precision': 0.1316}
+idx=14, metric_dict={'f1': 0.1266, 'recall': 0.125, 'precision': 0.1282}
+idx=15, metric_dict={'f1': 0.1481, 'recall': 0.1463, 'precision': 0.15}
+idx=16, metric_dict={'f1': 0.1412, 'recall': 0.1395, 'precision': 0.1429}
+idx=17, metric_dict={'f1': 0.1364, 'recall': 0.1364, 'precision': 0.1364}
+idx=18, metric_dict={'f1': 0.1165, 'recall': 0.1176, 'precision': 0.1154}
+idx=19, metric_dict={'f1': 0.1121, 'recall': 0.1154, 'precision': 0.1091}
+idx=20, metric_dict={'f1': 0.1091, 'recall': 0.1132, 'precision': 0.1053}
+idx=21, metric_dict={'f1': 0.1186, 'recall': 0.1296, 'precision': 0.1094}
+idx=22, metric_dict={'f1': 0.1167, 'recall': 0.1273, 'precision': 0.1077}
+idx=23, metric_dict={'f1': 0.1311, 'recall': 0.1429, 'precision': 0.1212}
+idx=24, metric_dict={'f1': 0.1395, 'recall': 0.1525, 'precision': 0.1286}
+idx=25, metric_dict={'f1': 0.1374, 'recall': 0.15, 'precision': 0.1268}
+idx=26, metric_dict={'f1': 0.1333, 'recall': 0.1452, 'precision': 0.1233}
+idx=27, metric_dict={'f1': 0.1449, 'recall': 0.1587, 'precision': 0.1333}
+idx=28, metric_dict={'f1': 0.1429, 'recall': 0.1562, 'precision': 0.1316}
+idx=29, metric_dict={'f1': 0.1549, 'recall': 0.1692, 'precision': 0.1429}
+idx=30, metric_dict={'f1': 0.1611, 'recall': 0.1714, 'precision': 0.1519}
+idx=31, metric_dict={'f1': 0.1911, 'recall': 0.2027, 'precision': 0.1807}
+idx=32, metric_dict={'f1': 0.1887, 'recall': 0.2, 'precision': 0.1786}
+idx=33, metric_dict={'f1': 0.1818, 'recall': 0.1948, 'precision': 0.1705}
+idx=34, metric_dict={'f1': 0.1786, 'recall': 0.1923, 'precision': 0.1667}
+idx=35, metric_dict={'f1': 0.1765, 'recall': 0.1899, 'precision': 0.1648}
+idx=36, metric_dict={'f1': 0.1734, 'recall': 0.1875, 'precision': 0.1613}
+idx=37, metric_dict={'f1': 0.1798, 'recall': 0.1951, 'precision': 0.1667}
+idx=38, metric_dict={'f1': 0.1778, 'recall': 0.1928, 'precision': 0.1649}
+idx=39, metric_dict={'f1': 0.1758, 'recall': 0.1905, 'precision': 0.1633}
+idx=40, metric_dict={'f1': 0.1749, 'recall': 0.1882, 'precision': 0.1633}
+idx=41, metric_dict={'f1': 0.1711, 'recall': 0.186, 'precision': 0.1584}
+idx=42, metric_dict={'f1': 0.1684, 'recall': 0.1839, 'precision': 0.1553}
+idx=43, metric_dict={'f1': 0.1667, 'recall': 0.1818, 'precision': 0.1538}
+idx=44, metric_dict={'f1': 0.1649, 'recall': 0.1798, 'precision': 0.1524}
+idx=45, metric_dict={'f1': 0.1633, 'recall': 0.1778, 'precision': 0.1509}
+idx=46, metric_dict={'f1': 0.1709, 'recall': 0.1868, 'precision': 0.1574}
+idx=47, metric_dict={'f1': 0.1611, 'recall': 0.1753, 'precision': 0.1491}
+idx=48, metric_dict={'f1': 0.1538, 'recall': 0.1717, 'precision': 0.1393}
+idx=49, metric_dict={'f1': 0.1674, 'recall': 0.1863, 'precision': 0.152}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0} - ERR
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0.1818, 'recall': 0.2, 'precision': 0.1667}
+idx=4, metric_dict={'f1': 0.125, 'recall': 0.1111, 'precision': 0.1429}
+idx=5, metric_dict={'f1': 0.2222, 'recall': 0.2, 'precision': 0.25}
+idx=6, metric_dict={'f1': 0.3, 'recall': 0.2727, 'precision': 0.3333}
+idx=7, metric_dict={'f1': 0.25, 'recall': 0.2, 'precision': 0.3333} - ERR
+idx=8, metric_dict={'f1': 0.3077, 'recall': 0.25, 'precision': 0.4}
+idx=9, metric_dict={'f1': 0.2759, 'recall': 0.2353, 'precision': 0.3333}
+idx=10, metric_dict={'f1': 0.3125, 'recall': 0.2632, 'precision': 0.3846}
+idx=11, metric_dict={'f1': 0.2857, 'recall': 0.25, 'precision': 0.3333}
+idx=12, metric_dict={'f1': 0.2326, 'recall': 0.2083, 'precision': 0.2632}
+idx=13, metric_dict={'f1': 0.2264, 'recall': 0.2308, 'precision': 0.2222}
+idx=14, metric_dict={'f1': 0.2545, 'recall': 0.2593, 'precision': 0.25}
+idx=15, metric_dict={'f1': 0.2333, 'recall': 0.2414, 'precision': 0.2258}
+idx=16, metric_dict={'f1': 0.2258, 'recall': 0.2333, 'precision': 0.2188}
+idx=17, metric_dict={'f1': 0.3143, 'recall': 0.3235, 'precision': 0.3056}
+idx=18, metric_dict={'f1': 0.3636, 'recall': 0.3784, 'precision': 0.35}
+idx=19, metric_dict={'f1': 0.3415, 'recall': 0.359, 'precision': 0.3256}
+idx=20, metric_dict={'f1': 0.3333, 'recall': 0.35, 'precision': 0.3182}
+idx=21, metric_dict={'f1': 0.3218, 'recall': 0.3415, 'precision': 0.3043}
+idx=22, metric_dict={'f1': 0.3478, 'recall': 0.3721, 'precision': 0.3265}
+idx=23, metric_dict={'f1': 0.3441, 'recall': 0.3636, 'precision': 0.3265}
+idx=24, metric_dict={'f1': 0.3542, 'recall': 0.3696, 'precision': 0.34}
+idx=25, metric_dict={'f1': 0.3366, 'recall': 0.3469, 'precision': 0.3269}
+idx=26, metric_dict={'f1': 0.3738, 'recall': 0.3846, 'precision': 0.3636}
+idx=27, metric_dict={'f1': 0.367, 'recall': 0.3704, 'precision': 0.3636} - ERR
+idx=28, metric_dict={'f1': 0.3509, 'recall': 0.3571, 'precision': 0.3448}
+idx=29, metric_dict={'f1': 0.3333, 'recall': 0.339, 'precision': 0.3279}
+idx=30, metric_dict={'f1': 0.3279, 'recall': 0.3333, 'precision': 0.3226}
+idx=31, metric_dict={'f1': 0.3492, 'recall': 0.3548, 'precision': 0.3438}
+idx=32, metric_dict={'f1': 0.3485, 'recall': 0.3651, 'precision': 0.3333}
+idx=33, metric_dict={'f1': 0.3556, 'recall': 0.375, 'precision': 0.338}
+idx=34, metric_dict={'f1': 0.3529, 'recall': 0.3692, 'precision': 0.338} - ERR
+idx=35, metric_dict={'f1': 0.3453, 'recall': 0.3636, 'precision': 0.3288}
+idx=36, metric_dict={'f1': 0.3429, 'recall': 0.3582, 'precision': 0.3288} - ERR
+idx=37, metric_dict={'f1': 0.338, 'recall': 0.3529, 'precision': 0.3243}
+idx=38, metric_dict={'f1': 0.3472, 'recall': 0.3623, 'precision': 0.3333}
+idx=39, metric_dict={'f1': 0.3425, 'recall': 0.3521, 'precision': 0.3333} - ERR
+idx=40, metric_dict={'f1': 0.3226, 'recall': 0.3165, 'precision': 0.3289}
+idx=41, metric_dict={'f1': 0.3312, 'recall': 0.325, 'precision': 0.3377}
+idx=42, metric_dict={'f1': 0.325, 'recall': 0.321, 'precision': 0.3291}
+idx=43, metric_dict={'f1': 0.321, 'recall': 0.3171, 'precision': 0.325}
+idx=44, metric_dict={'f1': 0.319, 'recall': 0.3133, 'precision': 0.325}
+idx=45, metric_dict={'f1': 0.3133, 'recall': 0.3095, 'precision': 0.3171}
+idx=46, metric_dict={'f1': 0.3158, 'recall': 0.3176, 'precision': 0.314}
+idx=47, metric_dict={'f1': 0.314, 'recall': 0.314, 'precision': 0.314} - ERR
+idx=48, metric_dict={'f1': 0.32, 'recall': 0.3182, 'precision': 0.3218}
+idx=49, metric_dict={'f1': 0.3333, 'recall': 0.3297, 'precision': 0.3371}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:06,  7.17 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.3333, 'recall': 0.3297, 'precision': 0.3371}
+
+===========================================================================================================================================
+
+# Attempt 2 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 4, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': True, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': True, 'mode': 'bge', 'k': 5}}}
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=6, metric_dict={'f1': 0.1364, 'recall': 0.1364, 'precision': 0.1364}
+idx=7, metric_dict={'f1': 0.1739, 'recall': 0.1739, 'precision': 0.1739}
+idx=8, metric_dict={'f1': 0.125, 'recall': 0.129, 'precision': 0.1212}
+idx=9, metric_dict={'f1': 0.1212, 'recall': 0.125, 'precision': 0.1176}
+idx=10, metric_dict={'f1': 0.1176, 'recall': 0.1212, 'precision': 0.1143}
+idx=11, metric_dict={'f1': 0.1389, 'recall': 0.1389, 'precision': 0.1389}
+idx=12, metric_dict={'f1': 0.1316, 'recall': 0.1316, 'precision': 0.1316}
+idx=13, metric_dict={'f1': 0.1282, 'recall': 0.1282, 'precision': 0.1282}
+idx=14, metric_dict={'f1': 0.125, 'recall': 0.125, 'precision': 0.125}
+idx=15, metric_dict={'f1': 0.1446, 'recall': 0.1463, 'precision': 0.1429}
+idx=16, metric_dict={'f1': 0.1395, 'recall': 0.1395, 'precision': 0.1395}
+idx=17, metric_dict={'f1': 0.1364, 'recall': 0.1364, 'precision': 0.1364}
+idx=18, metric_dict={'f1': 0.1165, 'recall': 0.1176, 'precision': 0.1154}
+idx=19, metric_dict={'f1': 0.1121, 'recall': 0.1154, 'precision': 0.1091}
+idx=20, metric_dict={'f1': 0.1101, 'recall': 0.1132, 'precision': 0.1071}
+idx=21, metric_dict={'f1': 0.1186, 'recall': 0.1296, 'precision': 0.1094}
+idx=22, metric_dict={'f1': 0.1167, 'recall': 0.1273, 'precision': 0.1077}
+idx=23, metric_dict={'f1': 0.1311, 'recall': 0.1429, 'precision': 0.1212}
+idx=24, metric_dict={'f1': 0.1395, 'recall': 0.1525, 'precision': 0.1286}
+idx=25, metric_dict={'f1': 0.1374, 'recall': 0.15, 'precision': 0.1268}
+idx=26, metric_dict={'f1': 0.146, 'recall': 0.1613, 'precision': 0.1333}
+idx=27, metric_dict={'f1': 0.1571, 'recall': 0.1746, 'precision': 0.1429}
+idx=28, metric_dict={'f1': 0.1549, 'recall': 0.1719, 'precision': 0.141}
+idx=29, metric_dict={'f1': 0.1667, 'recall': 0.1846, 'precision': 0.1519}
+idx=30, metric_dict={'f1': 0.1733, 'recall': 0.1857, 'precision': 0.1625}
+idx=31, metric_dict={'f1': 0.2152, 'recall': 0.2297, 'precision': 0.2024}
+idx=32, metric_dict={'f1': 0.2125, 'recall': 0.2267, 'precision': 0.2}
+idx=33, metric_dict={'f1': 0.2048, 'recall': 0.2208, 'precision': 0.191}
+idx=34, metric_dict={'f1': 0.2012, 'recall': 0.2179, 'precision': 0.1868}
+idx=35, metric_dict={'f1': 0.1965, 'recall': 0.2152, 'precision': 0.1809}
+idx=36, metric_dict={'f1': 0.1932, 'recall': 0.2125, 'precision': 0.1771}
+idx=37, metric_dict={'f1': 0.1989, 'recall': 0.2195, 'precision': 0.1818}
+idx=38, metric_dict={'f1': 0.1946, 'recall': 0.2169, 'precision': 0.1765}
+idx=39, metric_dict={'f1': 0.1925, 'recall': 0.2143, 'precision': 0.1748}
+idx=40, metric_dict={'f1': 0.1915, 'recall': 0.2118, 'precision': 0.1748}
+idx=41, metric_dict={'f1': 0.1865, 'recall': 0.2093, 'precision': 0.1682}
+idx=42, metric_dict={'f1': 0.1837, 'recall': 0.2069, 'precision': 0.1651}
+idx=43, metric_dict={'f1': 0.1809, 'recall': 0.2045, 'precision': 0.1622}
+idx=44, metric_dict={'f1': 0.1791, 'recall': 0.2022, 'precision': 0.1607}
+idx=45, metric_dict={'f1': 0.1773, 'recall': 0.2, 'precision': 0.1593}
+idx=46, metric_dict={'f1': 0.1845, 'recall': 0.2088, 'precision': 0.1652}
+idx=47, metric_dict={'f1': 0.1743, 'recall': 0.1959, 'precision': 0.157}
+idx=48, metric_dict={'f1': 0.1674, 'recall': 0.1919, 'precision': 0.1484}
+idx=49, metric_dict={'f1': 0.1803, 'recall': 0.2059, 'precision': 0.1603}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0.1538, 'recall': 0.2, 'precision': 0.125}
+idx=4, metric_dict={'f1': 0.2222, 'recall': 0.2222, 'precision': 0.2222}
+idx=5, metric_dict={'f1': 0.3, 'recall': 0.3, 'precision': 0.3}
+idx=6, metric_dict={'f1': 0.3478, 'recall': 0.3636, 'precision': 0.3333}
+idx=7, metric_dict={'f1': 0.2667, 'recall': 0.2667, 'precision': 0.2667}
+idx=8, metric_dict={'f1': 0.3125, 'recall': 0.3125, 'precision': 0.3125}
+idx=9, metric_dict={'f1': 0.2857, 'recall': 0.2941, 'precision': 0.2778}
+idx=10, metric_dict={'f1': 0.3158, 'recall': 0.3158, 'precision': 0.3158}
+idx=11, metric_dict={'f1': 0.2927, 'recall': 0.3, 'precision': 0.2857}
+idx=12, metric_dict={'f1': 0.2449, 'recall': 0.25, 'precision': 0.24}
+idx=13, metric_dict={'f1': 0.2414, 'recall': 0.2692, 'precision': 0.2188}
+idx=14, metric_dict={'f1': 0.2333, 'recall': 0.2593, 'precision': 0.2121}
+idx=15, metric_dict={'f1': 0.2154, 'recall': 0.2414, 'precision': 0.1944}
+idx=16, metric_dict={'f1': 0.209, 'recall': 0.2333, 'precision': 0.1892}
+idx=17, metric_dict={'f1': 0.2933, 'recall': 0.3235, 'precision': 0.2683}
+idx=18, metric_dict={'f1': 0.2651, 'recall': 0.2973, 'precision': 0.2391}
+idx=19, metric_dict={'f1': 0.25, 'recall': 0.2821, 'precision': 0.2245}
+idx=20, metric_dict={'f1': 0.2444, 'recall': 0.275, 'precision': 0.22}
+idx=21, metric_dict={'f1': 0.2418, 'recall': 0.2683, 'precision': 0.22} - ERR
+idx=22, metric_dict={'f1': 0.2708, 'recall': 0.3023, 'precision': 0.2453}
+idx=23, metric_dict={'f1': 0.2653, 'recall': 0.2955, 'precision': 0.2407}
+idx=24, metric_dict={'f1': 0.2772, 'recall': 0.3043, 'precision': 0.2545}
+idx=25, metric_dict={'f1': 0.283, 'recall': 0.3061, 'precision': 0.2632}
+idx=26, metric_dict={'f1': 0.3214, 'recall': 0.3462, 'precision': 0.3}
+idx=27, metric_dict={'f1': 0.3276, 'recall': 0.3519, 'precision': 0.3065}
+idx=28, metric_dict={'f1': 0.3193, 'recall': 0.3393, 'precision': 0.3016}
+idx=29, metric_dict={'f1': 0.304, 'recall': 0.322, 'precision': 0.2879}
+idx=30, metric_dict={'f1': 0.2992, 'recall': 0.3167, 'precision': 0.2836}
+idx=31, metric_dict={'f1': 0.3206, 'recall': 0.3387, 'precision': 0.3043}
+idx=32, metric_dict={'f1': 0.3259, 'recall': 0.3492, 'precision': 0.3056}
+idx=33, metric_dict={'f1': 0.3333, 'recall': 0.3594, 'precision': 0.3108}
+idx=34, metric_dict={'f1': 0.3286, 'recall': 0.3538, 'precision': 0.3067}
+idx=35, metric_dict={'f1': 0.3217, 'recall': 0.3485, 'precision': 0.2987}
+idx=36, metric_dict={'f1': 0.3194, 'recall': 0.3433, 'precision': 0.2987} - ERR
+idx=37, metric_dict={'f1': 0.3129, 'recall': 0.3382, 'precision': 0.2911}
+idx=38, metric_dict={'f1': 0.3221, 'recall': 0.3478, 'precision': 0.3}
+idx=39, metric_dict={'f1': 0.3179, 'recall': 0.338, 'precision': 0.3} - ERR
+idx=40, metric_dict={'f1': 0.3019, 'recall': 0.3038, 'precision': 0.3} - ERR
+idx=41, metric_dict={'f1': 0.3106, 'recall': 0.3125, 'precision': 0.3086}
+idx=42, metric_dict={'f1': 0.3049, 'recall': 0.3086, 'precision': 0.3012}
+idx=43, metric_dict={'f1': 0.3012, 'recall': 0.3049, 'precision': 0.2976}
+idx=44, metric_dict={'f1': 0.2994, 'recall': 0.3012, 'precision': 0.2976}
+idx=45, metric_dict={'f1': 0.2959, 'recall': 0.2976, 'precision': 0.2941}
+idx=46, metric_dict={'f1': 0.2941, 'recall': 0.2941, 'precision': 0.2941} - ERR
+idx=47, metric_dict={'f1': 0.2857, 'recall': 0.2907, 'precision': 0.2809}
+idx=48, metric_dict={'f1': 0.2921, 'recall': 0.2955, 'precision': 0.2889}
+idx=49, metric_dict={'f1': 0.306, 'recall': 0.3077, 'precision': 0.3043}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:09,  5.47 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.306, 'recall': 0.3077, 'precision': 0.3043}
+
+
+
+===========================================================================================================================================
+
+
+# Attempt 3
+
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 4, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': True, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': True, 'mode': 'bge', 'k': 5}}}
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=6, metric_dict={'f1': 0.0976, 'recall': 0.0909, 'precision': 0.1053}
+idx=7, metric_dict={'f1': 0.1395, 'recall': 0.1304, 'precision': 0.15}
+idx=8, metric_dict={'f1': 0.0984, 'recall': 0.0968, 'precision': 0.1}
+idx=9, metric_dict={'f1': 0.127, 'recall': 0.125, 'precision': 0.129}
+idx=10, metric_dict={'f1': 0.1231, 'recall': 0.1212, 'precision': 0.125}
+idx=11, metric_dict={'f1': 0.1449, 'recall': 0.1389, 'precision': 0.1515}
+idx=12, metric_dict={'f1': 0.137, 'recall': 0.1316, 'precision': 0.1429}
+idx=13, metric_dict={'f1': 0.1333, 'recall': 0.1282, 'precision': 0.1389}
+idx=14, metric_dict={'f1': 0.1282, 'recall': 0.125, 'precision': 0.1316}
+idx=15, metric_dict={'f1': 0.15, 'recall': 0.1463, 'precision': 0.1538}
+idx=16, metric_dict={'f1': 0.1429, 'recall': 0.1395, 'precision': 0.1463}
+idx=17, metric_dict={'f1': 0.1395, 'recall': 0.1364, 'precision': 0.1429}
+idx=18, metric_dict={'f1': 0.1188, 'recall': 0.1176, 'precision': 0.12}
+idx=19, metric_dict={'f1': 0.1143, 'recall': 0.1154, 'precision': 0.1132}
+idx=20, metric_dict={'f1': 0.1111, 'recall': 0.1132, 'precision': 0.1091}
+idx=21, metric_dict={'f1': 0.1197, 'recall': 0.1296, 'precision': 0.1111}
+idx=22, metric_dict={'f1': 0.1176, 'recall': 0.1273, 'precision': 0.1094}
+idx=23, metric_dict={'f1': 0.1311, 'recall': 0.1429, 'precision': 0.1212}
+idx=24, metric_dict={'f1': 0.1395, 'recall': 0.1525, 'precision': 0.1286}
+idx=25, metric_dict={'f1': 0.1374, 'recall': 0.15, 'precision': 0.1268}
+idx=26, metric_dict={'f1': 0.1333, 'recall': 0.1452, 'precision': 0.1233}
+idx=27, metric_dict={'f1': 0.1314, 'recall': 0.1429, 'precision': 0.1216}
+idx=28, metric_dict={'f1': 0.1295, 'recall': 0.1406, 'precision': 0.12}
+idx=29, metric_dict={'f1': 0.1408, 'recall': 0.1538, 'precision': 0.1299}
+idx=30, metric_dict={'f1': 0.1477, 'recall': 0.1571, 'precision': 0.1392}
+idx=31, metric_dict={'f1': 0.1783, 'recall': 0.1892, 'precision': 0.1687}
+idx=32, metric_dict={'f1': 0.1887, 'recall': 0.2, 'precision': 0.1786}
+idx=33, metric_dict={'f1': 0.1818, 'recall': 0.1948, 'precision': 0.1705}
+idx=34, metric_dict={'f1': 0.1786, 'recall': 0.1923, 'precision': 0.1667}
+idx=35, metric_dict={'f1': 0.1754, 'recall': 0.1899, 'precision': 0.163}
+idx=36, metric_dict={'f1': 0.1734, 'recall': 0.1875, 'precision': 0.1613}
+idx=37, metric_dict={'f1': 0.191, 'recall': 0.2073, 'precision': 0.1771}
+idx=38, metric_dict={'f1': 0.1878, 'recall': 0.2048, 'precision': 0.1735}
+idx=39, metric_dict={'f1': 0.1848, 'recall': 0.2024, 'precision': 0.17}
+idx=40, metric_dict={'f1': 0.1838, 'recall': 0.2, 'precision': 0.17}
+idx=41, metric_dict={'f1': 0.1789, 'recall': 0.1977, 'precision': 0.1635}
+idx=42, metric_dict={'f1': 0.1771, 'recall': 0.1954, 'precision': 0.1619}
+idx=43, metric_dict={'f1': 0.1744, 'recall': 0.1932, 'precision': 0.1589}
+idx=44, metric_dict={'f1': 0.1726, 'recall': 0.191, 'precision': 0.1574}
+idx=45, metric_dict={'f1': 0.1709, 'recall': 0.1889, 'precision': 0.156}
+idx=46, metric_dict={'f1': 0.1782, 'recall': 0.1978, 'precision': 0.1622}
+idx=47, metric_dict={'f1': 0.1682, 'recall': 0.1856, 'precision': 0.1538}
+idx=48, metric_dict={'f1': 0.1593, 'recall': 0.1818, 'precision': 0.1417}
+idx=49, metric_dict={'f1': 0.1717, 'recall': 0.1961, 'precision': 0.1527}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0.1538, 'recall': 0.2, 'precision': 0.125}
+idx=4, metric_dict={'f1': 0.1053, 'recall': 0.1111, 'precision': 0.1}
+idx=5, metric_dict={'f1': 0.1905, 'recall': 0.2, 'precision': 0.1818}
+idx=6, metric_dict={'f1': 0.1818, 'recall': 0.1818, 'precision': 0.1818} - ERR
+idx=7, metric_dict={'f1': 0.1538, 'recall': 0.1333, 'precision': 0.1818} - ERR
+idx=8, metric_dict={'f1': 0.2143, 'recall': 0.1875, 'precision': 0.25}
+idx=9, metric_dict={'f1': 0.1935, 'recall': 0.1765, 'precision': 0.2143}
+idx=10, metric_dict={'f1': 0.1818, 'recall': 0.1579, 'precision': 0.2143} - ERR
+idx=11, metric_dict={'f1': 0.1667, 'recall': 0.15, 'precision': 0.1875}
+idx=12, metric_dict={'f1': 0.1364, 'recall': 0.125, 'precision': 0.15}
+idx=13, metric_dict={'f1': 0.1304, 'recall': 0.1154, 'precision': 0.15} - ERR
+idx=14, metric_dict={'f1': 0.125, 'recall': 0.1111, 'precision': 0.1429}
+idx=15, metric_dict={'f1': 0.1132, 'recall': 0.1034, 'precision': 0.125}
+idx=16, metric_dict={'f1': 0.1091, 'recall': 0.1, 'precision': 0.12}
+idx=17, metric_dict={'f1': 0.2222, 'recall': 0.2059, 'precision': 0.2414}
+idx=18, metric_dict={'f1': 0.2121, 'recall': 0.1892, 'precision': 0.2414} - ERR
+idx=19, metric_dict={'f1': 0.1972, 'recall': 0.1795, 'precision': 0.2188}
+idx=20, metric_dict={'f1': 0.1918, 'recall': 0.175, 'precision': 0.2121}
+idx=21, metric_dict={'f1': 0.1892, 'recall': 0.1707, 'precision': 0.2121} - ERR
+idx=22, metric_dict={'f1': 0.2278, 'recall': 0.2093, 'precision': 0.25}
+idx=23, metric_dict={'f1': 0.225, 'recall': 0.2045, 'precision': 0.25}
+idx=24, metric_dict={'f1': 0.2619, 'recall': 0.2391, 'precision': 0.2895}
+idx=25, metric_dict={'f1': 0.2697, 'recall': 0.2449, 'precision': 0.3}
+idx=26, metric_dict={'f1': 0.3158, 'recall': 0.2885, 'precision': 0.3488}
+idx=27, metric_dict={'f1': 0.3061, 'recall': 0.2778, 'precision': 0.3409}
+idx=28, metric_dict={'f1': 0.2941, 'recall': 0.2679, 'precision': 0.3261}
+idx=29, metric_dict={'f1': 0.2778, 'recall': 0.2542, 'precision': 0.3061}
+idx=30, metric_dict={'f1': 0.2727, 'recall': 0.25, 'precision': 0.3}
+idx=31, metric_dict={'f1': 0.2632, 'recall': 0.2419, 'precision': 0.2885}
+idx=32, metric_dict={'f1': 0.2645, 'recall': 0.254, 'precision': 0.2759}
+idx=33, metric_dict={'f1': 0.272, 'recall': 0.2656, 'precision': 0.2787}
+idx=34, metric_dict={'f1': 0.2835, 'recall': 0.2769, 'precision': 0.2903}
+idx=35, metric_dict={'f1': 0.2769, 'recall': 0.2727, 'precision': 0.2812}
+idx=36, metric_dict={'f1': 0.2748, 'recall': 0.2687, 'precision': 0.2812} - ERR
+idx=37, metric_dict={'f1': 0.2687, 'recall': 0.2647, 'precision': 0.2727}
+idx=38, metric_dict={'f1': 0.2794, 'recall': 0.2754, 'precision': 0.2836}
+idx=39, metric_dict={'f1': 0.2754, 'recall': 0.2676, 'precision': 0.2836} - ERR
+idx=40, metric_dict={'f1': 0.2603, 'recall': 0.2405, 'precision': 0.2836} - ERR
+idx=41, metric_dict={'f1': 0.2703, 'recall': 0.25, 'precision': 0.2941}
+idx=42, metric_dict={'f1': 0.2632, 'recall': 0.2469, 'precision': 0.2817}
+idx=43, metric_dict={'f1': 0.2597, 'recall': 0.2439, 'precision': 0.2778}
+idx=44, metric_dict={'f1': 0.2581, 'recall': 0.241, 'precision': 0.2778}
+idx=45, metric_dict={'f1': 0.2564, 'recall': 0.2381, 'precision': 0.2778} - ERR
+idx=46, metric_dict={'f1': 0.2625, 'recall': 0.2471, 'precision': 0.28}
+idx=47, metric_dict={'f1': 0.2609, 'recall': 0.2442, 'precision': 0.28} - ERR
+idx=48, metric_dict={'f1': 0.2788, 'recall': 0.2614, 'precision': 0.2987}
+idx=49, metric_dict={'f1': 0.2941, 'recall': 0.2747, 'precision': 0.3165}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:05,  9.36 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.2941, 'recall': 0.2747, 'precision': 0.3165}
+
+
+===========================================================================================================================================
+
+
+AGENTRE_REDUX WITHOUT INCORRECT MEMORY 
+
+# Attempt 1 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 3, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': True, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}        
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=6, metric_dict={'f1': 0.0976, 'recall': 0.0909, 'precision': 0.1053}
+idx=7, metric_dict={'f1': 0.1395, 'recall': 0.1304, 'precision': 0.15}
+idx=8, metric_dict={'f1': 0.0984, 'recall': 0.0968, 'precision': 0.1}
+idx=9, metric_dict={'f1': 0.127, 'recall': 0.125, 'precision': 0.129}
+idx=10, metric_dict={'f1': 0.1231, 'recall': 0.1212, 'precision': 0.125}
+idx=11, metric_dict={'f1': 0.1449, 'recall': 0.1389, 'precision': 0.1515}
+idx=12, metric_dict={'f1': 0.1351, 'recall': 0.1316, 'precision': 0.1389}
+idx=13, metric_dict={'f1': 0.1579, 'recall': 0.1538, 'precision': 0.1622}
+idx=14, metric_dict={'f1': 0.1538, 'recall': 0.15, 'precision': 0.1579}
+idx=15, metric_dict={'f1': 0.1707, 'recall': 0.1707, 'precision': 0.1707}
+idx=16, metric_dict={'f1': 0.1628, 'recall': 0.1628, 'precision': 0.1628}
+idx=17, metric_dict={'f1': 0.1556, 'recall': 0.1591, 'precision': 0.1522}
+idx=18, metric_dict={'f1': 0.2667, 'recall': 0.2745, 'precision': 0.2593}
+idx=19, metric_dict={'f1': 0.2752, 'recall': 0.2885, 'precision': 0.2632}
+idx=20, metric_dict={'f1': 0.2703, 'recall': 0.283, 'precision': 0.2586}
+idx=21, metric_dict={'f1': 0.2832, 'recall': 0.2963, 'precision': 0.2712}
+idx=22, metric_dict={'f1': 0.2783, 'recall': 0.2909, 'precision': 0.2667}
+idx=23, metric_dict={'f1': 0.2881, 'recall': 0.3036, 'precision': 0.2742}
+idx=24, metric_dict={'f1': 0.2903, 'recall': 0.3051, 'precision': 0.2769}
+idx=25, metric_dict={'f1': 0.3016, 'recall': 0.3167, 'precision': 0.2879}
+idx=26, metric_dict={'f1': 0.3077, 'recall': 0.3226, 'precision': 0.2941}
+idx=27, metric_dict={'f1': 0.3158, 'recall': 0.3333, 'precision': 0.3}
+idx=28, metric_dict={'f1': 0.3134, 'recall': 0.3281, 'precision': 0.3} - ERR
+idx=29, metric_dict={'f1': 0.3235, 'recall': 0.3385, 'precision': 0.3099}
+idx=30, metric_dict={'f1': 0.3239, 'recall': 0.3286, 'precision': 0.3194}
+idx=31, metric_dict={'f1': 0.36, 'recall': 0.3649, 'precision': 0.3553}
+idx=32, metric_dict={'f1': 0.3684, 'recall': 0.3733, 'precision': 0.3636}
+idx=33, metric_dict={'f1': 0.3797, 'recall': 0.3896, 'precision': 0.3704}
+idx=34, metric_dict={'f1': 0.3727, 'recall': 0.3846, 'precision': 0.3614}
+idx=35, metric_dict={'f1': 0.3704, 'recall': 0.3797, 'precision': 0.3614}
+idx=36, metric_dict={'f1': 0.3636, 'recall': 0.375, 'precision': 0.3529}
+idx=37, metric_dict={'f1': 0.3787, 'recall': 0.3902, 'precision': 0.3678}
+idx=38, metric_dict={'f1': 0.3837, 'recall': 0.3976, 'precision': 0.3708}
+idx=39, metric_dict={'f1': 0.3908, 'recall': 0.4048, 'precision': 0.3778}
+idx=40, metric_dict={'f1': 0.3886, 'recall': 0.4, 'precision': 0.3778}
+idx=41, metric_dict={'f1': 0.382, 'recall': 0.3953, 'precision': 0.3696}
+idx=42, metric_dict={'f1': 0.3778, 'recall': 0.3908, 'precision': 0.3656}
+idx=43, metric_dict={'f1': 0.3846, 'recall': 0.3977, 'precision': 0.3723}
+idx=44, metric_dict={'f1': 0.3913, 'recall': 0.4045, 'precision': 0.3789}
+idx=45, metric_dict={'f1': 0.3871, 'recall': 0.4, 'precision': 0.375}
+idx=46, metric_dict={'f1': 0.3915, 'recall': 0.4066, 'precision': 0.3776}
+idx=47, metric_dict={'f1': 0.4179, 'recall': 0.433, 'precision': 0.4038}
+idx=48, metric_dict={'f1': 0.3981, 'recall': 0.4242, 'precision': 0.375}
+idx=49, metric_dict={'f1': 0.4055, 'recall': 0.4314, 'precision': 0.3826}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 0.5, 'recall': 0.5, 'precision': 0.5}
+idx=1, metric_dict={'f1': 0.4, 'recall': 0.3333, 'precision': 0.5} - ERR
+idx=2, metric_dict={'f1': 0.5714, 'recall': 0.5, 'precision': 0.6667}
+idx=3, metric_dict={'f1': 0.6667, 'recall': 0.6, 'precision': 0.75}
+idx=4, metric_dict={'f1': 0.5714, 'recall': 0.4444, 'precision': 0.8}
+idx=5, metric_dict={'f1': 0.625, 'recall': 0.5, 'precision': 0.8333}
+idx=6, metric_dict={'f1': 0.6316, 'recall': 0.5455, 'precision': 0.75}
+idx=7, metric_dict={'f1': 0.4444, 'recall': 0.4, 'precision': 0.5}
+idx=8, metric_dict={'f1': 0.4828, 'recall': 0.4375, 'precision': 0.5385}
+idx=9, metric_dict={'f1': 0.5161, 'recall': 0.4706, 'precision': 0.5714}
+idx=10, metric_dict={'f1': 0.5714, 'recall': 0.5263, 'precision': 0.625}
+idx=11, metric_dict={'f1': 0.5263, 'recall': 0.5, 'precision': 0.5556}
+idx=12, metric_dict={'f1': 0.6087, 'recall': 0.5833, 'precision': 0.6364}
+idx=13, metric_dict={'f1': 0.5357, 'recall': 0.5769, 'precision': 0.5}
+idx=14, metric_dict={'f1': 0.5517, 'recall': 0.5926, 'precision': 0.5161}
+idx=15, metric_dict={'f1': 0.5714, 'recall': 0.6207, 'precision': 0.5294}
+idx=16, metric_dict={'f1': 0.5538, 'recall': 0.6, 'precision': 0.5143}
+idx=17, metric_dict={'f1': 0.6027, 'recall': 0.6471, 'precision': 0.5641}
+idx=18, metric_dict={'f1': 0.5366, 'recall': 0.5946, 'precision': 0.4889}
+idx=19, metric_dict={'f1': 0.5517, 'recall': 0.6154, 'precision': 0.5}
+idx=20, metric_dict={'f1': 0.5618, 'recall': 0.625, 'precision': 0.5102}
+idx=21, metric_dict={'f1': 0.5652, 'recall': 0.6341, 'precision': 0.5098}
+idx=22, metric_dict={'f1': 0.5773, 'recall': 0.6512, 'precision': 0.5185}
+idx=23, metric_dict={'f1': 0.5657, 'recall': 0.6364, 'precision': 0.5091}
+idx=24, metric_dict={'f1': 0.5825, 'recall': 0.6522, 'precision': 0.5263}
+idx=25, metric_dict={'f1': 0.5741, 'recall': 0.6327, 'precision': 0.5254}
+idx=26, metric_dict={'f1': 0.5965, 'recall': 0.6538, 'precision': 0.5484}
+idx=27, metric_dict={'f1': 0.5812, 'recall': 0.6296, 'precision': 0.5397}
+idx=28, metric_dict={'f1': 0.5738, 'recall': 0.625, 'precision': 0.5303}
+idx=29, metric_dict={'f1': 0.5938, 'recall': 0.6441, 'precision': 0.5507}
+idx=30, metric_dict={'f1': 0.5846, 'recall': 0.6333, 'precision': 0.5429}
+idx=31, metric_dict={'f1': 0.5672, 'recall': 0.6129, 'precision': 0.5278}
+idx=32, metric_dict={'f1': 0.5693, 'recall': 0.619, 'precision': 0.527}
+idx=33, metric_dict={'f1': 0.5714, 'recall': 0.625, 'precision': 0.5263}
+idx=34, metric_dict={'f1': 0.5775, 'recall': 0.6308, 'precision': 0.5325}
+idx=35, metric_dict={'f1': 0.5793, 'recall': 0.6364, 'precision': 0.5316}
+idx=36, metric_dict={'f1': 0.5714, 'recall': 0.6269, 'precision': 0.525}
+idx=37, metric_dict={'f1': 0.56, 'recall': 0.6176, 'precision': 0.5122}
+idx=38, metric_dict={'f1': 0.5658, 'recall': 0.6232, 'precision': 0.5181}
+idx=39, metric_dict={'f1': 0.5584, 'recall': 0.6056, 'precision': 0.5181} - ERR
+idx=40, metric_dict={'f1': 0.5882, 'recall': 0.6329, 'precision': 0.5495}
+idx=41, metric_dict={'f1': 0.593, 'recall': 0.6375, 'precision': 0.5543}
+idx=42, metric_dict={'f1': 0.5909, 'recall': 0.642, 'precision': 0.5474}
+idx=43, metric_dict={'f1': 0.5955, 'recall': 0.6463, 'precision': 0.5521}
+idx=44, metric_dict={'f1': 0.6, 'recall': 0.6506, 'precision': 0.5567}
+idx=45, metric_dict={'f1': 0.5902, 'recall': 0.6429, 'precision': 0.5455}
+idx=46, metric_dict={'f1': 0.5882, 'recall': 0.6471, 'precision': 0.5392}
+idx=47, metric_dict={'f1': 0.5833, 'recall': 0.6512, 'precision': 0.5283}
+idx=48, metric_dict={'f1': 0.5846, 'recall': 0.6477, 'precision': 0.5327}
+idx=49, metric_dict={'f1': 0.59, 'recall': 0.6484, 'precision': 0.5413}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:03, 13.05 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.59, 'recall': 0.6484, 'precision': 0.5413}
+
+===========================================================================================================================================
+
+# Attempt 2 
+
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 3, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': True, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}        
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=6, metric_dict={'f1': 0.0952, 'recall': 0.0909, 'precision': 0.1}
+idx=7, metric_dict={'f1': 0.1364, 'recall': 0.1304, 'precision': 0.1429}
+idx=8, metric_dict={'f1': 0.0968, 'recall': 0.0968, 'precision': 0.0968}
+idx=9, metric_dict={'f1': 0.0952, 'recall': 0.0938, 'precision': 0.0968} - ERR
+idx=10, metric_dict={'f1': 0.0923, 'recall': 0.0909, 'precision': 0.0938}
+idx=11, metric_dict={'f1': 0.1159, 'recall': 0.1111, 'precision': 0.1212}
+idx=12, metric_dict={'f1': 0.1096, 'recall': 0.1053, 'precision': 0.1143}
+idx=13, metric_dict={'f1': 0.1081, 'recall': 0.1026, 'precision': 0.1143}
+idx=14, metric_dict={'f1': 0.1053, 'recall': 0.1, 'precision': 0.1111}
+idx=15, metric_dict={'f1': 0.1282, 'recall': 0.122, 'precision': 0.1351}
+idx=16, metric_dict={'f1': 0.122, 'recall': 0.1163, 'precision': 0.1282}
+idx=17, metric_dict={'f1': 0.1205, 'recall': 0.1136, 'precision': 0.1282} - ERR
+idx=18, metric_dict={'f1': 0.102, 'recall': 0.098, 'precision': 0.1064}
+idx=19, metric_dict={'f1': 0.098, 'recall': 0.0962, 'precision': 0.1}
+idx=20, metric_dict={'f1': 0.0962, 'recall': 0.0943, 'precision': 0.098}
+idx=21, metric_dict={'f1': 0.1062, 'recall': 0.1111, 'precision': 0.1017}
+idx=22, metric_dict={'f1': 0.1043, 'recall': 0.1091, 'precision': 0.1}
+idx=23, metric_dict={'f1': 0.1186, 'recall': 0.125, 'precision': 0.1129}
+idx=24, metric_dict={'f1': 0.128, 'recall': 0.1356, 'precision': 0.1212}
+idx=25, metric_dict={'f1': 0.1417, 'recall': 0.15, 'precision': 0.1343}
+idx=26, metric_dict={'f1': 0.1515, 'recall': 0.1613, 'precision': 0.1429}
+idx=27, metric_dict={'f1': 0.163, 'recall': 0.1746, 'precision': 0.1528}
+idx=28, metric_dict={'f1': 0.1606, 'recall': 0.1719, 'precision': 0.1507}
+idx=29, metric_dict={'f1': 0.1727, 'recall': 0.1846, 'precision': 0.1622}
+idx=30, metric_dict={'f1': 0.1781, 'recall': 0.1857, 'precision': 0.1711}
+idx=31, metric_dict={'f1': 0.2208, 'recall': 0.2297, 'precision': 0.2125}
+idx=32, metric_dict={'f1': 0.2308, 'recall': 0.24, 'precision': 0.2222}
+idx=33, metric_dict={'f1': 0.2222, 'recall': 0.2338, 'precision': 0.2118}
+idx=34, metric_dict={'f1': 0.2303, 'recall': 0.2436, 'precision': 0.2184}
+idx=35, metric_dict={'f1': 0.2275, 'recall': 0.2405, 'precision': 0.2159}
+idx=36, metric_dict={'f1': 0.2235, 'recall': 0.2375, 'precision': 0.2111}
+idx=37, metric_dict={'f1': 0.2209, 'recall': 0.2317, 'precision': 0.2111} - ERR
+idx=38, metric_dict={'f1': 0.2171, 'recall': 0.2289, 'precision': 0.2065}
+idx=39, metric_dict={'f1': 0.226, 'recall': 0.2381, 'precision': 0.2151}
+idx=40, metric_dict={'f1': 0.2247, 'recall': 0.2353, 'precision': 0.2151}
+idx=41, metric_dict={'f1': 0.221, 'recall': 0.2326, 'precision': 0.2105}
+idx=42, metric_dict={'f1': 0.2186, 'recall': 0.2299, 'precision': 0.2083}
+idx=43, metric_dict={'f1': 0.2162, 'recall': 0.2273, 'precision': 0.2062}
+idx=44, metric_dict={'f1': 0.2246, 'recall': 0.236, 'precision': 0.2143}
+idx=45, metric_dict={'f1': 0.2222, 'recall': 0.2333, 'precision': 0.2121}
+idx=46, metric_dict={'f1': 0.2292, 'recall': 0.2418, 'precision': 0.2178}
+idx=47, metric_dict={'f1': 0.2157, 'recall': 0.2268, 'precision': 0.2056}
+idx=48, metric_dict={'f1': 0.213, 'recall': 0.2323, 'precision': 0.1966}
+idx=49, metric_dict={'f1': 0.2332, 'recall': 0.2549, 'precision': 0.2149}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 1.0, 'recall': 1.0, 'precision': 1.0}
+idx=1, metric_dict={'f1': 0.5, 'recall': 0.6667, 'precision': 0.4}
+idx=2, metric_dict={'f1': 0.6, 'recall': 0.75, 'precision': 0.5}
+idx=3, metric_dict={'f1': 0.5, 'recall': 0.6, 'precision': 0.4286}
+idx=4, metric_dict={'f1': 0.4706, 'recall': 0.4444, 'precision': 0.5}
+idx=5, metric_dict={'f1': 0.5263, 'recall': 0.5, 'precision': 0.5556}
+idx=6, metric_dict={'f1': 0.5217, 'recall': 0.5455, 'precision': 0.5}
+idx=7, metric_dict={'f1': 0.3871, 'recall': 0.4, 'precision': 0.375}
+idx=8, metric_dict={'f1': 0.4242, 'recall': 0.4375, 'precision': 0.4118}
+idx=9, metric_dict={'f1': 0.4444, 'recall': 0.4706, 'precision': 0.4211}
+idx=10, metric_dict={'f1': 0.5, 'recall': 0.5263, 'precision': 0.4762}
+idx=11, metric_dict={'f1': 0.4878, 'recall': 0.5, 'precision': 0.4762} - ERR
+idx=12, metric_dict={'f1': 0.4082, 'recall': 0.4167, 'precision': 0.4}
+idx=13, metric_dict={'f1': 0.3729, 'recall': 0.4231, 'precision': 0.3333}
+idx=14, metric_dict={'f1': 0.3934, 'recall': 0.4444, 'precision': 0.3529}
+idx=15, metric_dict={'f1': 0.3636, 'recall': 0.4138, 'precision': 0.3243}
+idx=16, metric_dict={'f1': 0.3529, 'recall': 0.4, 'precision': 0.3158}
+idx=17, metric_dict={'f1': 0.4211, 'recall': 0.4706, 'precision': 0.381}
+idx=18, metric_dict={'f1': 0.381, 'recall': 0.4324, 'precision': 0.3404}
+idx=19, metric_dict={'f1': 0.4, 'recall': 0.4615, 'precision': 0.3529}
+idx=20, metric_dict={'f1': 0.3913, 'recall': 0.45, 'precision': 0.3462}
+idx=21, metric_dict={'f1': 0.3871, 'recall': 0.439, 'precision': 0.3462} - ERR
+idx=22, metric_dict={'f1': 0.4082, 'recall': 0.4651, 'precision': 0.3636}
+idx=23, metric_dict={'f1': 0.4, 'recall': 0.4545, 'precision': 0.3571}
+idx=24, metric_dict={'f1': 0.4231, 'recall': 0.4783, 'precision': 0.3793}
+idx=25, metric_dict={'f1': 0.422, 'recall': 0.4694, 'precision': 0.3833}
+idx=26, metric_dict={'f1': 0.4522, 'recall': 0.5, 'precision': 0.4127}
+idx=27, metric_dict={'f1': 0.4407, 'recall': 0.4815, 'precision': 0.4062}
+idx=28, metric_dict={'f1': 0.439, 'recall': 0.4821, 'precision': 0.403}
+idx=29, metric_dict={'f1': 0.4651, 'recall': 0.5085, 'precision': 0.4286}
+idx=30, metric_dict={'f1': 0.458, 'recall': 0.5, 'precision': 0.4225}
+idx=31, metric_dict={'f1': 0.4412, 'recall': 0.4839, 'precision': 0.4054}
+idx=32, metric_dict={'f1': 0.446, 'recall': 0.4921, 'precision': 0.4079}
+idx=33, metric_dict={'f1': 0.4507, 'recall': 0.5, 'precision': 0.4103}
+idx=34, metric_dict={'f1': 0.4476, 'recall': 0.4923, 'precision': 0.4103} - ERR
+idx=35, metric_dict={'f1': 0.4521, 'recall': 0.5, 'precision': 0.4125}
+idx=36, metric_dict={'f1': 0.4459, 'recall': 0.4925, 'precision': 0.4074}
+idx=37, metric_dict={'f1': 0.4371, 'recall': 0.4853, 'precision': 0.3976}
+idx=38, metric_dict={'f1': 0.4444, 'recall': 0.4928, 'precision': 0.4048}
+idx=39, metric_dict={'f1': 0.4387, 'recall': 0.4789, 'precision': 0.4048} - ERR
+idx=40, metric_dict={'f1': 0.3977, 'recall': 0.4304, 'precision': 0.3696}
+idx=41, metric_dict={'f1': 0.4046, 'recall': 0.4375, 'precision': 0.3763}
+idx=42, metric_dict={'f1': 0.4045, 'recall': 0.4444, 'precision': 0.3711}
+idx=43, metric_dict={'f1': 0.4, 'recall': 0.439, 'precision': 0.3673}
+idx=44, metric_dict={'f1': 0.3956, 'recall': 0.4337, 'precision': 0.3636}
+idx=45, metric_dict={'f1': 0.3892, 'recall': 0.4286, 'precision': 0.3564}
+idx=46, metric_dict={'f1': 0.381, 'recall': 0.4235, 'precision': 0.3462}
+idx=47, metric_dict={'f1': 0.3874, 'recall': 0.4302, 'precision': 0.3524}
+idx=48, metric_dict={'f1': 0.4, 'recall': 0.4432, 'precision': 0.3645}
+idx=49, metric_dict={'f1': 0.41, 'recall': 0.4505, 'precision': 0.3761}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:01, 36.18 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.41, 'recall': 0.4505, 'precision': 0.3761}
+
+
+
+===========================================================================================================================================
+
+# Attempt 3 
+
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 3, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': True, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}        
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0.0606, 'recall': 0.0667, 'precision': 0.0556}
+idx=5, metric_dict={'f1': 0.05, 'recall': 0.0526, 'precision': 0.0476}
+idx=6, metric_dict={'f1': 0.0444, 'recall': 0.0455, 'precision': 0.0435}
+idx=7, metric_dict={'f1': 0.0851, 'recall': 0.087, 'precision': 0.0833}
+idx=8, metric_dict={'f1': 0.0615, 'recall': 0.0645, 'precision': 0.0588}
+idx=9, metric_dict={'f1': 0.0606, 'recall': 0.0625, 'precision': 0.0588} - ERR
+idx=10, metric_dict={'f1': 0.0588, 'recall': 0.0606, 'precision': 0.0571}
+idx=11, metric_dict={'f1': 0.0833, 'recall': 0.0833, 'precision': 0.0833}
+idx=12, metric_dict={'f1': 0.0789, 'recall': 0.0789, 'precision': 0.0789}
+idx=13, metric_dict={'f1': 0.0769, 'recall': 0.0769, 'precision': 0.0769}
+idx=14, metric_dict={'f1': 0.075, 'recall': 0.075, 'precision': 0.075}
+idx=15, metric_dict={'f1': 0.0976, 'recall': 0.0976, 'precision': 0.0976}
+idx=16, metric_dict={'f1': 0.0941, 'recall': 0.093, 'precision': 0.0952}
+idx=17, metric_dict={'f1': 0.1136, 'recall': 0.1136, 'precision': 0.1136}
+idx=18, metric_dict={'f1': 0.0971, 'recall': 0.098, 'precision': 0.0962}
+idx=19, metric_dict={'f1': 0.0935, 'recall': 0.0962, 'precision': 0.0909}
+idx=20, metric_dict={'f1': 0.0909, 'recall': 0.0943, 'precision': 0.0877}
+idx=21, metric_dict={'f1': 0.1017, 'recall': 0.1111, 'precision': 0.0938}
+idx=22, metric_dict={'f1': 0.1, 'recall': 0.1091, 'precision': 0.0923}
+idx=23, metric_dict={'f1': 0.1148, 'recall': 0.125, 'precision': 0.1061}
+idx=24, metric_dict={'f1': 0.1094, 'recall': 0.1186, 'precision': 0.1014}
+idx=25, metric_dict={'f1': 0.1077, 'recall': 0.1167, 'precision': 0.1}
+idx=26, metric_dict={'f1': 0.1037, 'recall': 0.1129, 'precision': 0.0959}
+idx=27, metric_dict={'f1': 0.1159, 'recall': 0.127, 'precision': 0.1067}
+idx=28, metric_dict={'f1': 0.1143, 'recall': 0.125, 'precision': 0.1053}
+idx=29, metric_dict={'f1': 0.1135, 'recall': 0.1231, 'precision': 0.1053} - ERR
+idx=30, metric_dict={'f1': 0.1216, 'recall': 0.1286, 'precision': 0.1154}
+idx=31, metric_dict={'f1': 0.1667, 'recall': 0.1757, 'precision': 0.1585}
+idx=32, metric_dict={'f1': 0.1646, 'recall': 0.1733, 'precision': 0.1566}
+idx=33, metric_dict={'f1': 0.1585, 'recall': 0.1688, 'precision': 0.1494}
+idx=34, metric_dict={'f1': 0.1557, 'recall': 0.1667, 'precision': 0.1461}
+idx=35, metric_dict={'f1': 0.152, 'recall': 0.1646, 'precision': 0.1413}
+idx=36, metric_dict={'f1': 0.1503, 'recall': 0.1625, 'precision': 0.1398}
+idx=37, metric_dict={'f1': 0.1695, 'recall': 0.1829, 'precision': 0.1579}
+idx=38, metric_dict={'f1': 0.1667, 'recall': 0.1807, 'precision': 0.1546}
+idx=39, metric_dict={'f1': 0.1648, 'recall': 0.1786, 'precision': 0.1531}
+idx=40, metric_dict={'f1': 0.1639, 'recall': 0.1765, 'precision': 0.1531} - ERR
+idx=41, metric_dict={'f1': 0.1596, 'recall': 0.1744, 'precision': 0.1471}
+idx=42, metric_dict={'f1': 0.1579, 'recall': 0.1724, 'precision': 0.1456}
+idx=43, metric_dict={'f1': 0.1562, 'recall': 0.1705, 'precision': 0.1442}
+idx=44, metric_dict={'f1': 0.1649, 'recall': 0.1798, 'precision': 0.1524}
+idx=45, metric_dict={'f1': 0.1633, 'recall': 0.1778, 'precision': 0.1509}
+idx=46, metric_dict={'f1': 0.1709, 'recall': 0.1868, 'precision': 0.1574}
+idx=47, metric_dict={'f1': 0.1611, 'recall': 0.1753, 'precision': 0.1491}
+idx=48, metric_dict={'f1': 0.1614, 'recall': 0.1818, 'precision': 0.1452}
+idx=49, metric_dict={'f1': 0.1667, 'recall': 0.1863, 'precision': 0.1508}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 0.5, 'recall': 0.5, 'precision': 0.5}
+idx=1, metric_dict={'f1': 0.2222, 'recall': 0.3333, 'precision': 0.1667}
+idx=2, metric_dict={'f1': 0.3636, 'recall': 0.5, 'precision': 0.2857}
+idx=3, metric_dict={'f1': 0.4615, 'recall': 0.6, 'precision': 0.375}
+idx=4, metric_dict={'f1': 0.4211, 'recall': 0.4444, 'precision': 0.4}
+idx=5, metric_dict={'f1': 0.4762, 'recall': 0.5, 'precision': 0.4545}
+idx=6, metric_dict={'f1': 0.5, 'recall': 0.5455, 'precision': 0.4615}
+idx=7, metric_dict={'f1': 0.3871, 'recall': 0.4, 'precision': 0.375}
+idx=8, metric_dict={'f1': 0.4242, 'recall': 0.4375, 'precision': 0.4118}
+idx=9, metric_dict={'f1': 0.4444, 'recall': 0.4706, 'precision': 0.4211}
+idx=10, metric_dict={'f1': 0.4615, 'recall': 0.4737, 'precision': 0.45}
+idx=11, metric_dict={'f1': 0.4286, 'recall': 0.45, 'precision': 0.4091}
+idx=12, metric_dict={'f1': 0.36, 'recall': 0.375, 'precision': 0.3462}
+idx=13, metric_dict={'f1': 0.3462, 'recall': 0.3462, 'precision': 0.3462} - ERR
+idx=14, metric_dict={'f1': 0.3704, 'recall': 0.3704, 'precision': 0.3704}
+idx=15, metric_dict={'f1': 0.339, 'recall': 0.3448, 'precision': 0.3333}
+idx=16, metric_dict={'f1': 0.3279, 'recall': 0.3333, 'precision': 0.3226}
+idx=17, metric_dict={'f1': 0.4058, 'recall': 0.4118, 'precision': 0.4}
+idx=18, metric_dict={'f1': 0.4474, 'recall': 0.4595, 'precision': 0.4359}
+idx=19, metric_dict={'f1': 0.4691, 'recall': 0.4872, 'precision': 0.4524}
+idx=20, metric_dict={'f1': 0.4819, 'recall': 0.5, 'precision': 0.4651}
+idx=21, metric_dict={'f1': 0.4706, 'recall': 0.4878, 'precision': 0.4545}
+idx=22, metric_dict={'f1': 0.4889, 'recall': 0.5116, 'precision': 0.4681}
+idx=23, metric_dict={'f1': 0.4835, 'recall': 0.5, 'precision': 0.4681}
+idx=24, metric_dict={'f1': 0.5053, 'recall': 0.5217, 'precision': 0.4898}
+idx=25, metric_dict={'f1': 0.5, 'recall': 0.5102, 'precision': 0.4902}
+idx=26, metric_dict={'f1': 0.5283, 'recall': 0.5385, 'precision': 0.5185}
+idx=27, metric_dict={'f1': 0.5138, 'recall': 0.5185, 'precision': 0.5091}
+idx=28, metric_dict={'f1': 0.5088, 'recall': 0.5179, 'precision': 0.5}
+idx=29, metric_dict={'f1': 0.5333, 'recall': 0.5424, 'precision': 0.5246}
+idx=30, metric_dict={'f1': 0.5246, 'recall': 0.5333, 'precision': 0.5161}
+idx=31, metric_dict={'f1': 0.5397, 'recall': 0.5484, 'precision': 0.5312}
+idx=32, metric_dict={'f1': 0.5426, 'recall': 0.5556, 'precision': 0.5303}
+idx=33, metric_dict={'f1': 0.5455, 'recall': 0.5625, 'precision': 0.5294}
+idx=34, metric_dict={'f1': 0.5414, 'recall': 0.5538, 'precision': 0.5294} - ERR
+idx=35, metric_dict={'f1': 0.5294, 'recall': 0.5455, 'precision': 0.5143}
+idx=36, metric_dict={'f1': 0.5324, 'recall': 0.5522, 'precision': 0.5139}
+idx=37, metric_dict={'f1': 0.5211, 'recall': 0.5441, 'precision': 0.5}
+idx=38, metric_dict={'f1': 0.5278, 'recall': 0.5507, 'precision': 0.5067}
+idx=39, metric_dict={'f1': 0.5205, 'recall': 0.5352, 'precision': 0.5067} - ERR
+idx=40, metric_dict={'f1': 0.5556, 'recall': 0.5696, 'precision': 0.5422}
+idx=41, metric_dict={'f1': 0.561, 'recall': 0.575, 'precision': 0.5476}
+idx=42, metric_dict={'f1': 0.5509, 'recall': 0.5679, 'precision': 0.5349}
+idx=43, metric_dict={'f1': 0.5562, 'recall': 0.5732, 'precision': 0.5402}
+idx=44, metric_dict={'f1': 0.5614, 'recall': 0.5783, 'precision': 0.5455}
+idx=45, metric_dict={'f1': 0.5549, 'recall': 0.5714, 'precision': 0.5393}
+idx=46, metric_dict={'f1': 0.5537, 'recall': 0.5765, 'precision': 0.5326}
+idx=47, metric_dict={'f1': 0.5385, 'recall': 0.5698, 'precision': 0.5104}
+idx=48, metric_dict={'f1': 0.5405, 'recall': 0.5682, 'precision': 0.5155}
+idx=49, metric_dict={'f1': 0.5474, 'recall': 0.5714, 'precision': 0.5253}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:00, 121.45 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.5474, 'recall': 0.5714, 'precision': 0.5253}
+
+
+
+
+===========================================================================================================================================
+
+AGENTRE_REDUX WITH ONLY CORRECT MEMORY 
+
+# Attempt 1 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 3, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': False, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}       
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=6, metric_dict={'f1': 0.0455, 'recall': 0.0455, 'precision': 0.0455}
+idx=7, metric_dict={'f1': 0.0833, 'recall': 0.087, 'precision': 0.08}
+idx=8, metric_dict={'f1': 0.303, 'recall': 0.3226, 'precision': 0.2857}
+idx=9, metric_dict={'f1': 0.3235, 'recall': 0.3438, 'precision': 0.3056}
+idx=10, metric_dict={'f1': 0.3143, 'recall': 0.3333, 'precision': 0.2973}
+idx=11, metric_dict={'f1': 0.3243, 'recall': 0.3333, 'precision': 0.3158}
+idx=12, metric_dict={'f1': 0.3038, 'recall': 0.3158, 'precision': 0.2927}
+idx=13, metric_dict={'f1': 0.3, 'recall': 0.3077, 'precision': 0.2927}
+idx=14, metric_dict={'f1': 0.2927, 'recall': 0.3, 'precision': 0.2857}
+idx=15, metric_dict={'f1': 0.3095, 'recall': 0.3171, 'precision': 0.3023}
+idx=16, metric_dict={'f1': 0.2955, 'recall': 0.3023, 'precision': 0.2889}
+idx=17, metric_dict={'f1': 0.2889, 'recall': 0.2955, 'precision': 0.2826}
+idx=18, metric_dict={'f1': 0.381, 'recall': 0.3922, 'precision': 0.3704}
+idx=19, metric_dict={'f1': 0.3853, 'recall': 0.4038, 'precision': 0.3684}
+idx=20, metric_dict={'f1': 0.3784, 'recall': 0.3962, 'precision': 0.3621}
+idx=21, metric_dict={'f1': 0.3697, 'recall': 0.4074, 'precision': 0.3385}
+idx=22, metric_dict={'f1': 0.3636, 'recall': 0.4, 'precision': 0.3333}
+idx=23, metric_dict={'f1': 0.371, 'recall': 0.4107, 'precision': 0.3382}
+idx=24, metric_dict={'f1': 0.3721, 'recall': 0.4068, 'precision': 0.3429}
+idx=25, metric_dict={'f1': 0.3817, 'recall': 0.4167, 'precision': 0.3521}
+idx=26, metric_dict={'f1': 0.3852, 'recall': 0.4194, 'precision': 0.3562}
+idx=27, metric_dict={'f1': 0.3913, 'recall': 0.4286, 'precision': 0.36}
+idx=28, metric_dict={'f1': 0.3857, 'recall': 0.4219, 'precision': 0.3553}
+idx=29, metric_dict={'f1': 0.383, 'recall': 0.4154, 'precision': 0.3553} - ERR
+idx=30, metric_dict={'f1': 0.3784, 'recall': 0.4, 'precision': 0.359}
+idx=31, metric_dict={'f1': 0.4103, 'recall': 0.4324, 'precision': 0.3902}
+idx=32, metric_dict={'f1': 0.4177, 'recall': 0.44, 'precision': 0.3976}
+idx=33, metric_dict={'f1': 0.4268, 'recall': 0.4545, 'precision': 0.4023}
+idx=34, metric_dict={'f1': 0.4192, 'recall': 0.4487, 'precision': 0.3933}
+idx=35, metric_dict={'f1': 0.4118, 'recall': 0.443, 'precision': 0.3846}
+idx=36, metric_dict={'f1': 0.4046, 'recall': 0.4375, 'precision': 0.3763}
+idx=37, metric_dict={'f1': 0.4068, 'recall': 0.439, 'precision': 0.3789}
+idx=38, metric_dict={'f1': 0.4111, 'recall': 0.4458, 'precision': 0.3814}
+idx=39, metric_dict={'f1': 0.4176, 'recall': 0.4524, 'precision': 0.3878}
+idx=40, metric_dict={'f1': 0.4153, 'recall': 0.4471, 'precision': 0.3878}
+idx=41, metric_dict={'f1': 0.413, 'recall': 0.4419, 'precision': 0.3878} - ERR
+idx=42, metric_dict={'f1': 0.4086, 'recall': 0.4368, 'precision': 0.3838}
+idx=43, metric_dict={'f1': 0.4149, 'recall': 0.4432, 'precision': 0.39}
+idx=44, metric_dict={'f1': 0.4211, 'recall': 0.4494, 'precision': 0.396}
+idx=45, metric_dict={'f1': 0.4271, 'recall': 0.4556, 'precision': 0.402}
+idx=46, metric_dict={'f1': 0.4308, 'recall': 0.4615, 'precision': 0.4038}
+idx=47, metric_dict={'f1': 0.4541, 'recall': 0.4845, 'precision': 0.4273}
+idx=48, metric_dict={'f1': 0.4292, 'recall': 0.4747, 'precision': 0.3917}
+idx=49, metric_dict={'f1': 0.4336, 'recall': 0.4804, 'precision': 0.3952}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 0.5, 'recall': 0.5, 'precision': 0.5}
+idx=1, metric_dict={'f1': 0.2222, 'recall': 0.3333, 'precision': 0.1667}
+idx=2, metric_dict={'f1': 0.3636, 'recall': 0.5, 'precision': 0.2857}
+idx=3, metric_dict={'f1': 0.4615, 'recall': 0.6, 'precision': 0.375}
+idx=4, metric_dict={'f1': 0.4444, 'recall': 0.4444, 'precision': 0.4444}
+idx=5, metric_dict={'f1': 0.5, 'recall': 0.5, 'precision': 0.5}
+idx=6, metric_dict={'f1': 0.5, 'recall': 0.5455, 'precision': 0.4615}
+idx=7, metric_dict={'f1': 0.375, 'recall': 0.4, 'precision': 0.3529}
+idx=8, metric_dict={'f1': 0.4118, 'recall': 0.4375, 'precision': 0.3889}
+idx=9, metric_dict={'f1': 0.4, 'recall': 0.4118, 'precision': 0.3889} - ERR
+idx=10, metric_dict={'f1': 0.4211, 'recall': 0.4211, 'precision': 0.4211}
+idx=11, metric_dict={'f1': 0.439, 'recall': 0.45, 'precision': 0.4286}
+idx=12, metric_dict={'f1': 0.5306, 'recall': 0.5417, 'precision': 0.52}
+idx=13, metric_dict={'f1': 0.4828, 'recall': 0.5385, 'precision': 0.4375}
+idx=14, metric_dict={'f1': 0.459, 'recall': 0.5185, 'precision': 0.4118}
+idx=15, metric_dict={'f1': 0.4242, 'recall': 0.4828, 'precision': 0.3784}
+idx=16, metric_dict={'f1': 0.4118, 'recall': 0.4667, 'precision': 0.3684}
+idx=17, metric_dict={'f1': 0.4737, 'recall': 0.5294, 'precision': 0.4286}
+idx=18, metric_dict={'f1': 0.4286, 'recall': 0.4865, 'precision': 0.383}
+idx=19, metric_dict={'f1': 0.4045, 'recall': 0.4615, 'precision': 0.36}
+idx=20, metric_dict={'f1': 0.4176, 'recall': 0.475, 'precision': 0.3725}
+idx=21, metric_dict={'f1': 0.4043, 'recall': 0.4634, 'precision': 0.3585}
+idx=22, metric_dict={'f1': 0.4242, 'recall': 0.4884, 'precision': 0.375}
+idx=23, metric_dict={'f1': 0.4158, 'recall': 0.4773, 'precision': 0.3684}
+idx=24, metric_dict={'f1': 0.4231, 'recall': 0.4783, 'precision': 0.3793}
+idx=25, metric_dict={'f1': 0.4259, 'recall': 0.4694, 'precision': 0.3898}
+idx=26, metric_dict={'f1': 0.4561, 'recall': 0.5, 'precision': 0.4194}
+idx=27, metric_dict={'f1': 0.4407, 'recall': 0.4815, 'precision': 0.4062}
+idx=28, metric_dict={'f1': 0.4553, 'recall': 0.5, 'precision': 0.4179}
+idx=29, metric_dict={'f1': 0.4806, 'recall': 0.5254, 'precision': 0.4429}
+idx=30, metric_dict={'f1': 0.4733, 'recall': 0.5167, 'precision': 0.4366}
+idx=31, metric_dict={'f1': 0.4889, 'recall': 0.5323, 'precision': 0.4521}
+idx=32, metric_dict={'f1': 0.4789, 'recall': 0.5397, 'precision': 0.4304}
+idx=33, metric_dict={'f1': 0.4795, 'recall': 0.5469, 'precision': 0.4268}
+idx=34, metric_dict={'f1': 0.4832, 'recall': 0.5538, 'precision': 0.4286}
+idx=35, metric_dict={'f1': 0.4737, 'recall': 0.5455, 'precision': 0.4186}
+idx=36, metric_dict={'f1': 0.4675, 'recall': 0.5373, 'precision': 0.4138}
+idx=37, metric_dict={'f1': 0.4615, 'recall': 0.5294, 'precision': 0.4091}
+idx=38, metric_dict={'f1': 0.4684, 'recall': 0.5362, 'precision': 0.4157}
+idx=39, metric_dict={'f1': 0.4625, 'recall': 0.5211, 'precision': 0.4157} - ERR
+idx=40, metric_dict={'f1': 0.5, 'recall': 0.557, 'precision': 0.4536}
+idx=41, metric_dict={'f1': 0.5056, 'recall': 0.5625, 'precision': 0.4592}
+idx=42, metric_dict={'f1': 0.4945, 'recall': 0.5556, 'precision': 0.4455}
+idx=43, metric_dict={'f1': 0.5, 'recall': 0.561, 'precision': 0.451}
+idx=44, metric_dict={'f1': 0.5054, 'recall': 0.5663, 'precision': 0.4563}
+idx=45, metric_dict={'f1': 0.5, 'recall': 0.5595, 'precision': 0.4519}
+idx=46, metric_dict={'f1': 0.5, 'recall': 0.5647, 'precision': 0.4486}
+idx=47, metric_dict={'f1': 0.5, 'recall': 0.5698, 'precision': 0.4455}
+idx=48, metric_dict={'f1': 0.5025, 'recall': 0.5682, 'precision': 0.4505}
+idx=49, metric_dict={'f1': 0.4902, 'recall': 0.5495, 'precision': 0.4425}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:04, 10.89 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.4902, 'recall': 0.5495, 'precision': 0.4425}
+
+===========================================================================================================================================
+
+# Attempt 2 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 3, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': False, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}       
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=6, metric_dict={'f1': 0.0952, 'recall': 0.0909, 'precision': 0.1}
+idx=7, metric_dict={'f1': 0.1364, 'recall': 0.1304, 'precision': 0.1429}
+idx=8, metric_dict={'f1': 0.0984, 'recall': 0.0968, 'precision': 0.1}
+idx=9, metric_dict={'f1': 0.0952, 'recall': 0.0938, 'precision': 0.0968}
+idx=10, metric_dict={'f1': 0.0909, 'recall': 0.0909, 'precision': 0.0909}
+idx=11, metric_dict={'f1': 0.0857, 'recall': 0.0833, 'precision': 0.0882}
+idx=12, metric_dict={'f1': 0.08, 'recall': 0.0789, 'precision': 0.0811}
+idx=13, metric_dict={'f1': 0.0789, 'recall': 0.0769, 'precision': 0.0811}
+idx=14, metric_dict={'f1': 0.0769, 'recall': 0.075, 'precision': 0.0789}
+idx=15, metric_dict={'f1': 0.1, 'recall': 0.0976, 'precision': 0.1026}
+idx=16, metric_dict={'f1': 0.119, 'recall': 0.1163, 'precision': 0.122}
+idx=17, metric_dict={'f1': 0.1149, 'recall': 0.1136, 'precision': 0.1163}
+idx=18, metric_dict={'f1': 0.2353, 'recall': 0.2353, 'precision': 0.2353}
+idx=19, metric_dict={'f1': 0.2453, 'recall': 0.25, 'precision': 0.2407}
+idx=20, metric_dict={'f1': 0.2385, 'recall': 0.2453, 'precision': 0.2321}
+idx=21, metric_dict={'f1': 0.2364, 'recall': 0.2407, 'precision': 0.2321} - ERR
+idx=22, metric_dict={'f1': 0.25, 'recall': 0.2545, 'precision': 0.2456}
+idx=23, metric_dict={'f1': 0.2632, 'recall': 0.2679, 'precision': 0.2586}
+idx=24, metric_dict={'f1': 0.2833, 'recall': 0.2881, 'precision': 0.2787}
+idx=25, metric_dict={'f1': 0.2951, 'recall': 0.3, 'precision': 0.2903}
+idx=26, metric_dict={'f1': 0.315, 'recall': 0.3226, 'precision': 0.3077}
+idx=27, metric_dict={'f1': 0.3231, 'recall': 0.3333, 'precision': 0.3134}
+idx=28, metric_dict={'f1': 0.3182, 'recall': 0.3281, 'precision': 0.3088}
+idx=29, metric_dict={'f1': 0.3284, 'recall': 0.3385, 'precision': 0.3188}
+idx=30, metric_dict={'f1': 0.338, 'recall': 0.3429, 'precision': 0.3333}
+idx=31, metric_dict={'f1': 0.3733, 'recall': 0.3784, 'precision': 0.3684}
+idx=32, metric_dict={'f1': 0.3816, 'recall': 0.3867, 'precision': 0.3766}
+idx=33, metric_dict={'f1': 0.3924, 'recall': 0.4026, 'precision': 0.3827}
+idx=34, metric_dict={'f1': 0.3975, 'recall': 0.4103, 'precision': 0.3855}
+idx=35, metric_dict={'f1': 0.3926, 'recall': 0.4051, 'precision': 0.381}
+idx=36, metric_dict={'f1': 0.3902, 'recall': 0.4, 'precision': 0.381} - ERR
+idx=37, metric_dict={'f1': 0.3905, 'recall': 0.4024, 'precision': 0.3793}
+idx=38, metric_dict={'f1': 0.3977, 'recall': 0.4096, 'precision': 0.3864}
+idx=39, metric_dict={'f1': 0.4046, 'recall': 0.4167, 'precision': 0.3933}
+idx=40, metric_dict={'f1': 0.4023, 'recall': 0.4118, 'precision': 0.3933}
+idx=41, metric_dict={'f1': 0.3933, 'recall': 0.407, 'precision': 0.3804}
+idx=42, metric_dict={'f1': 0.3889, 'recall': 0.4023, 'precision': 0.3763}
+idx=43, metric_dict={'f1': 0.3956, 'recall': 0.4091, 'precision': 0.383}
+idx=44, metric_dict={'f1': 0.4022, 'recall': 0.4157, 'precision': 0.3895}
+idx=45, metric_dict={'f1': 0.3978, 'recall': 0.4111, 'precision': 0.3854}
+idx=46, metric_dict={'f1': 0.4021, 'recall': 0.4176, 'precision': 0.3878}
+idx=47, metric_dict={'f1': 0.4279, 'recall': 0.4433, 'precision': 0.4135}
+idx=48, metric_dict={'f1': 0.4131, 'recall': 0.4444, 'precision': 0.386}
+idx=49, metric_dict={'f1': 0.4128, 'recall': 0.4412, 'precision': 0.3879}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 1.0, 'recall': 1.0, 'precision': 1.0}
+idx=1, metric_dict={'f1': 0.8, 'recall': 0.6667, 'precision': 1.0} - ERR
+idx=2, metric_dict={'f1': 0.4444, 'recall': 0.5, 'precision': 0.4}
+idx=3, metric_dict={'f1': 0.5455, 'recall': 0.6, 'precision': 0.5}
+idx=4, metric_dict={'f1': 0.5, 'recall': 0.4444, 'precision': 0.5714}
+idx=5, metric_dict={'f1': 0.5556, 'recall': 0.5, 'precision': 0.625}
+idx=6, metric_dict={'f1': 0.5455, 'recall': 0.5455, 'precision': 0.5455}
+idx=7, metric_dict={'f1': 0.4, 'recall': 0.4, 'precision': 0.4}
+idx=8, metric_dict={'f1': 0.4375, 'recall': 0.4375, 'precision': 0.4375}
+idx=9, metric_dict={'f1': 0.4571, 'recall': 0.4706, 'precision': 0.4444}
+idx=10, metric_dict={'f1': 0.4737, 'recall': 0.4737, 'precision': 0.4737}
+idx=11, metric_dict={'f1': 0.439, 'recall': 0.45, 'precision': 0.4286}
+idx=12, metric_dict={'f1': 0.3673, 'recall': 0.375, 'precision': 0.36}
+idx=13, metric_dict={'f1': 0.3448, 'recall': 0.3846, 'precision': 0.3125}
+idx=14, metric_dict={'f1': 0.3333, 'recall': 0.3704, 'precision': 0.303}
+idx=15, metric_dict={'f1': 0.3077, 'recall': 0.3448, 'precision': 0.2778}
+idx=16, metric_dict={'f1': 0.2985, 'recall': 0.3333, 'precision': 0.2703}
+idx=17, metric_dict={'f1': 0.3733, 'recall': 0.4118, 'precision': 0.3415}
+idx=18, metric_dict={'f1': 0.3373, 'recall': 0.3784, 'precision': 0.3043}
+idx=19, metric_dict={'f1': 0.3596, 'recall': 0.4103, 'precision': 0.32}
+idx=20, metric_dict={'f1': 0.3516, 'recall': 0.4, 'precision': 0.3137}
+idx=21, metric_dict={'f1': 0.3478, 'recall': 0.3902, 'precision': 0.3137}
+idx=22, metric_dict={'f1': 0.3711, 'recall': 0.4186, 'precision': 0.3333}
+idx=23, metric_dict={'f1': 0.3636, 'recall': 0.4091, 'precision': 0.3273}
+idx=24, metric_dict={'f1': 0.3725, 'recall': 0.413, 'precision': 0.3393}
+idx=25, metric_dict={'f1': 0.3738, 'recall': 0.4082, 'precision': 0.3448}
+idx=26, metric_dict={'f1': 0.4071, 'recall': 0.4423, 'precision': 0.377}
+idx=27, metric_dict={'f1': 0.3932, 'recall': 0.4259, 'precision': 0.3651}
+idx=28, metric_dict={'f1': 0.3967, 'recall': 0.4286, 'precision': 0.3692}
+idx=29, metric_dict={'f1': 0.378, 'recall': 0.4068, 'precision': 0.3529}
+idx=30, metric_dict={'f1': 0.3721, 'recall': 0.4, 'precision': 0.3478}
+idx=31, metric_dict={'f1': 0.391, 'recall': 0.4194, 'precision': 0.3662}
+idx=32, metric_dict={'f1': 0.3913, 'recall': 0.4286, 'precision': 0.36}
+idx=33, metric_dict={'f1': 0.3972, 'recall': 0.4375, 'precision': 0.3636}
+idx=34, metric_dict={'f1': 0.3944, 'recall': 0.4308, 'precision': 0.3636} - ERR
+idx=35, metric_dict={'f1': 0.4, 'recall': 0.4394, 'precision': 0.3671}
+idx=36, metric_dict={'f1': 0.3946, 'recall': 0.4328, 'precision': 0.3625}
+idx=37, metric_dict={'f1': 0.3893, 'recall': 0.4265, 'precision': 0.358}
+idx=38, metric_dict={'f1': 0.3974, 'recall': 0.4348, 'precision': 0.3659}
+idx=39, metric_dict={'f1': 0.3922, 'recall': 0.4225, 'precision': 0.3659} - ERR
+idx=40, metric_dict={'f1': 0.355, 'recall': 0.3797, 'precision': 0.3333}
+idx=41, metric_dict={'f1': 0.3626, 'recall': 0.3875, 'precision': 0.3407}
+idx=42, metric_dict={'f1': 0.3543, 'recall': 0.3827, 'precision': 0.3298}
+idx=43, metric_dict={'f1': 0.3503, 'recall': 0.378, 'precision': 0.3263}
+idx=44, metric_dict={'f1': 0.3483, 'recall': 0.3735, 'precision': 0.3263}
+idx=45, metric_dict={'f1': 0.3444, 'recall': 0.369, 'precision': 0.3229}
+idx=46, metric_dict={'f1': 0.3478, 'recall': 0.3765, 'precision': 0.3232}
+idx=47, metric_dict={'f1': 0.3441, 'recall': 0.3721, 'precision': 0.32}
+idx=48, metric_dict={'f1': 0.3492, 'recall': 0.375, 'precision': 0.3267}
+idx=49, metric_dict={'f1': 0.3608, 'recall': 0.3846, 'precision': 0.3398}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:05,  9.15 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.3608, 'recall': 0.3846, 'precision': 0.3398}
+
+
+===========================================================================================================================================
+
+
+# Attempt 3 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 3, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': True}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE_redux'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': False, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}       
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0.0909, 'recall': 0.0909, 'precision': 0.0909}
+idx=2, metric_dict={'f1': 0.0769, 'recall': 0.0833, 'precision': 0.0714}
+idx=3, metric_dict={'f1': 0.069, 'recall': 0.0714, 'precision': 0.0667}
+idx=4, metric_dict={'f1': 0.0625, 'recall': 0.0667, 'precision': 0.0588}
+idx=5, metric_dict={'f1': 0.0513, 'recall': 0.0526, 'precision': 0.05}
+idx=6, metric_dict={'f1': 0.0455, 'recall': 0.0455, 'precision': 0.0455}
+idx=7, metric_dict={'f1': 0.087, 'recall': 0.087, 'precision': 0.087}
+idx=8, metric_dict={'f1': 0.0625, 'recall': 0.0645, 'precision': 0.0606}
+idx=9, metric_dict={'f1': 0.0909, 'recall': 0.0938, 'precision': 0.0882}
+idx=10, metric_dict={'f1': 0.0882, 'recall': 0.0909, 'precision': 0.0857}
+idx=11, metric_dict={'f1': 0.0822, 'recall': 0.0833, 'precision': 0.0811}
+idx=12, metric_dict={'f1': 0.0779, 'recall': 0.0789, 'precision': 0.0769}
+idx=13, metric_dict={'f1': 0.1013, 'recall': 0.1026, 'precision': 0.1}
+idx=14, metric_dict={'f1': 0.0988, 'recall': 0.1, 'precision': 0.0976}
+idx=15, metric_dict={'f1': 0.1205, 'recall': 0.122, 'precision': 0.119}
+idx=16, metric_dict={'f1': 0.1149, 'recall': 0.1163, 'precision': 0.1136}
+idx=17, metric_dict={'f1': 0.1111, 'recall': 0.1136, 'precision': 0.1087}
+idx=18, metric_dict={'f1': 0.0952, 'recall': 0.098, 'precision': 0.0926}
+idx=19, metric_dict={'f1': 0.0917, 'recall': 0.0962, 'precision': 0.0877}
+idx=20, metric_dict={'f1': 0.0901, 'recall': 0.0943, 'precision': 0.0862}
+idx=21, metric_dict={'f1': 0.1008, 'recall': 0.1111, 'precision': 0.0923}
+idx=22, metric_dict={'f1': 0.0992, 'recall': 0.1091, 'precision': 0.0909}
+idx=23, metric_dict={'f1': 0.1129, 'recall': 0.125, 'precision': 0.1029}
+idx=24, metric_dict={'f1': 0.1085, 'recall': 0.1186, 'precision': 0.1}
+idx=25, metric_dict={'f1': 0.1069, 'recall': 0.1167, 'precision': 0.0986}
+idx=26, metric_dict={'f1': 0.1045, 'recall': 0.1129, 'precision': 0.0972}
+idx=27, metric_dict={'f1': 0.1168, 'recall': 0.127, 'precision': 0.1081}
+idx=28, metric_dict={'f1': 0.1151, 'recall': 0.125, 'precision': 0.1067}
+idx=29, metric_dict={'f1': 0.1277, 'recall': 0.1385, 'precision': 0.1184}
+idx=30, metric_dict={'f1': 0.1477, 'recall': 0.1571, 'precision': 0.1392}
+idx=31, metric_dict={'f1': 0.1783, 'recall': 0.1892, 'precision': 0.1687}
+idx=32, metric_dict={'f1': 0.1887, 'recall': 0.2, 'precision': 0.1786}
+idx=33, metric_dict={'f1': 0.1818, 'recall': 0.1948, 'precision': 0.1705}
+idx=34, metric_dict={'f1': 0.1786, 'recall': 0.1923, 'precision': 0.1667}
+idx=35, metric_dict={'f1': 0.1765, 'recall': 0.1899, 'precision': 0.1648}
+idx=36, metric_dict={'f1': 0.1754, 'recall': 0.1875, 'precision': 0.1648} - ERR
+idx=37, metric_dict={'f1': 0.1932, 'recall': 0.2073, 'precision': 0.1809}
+idx=38, metric_dict={'f1': 0.1899, 'recall': 0.2048, 'precision': 0.1771}
+idx=39, metric_dict={'f1': 0.1878, 'recall': 0.2024, 'precision': 0.1753}
+idx=40, metric_dict={'f1': 0.1868, 'recall': 0.2, 'precision': 0.1753}
+idx=41, metric_dict={'f1': 0.1818, 'recall': 0.1977, 'precision': 0.1683}
+idx=42, metric_dict={'f1': 0.1905, 'recall': 0.2069, 'precision': 0.1765}
+idx=43, metric_dict={'f1': 0.1885, 'recall': 0.2045, 'precision': 0.1748}
+idx=44, metric_dict={'f1': 0.1865, 'recall': 0.2022, 'precision': 0.1731}
+idx=45, metric_dict={'f1': 0.1846, 'recall': 0.2, 'precision': 0.1714}
+idx=46, metric_dict={'f1': 0.1919, 'recall': 0.2088, 'precision': 0.1776}
+idx=47, metric_dict={'f1': 0.2286, 'recall': 0.2474, 'precision': 0.2124}
+idx=48, metric_dict={'f1': 0.2342, 'recall': 0.2626, 'precision': 0.2114}
+idx=49, metric_dict={'f1': 0.2533, 'recall': 0.2843, 'precision': 0.2283}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 1.0, 'recall': 1.0, 'precision': 1.0}
+idx=1, metric_dict={'f1': 0.4444, 'recall': 0.6667, 'precision': 0.3333}
+idx=2, metric_dict={'f1': 0.3636, 'recall': 0.5, 'precision': 0.2857}
+idx=3, metric_dict={'f1': 0.4615, 'recall': 0.6, 'precision': 0.375}
+idx=4, metric_dict={'f1': 0.4444, 'recall': 0.4444, 'precision': 0.4444}
+idx=5, metric_dict={'f1': 0.5, 'recall': 0.5, 'precision': 0.5}
+idx=6, metric_dict={'f1': 0.5455, 'recall': 0.5455, 'precision': 0.5455}
+idx=7, metric_dict={'f1': 0.4138, 'recall': 0.4, 'precision': 0.4286}
+idx=8, metric_dict={'f1': 0.4516, 'recall': 0.4375, 'precision': 0.4667}
+idx=9, metric_dict={'f1': 0.4118, 'recall': 0.4118, 'precision': 0.4118}
+idx=10, metric_dict={'f1': 0.4324, 'recall': 0.4211, 'precision': 0.4444}
+idx=11, metric_dict={'f1': 0.45, 'recall': 0.45, 'precision': 0.45}
+idx=12, metric_dict={'f1': 0.375, 'recall': 0.375, 'precision': 0.375}
+idx=13, metric_dict={'f1': 0.3509, 'recall': 0.3846, 'precision': 0.3226}
+idx=14, metric_dict={'f1': 0.339, 'recall': 0.3704, 'precision': 0.3125}
+idx=15, metric_dict={'f1': 0.3125, 'recall': 0.3448, 'precision': 0.2857}
+idx=16, metric_dict={'f1': 0.303, 'recall': 0.3333, 'precision': 0.2778}
+idx=17, metric_dict={'f1': 0.3784, 'recall': 0.4118, 'precision': 0.35}
+idx=18, metric_dict={'f1': 0.3457, 'recall': 0.3784, 'precision': 0.3182}
+idx=19, metric_dict={'f1': 0.3218, 'recall': 0.359, 'precision': 0.2917}
+idx=20, metric_dict={'f1': 0.3371, 'recall': 0.375, 'precision': 0.3061}
+idx=21, metric_dict={'f1': 0.3333, 'recall': 0.3659, 'precision': 0.3061} - ERR
+idx=22, metric_dict={'f1': 0.3579, 'recall': 0.3953, 'precision': 0.3269}
+idx=23, metric_dict={'f1': 0.3469, 'recall': 0.3864, 'precision': 0.3148}
+idx=24, metric_dict={'f1': 0.3725, 'recall': 0.413, 'precision': 0.3393}
+idx=25, metric_dict={'f1': 0.3738, 'recall': 0.4082, 'precision': 0.3448}
+idx=26, metric_dict={'f1': 0.4071, 'recall': 0.4423, 'precision': 0.377}
+idx=27, metric_dict={'f1': 0.3966, 'recall': 0.4259, 'precision': 0.371}
+idx=28, metric_dict={'f1': 0.3802, 'recall': 0.4107, 'precision': 0.3538}
+idx=29, metric_dict={'f1': 0.3622, 'recall': 0.3898, 'precision': 0.3382}
+idx=30, metric_dict={'f1': 0.3538, 'recall': 0.3833, 'precision': 0.3286}
+idx=31, metric_dict={'f1': 0.3433, 'recall': 0.371, 'precision': 0.3194}
+idx=32, metric_dict={'f1': 0.3504, 'recall': 0.381, 'precision': 0.3243}
+idx=33, metric_dict={'f1': 0.3571, 'recall': 0.3906, 'precision': 0.3289}
+idx=34, metric_dict={'f1': 0.3546, 'recall': 0.3846, 'precision': 0.3289} - ERR
+idx=35, metric_dict={'f1': 0.3611, 'recall': 0.3939, 'precision': 0.3333}
+idx=36, metric_dict={'f1': 0.3562, 'recall': 0.3881, 'precision': 0.3291}
+idx=37, metric_dict={'f1': 0.3514, 'recall': 0.3824, 'precision': 0.325}
+idx=38, metric_dict={'f1': 0.36, 'recall': 0.3913, 'precision': 0.3333}
+idx=39, metric_dict={'f1': 0.3553, 'recall': 0.3803, 'precision': 0.3333} - ERR
+idx=40, metric_dict={'f1': 0.3214, 'recall': 0.3418, 'precision': 0.3034}
+idx=41, metric_dict={'f1': 0.3294, 'recall': 0.35, 'precision': 0.3111}
+idx=42, metric_dict={'f1': 0.32, 'recall': 0.3457, 'precision': 0.2979}
+idx=43, metric_dict={'f1': 0.3164, 'recall': 0.3415, 'precision': 0.2947}
+idx=44, metric_dict={'f1': 0.3128, 'recall': 0.3373, 'precision': 0.2917}
+idx=45, metric_dict={'f1': 0.3094, 'recall': 0.3333, 'precision': 0.2887}
+idx=46, metric_dict={'f1': 0.3135, 'recall': 0.3412, 'precision': 0.29}
+idx=47, metric_dict={'f1': 0.3175, 'recall': 0.3488, 'precision': 0.2913}
+idx=48, metric_dict={'f1': 0.3316, 'recall': 0.3636, 'precision': 0.3048}
+idx=49, metric_dict={'f1': 0.3434, 'recall': 0.3736, 'precision': 0.3178}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_redux.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:01, 28.31 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.3434, 'recall': 0.3736, 'precision': 0.3178}
+
+==========================================================================================================================================
+
+AGENTRE 
+
+# Attempt 1 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 2, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': False}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': False, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0} - ERR
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=6, metric_dict={'f1': 0.1053, 'recall': 0.0909, 'precision': 0.125}
+idx=7, metric_dict={'f1': 0.15, 'recall': 0.1304, 'precision': 0.1765}
+idx=8, metric_dict={'f1': 0.3793, 'recall': 0.3548, 'precision': 0.4074}
+idx=9, metric_dict={'f1': 0.3667, 'recall': 0.3438, 'precision': 0.3929}
+idx=10, metric_dict={'f1': 0.3548, 'recall': 0.3333, 'precision': 0.3793}
+idx=11, metric_dict={'f1': 0.3636, 'recall': 0.3333, 'precision': 0.4}
+idx=12, metric_dict={'f1': 0.3714, 'recall': 0.3421, 'precision': 0.4062}
+idx=13, metric_dict={'f1': 0.3662, 'recall': 0.3333, 'precision': 0.4062} - ERR
+idx=14, metric_dict={'f1': 0.3562, 'recall': 0.325, 'precision': 0.3939}
+idx=15, metric_dict={'f1': 0.3733, 'recall': 0.3415, 'precision': 0.4118}
+idx=16, metric_dict={'f1': 0.3544, 'recall': 0.3256, 'precision': 0.3889}
+idx=17, metric_dict={'f1': 0.35, 'recall': 0.3182, 'precision': 0.3889}
+idx=18, metric_dict={'f1': 0.4421, 'recall': 0.4118, 'precision': 0.4773}
+idx=19, metric_dict={'f1': 0.4444, 'recall': 0.4231, 'precision': 0.4681}
+idx=20, metric_dict={'f1': 0.4314, 'recall': 0.4151, 'precision': 0.449}
+idx=21, metric_dict={'f1': 0.4182, 'recall': 0.4259, 'precision': 0.4107}
+idx=22, metric_dict={'f1': 0.4107, 'recall': 0.4182, 'precision': 0.4035}
+idx=23, metric_dict={'f1': 0.4211, 'recall': 0.4286, 'precision': 0.4138}
+idx=24, metric_dict={'f1': 0.4, 'recall': 0.4068, 'precision': 0.3934}
+idx=25, metric_dict={'f1': 0.3934, 'recall': 0.4, 'precision': 0.3871}
+idx=26, metric_dict={'f1': 0.3968, 'recall': 0.4032, 'precision': 0.3906}
+idx=27, metric_dict={'f1': 0.4031, 'recall': 0.4127, 'precision': 0.3939}
+idx=28, metric_dict={'f1': 0.4122, 'recall': 0.4219, 'precision': 0.403}
+idx=29, metric_dict={'f1': 0.4211, 'recall': 0.4308, 'precision': 0.4118}
+idx=30, metric_dict={'f1': 0.4225, 'recall': 0.4286, 'precision': 0.4167}
+idx=31, metric_dict={'f1': 0.4533, 'recall': 0.4595, 'precision': 0.4474}
+idx=32, metric_dict={'f1': 0.4503, 'recall': 0.4533, 'precision': 0.4474} - ERR
+idx=33, metric_dict={'f1': 0.4586, 'recall': 0.4675, 'precision': 0.45}
+idx=34, metric_dict={'f1': 0.4528, 'recall': 0.4615, 'precision': 0.4444}
+idx=35, metric_dict={'f1': 0.4472, 'recall': 0.4557, 'precision': 0.439}
+idx=36, metric_dict={'f1': 0.4417, 'recall': 0.45, 'precision': 0.4337}
+idx=37, metric_dict={'f1': 0.4524, 'recall': 0.4634, 'precision': 0.4419}
+idx=38, metric_dict={'f1': 0.4561, 'recall': 0.4699, 'precision': 0.4432}
+idx=39, metric_dict={'f1': 0.4509, 'recall': 0.4643, 'precision': 0.4382}
+idx=40, metric_dict={'f1': 0.4483, 'recall': 0.4588, 'precision': 0.4382}
+idx=41, metric_dict={'f1': 0.4382, 'recall': 0.4535, 'precision': 0.4239}
+idx=42, metric_dict={'f1': 0.4333, 'recall': 0.4483, 'precision': 0.4194}
+idx=43, metric_dict={'f1': 0.4262, 'recall': 0.4432, 'precision': 0.4105}
+idx=44, metric_dict={'f1': 0.4324, 'recall': 0.4494, 'precision': 0.4167}
+idx=45, metric_dict={'f1': 0.4278, 'recall': 0.4444, 'precision': 0.4124}
+idx=46, metric_dict={'f1': 0.4316, 'recall': 0.4505, 'precision': 0.4141}
+idx=47, metric_dict={'f1': 0.4554, 'recall': 0.4742, 'precision': 0.4381}
+idx=48, metric_dict={'f1': 0.4434, 'recall': 0.4747, 'precision': 0.4159}
+idx=49, metric_dict={'f1': 0.4404, 'recall': 0.4706, 'precision': 0.4138}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 0.8, 'recall': 1.0, 'precision': 0.6667}
+idx=1, metric_dict={'f1': 0.4, 'recall': 0.6667, 'precision': 0.2857}
+idx=2, metric_dict={'f1': 0.5, 'recall': 0.75, 'precision': 0.375}
+idx=3, metric_dict={'f1': 0.4615, 'recall': 0.6, 'precision': 0.375} - ERR
+idx=4, metric_dict={'f1': 0.3529, 'recall': 0.3333, 'precision': 0.375} - ERR
+idx=5, metric_dict={'f1': 0.4211, 'recall': 0.4, 'precision': 0.4444}
+idx=6, metric_dict={'f1': 0.4545, 'recall': 0.4545, 'precision': 0.4545}
+idx=7, metric_dict={'f1': 0.3333, 'recall': 0.3333, 'precision': 0.3333}
+idx=8, metric_dict={'f1': 0.375, 'recall': 0.375, 'precision': 0.375}
+idx=9, metric_dict={'f1': 0.3636, 'recall': 0.3529, 'precision': 0.375} - ERR
+idx=10, metric_dict={'f1': 0.4324, 'recall': 0.4211, 'precision': 0.4444}
+idx=11, metric_dict={'f1': 0.4103, 'recall': 0.4, 'precision': 0.4211}
+idx=12, metric_dict={'f1': 0.5106, 'recall': 0.5, 'precision': 0.5217}
+idx=13, metric_dict={'f1': 0.4643, 'recall': 0.5, 'precision': 0.4333}
+idx=14, metric_dict={'f1': 0.4828, 'recall': 0.5185, 'precision': 0.4516}
+idx=15, metric_dict={'f1': 0.4444, 'recall': 0.4828, 'precision': 0.4118}
+idx=16, metric_dict={'f1': 0.4375, 'recall': 0.4667, 'precision': 0.4118} - ERR
+idx=17, metric_dict={'f1': 0.5, 'recall': 0.5294, 'precision': 0.4737}
+idx=18, metric_dict={'f1': 0.45, 'recall': 0.4865, 'precision': 0.4186}
+idx=19, metric_dict={'f1': 0.4762, 'recall': 0.5128, 'precision': 0.4444}
+idx=20, metric_dict={'f1': 0.4884, 'recall': 0.525, 'precision': 0.4565}
+idx=21, metric_dict={'f1': 0.4944, 'recall': 0.5366, 'precision': 0.4583}
+idx=22, metric_dict={'f1': 0.4835, 'recall': 0.5116, 'precision': 0.4583} - ERR
+idx=23, metric_dict={'f1': 0.4783, 'recall': 0.5, 'precision': 0.4583} - ERR
+idx=24, metric_dict={'f1': 0.5, 'recall': 0.5217, 'precision': 0.48}
+idx=25, metric_dict={'f1': 0.495, 'recall': 0.5102, 'precision': 0.4808}
+idx=26, metric_dict={'f1': 0.5234, 'recall': 0.5385, 'precision': 0.5091}
+idx=27, metric_dict={'f1': 0.5091, 'recall': 0.5185, 'precision': 0.5}
+idx=28, metric_dict={'f1': 0.487, 'recall': 0.5, 'precision': 0.4746}
+idx=29, metric_dict={'f1': 0.5124, 'recall': 0.5254, 'precision': 0.5}
+idx=30, metric_dict={'f1': 0.5041, 'recall': 0.5167, 'precision': 0.4921}
+idx=31, metric_dict={'f1': 0.5197, 'recall': 0.5323, 'precision': 0.5077}
+idx=32, metric_dict={'f1': 0.5156, 'recall': 0.5238, 'precision': 0.5077} - ERR
+idx=33, metric_dict={'f1': 0.5191, 'recall': 0.5312, 'precision': 0.5075}
+idx=34, metric_dict={'f1': 0.5263, 'recall': 0.5385, 'precision': 0.5147}
+idx=35, metric_dict={'f1': 0.5224, 'recall': 0.5303, 'precision': 0.5147} - ERR
+idx=36, metric_dict={'f1': 0.5255, 'recall': 0.5373, 'precision': 0.5143}
+idx=37, metric_dict={'f1': 0.5217, 'recall': 0.5294, 'precision': 0.5143} - ERR
+idx=38, metric_dict={'f1': 0.5286, 'recall': 0.5362, 'precision': 0.5211}
+idx=39, metric_dict={'f1': 0.5211, 'recall': 0.5211, 'precision': 0.5211} - ERR
+idx=40, metric_dict={'f1': 0.4933, 'recall': 0.4684, 'precision': 0.5211} - ERR
+idx=41, metric_dict={'f1': 0.5, 'recall': 0.475, 'precision': 0.5278}
+idx=42, metric_dict={'f1': 0.4968, 'recall': 0.4815, 'precision': 0.5132}
+idx=43, metric_dict={'f1': 0.4906, 'recall': 0.4756, 'precision': 0.5065}
+idx=44, metric_dict={'f1': 0.4969, 'recall': 0.4819, 'precision': 0.5128}
+idx=45, metric_dict={'f1': 0.4908, 'recall': 0.4762, 'precision': 0.5063}
+idx=46, metric_dict={'f1': 0.494, 'recall': 0.4824, 'precision': 0.5062}
+idx=47, metric_dict={'f1': 0.491, 'recall': 0.4767, 'precision': 0.5062} - ERR
+idx=48, metric_dict={'f1': 0.5029, 'recall': 0.4886, 'precision': 0.5181}
+idx=49, metric_dict={'f1': 0.4886, 'recall': 0.4725, 'precision': 0.5059}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:04, 10.07 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.4886, 'recall': 0.4725, 'precision': 0.5059}
+
+==========================================================================================================================================
+
+# Attempt 2 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 2, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': False}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': False, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0} - ERR
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0} - ERR
+idx=6, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0} - ERR
+idx=7, metric_dict={'f1': 0.0571, 'recall': 0.0435, 'precision': 0.0833}
+idx=8, metric_dict={'f1': 0.0377, 'recall': 0.0323, 'precision': 0.0455}
+idx=9, metric_dict={'f1': 0.0727, 'recall': 0.0625, 'precision': 0.087}
+idx=10, metric_dict={'f1': 0.0702, 'recall': 0.0606, 'precision': 0.0833}
+idx=11, metric_dict={'f1': 0.0984, 'recall': 0.0833, 'precision': 0.12}
+idx=12, metric_dict={'f1': 0.1231, 'recall': 0.1053, 'precision': 0.1481}
+idx=13, metric_dict={'f1': 0.1194, 'recall': 0.1026, 'precision': 0.1429}
+idx=14, metric_dict={'f1': 0.1159, 'recall': 0.1, 'precision': 0.1379}
+idx=15, metric_dict={'f1': 0.1408, 'recall': 0.122, 'precision': 0.1667}
+idx=16, metric_dict={'f1': 0.137, 'recall': 0.1163, 'precision': 0.1667} - ERR
+idx=17, metric_dict={'f1': 0.1316, 'recall': 0.1136, 'precision': 0.1562}
+idx=18, metric_dict={'f1': 0.1205, 'recall': 0.098, 'precision': 0.1562} - ERR
+idx=19, metric_dict={'f1': 0.1379, 'recall': 0.1154, 'precision': 0.1714}
+idx=20, metric_dict={'f1': 0.1348, 'recall': 0.1132, 'precision': 0.1667}
+idx=21, metric_dict={'f1': 0.1414, 'recall': 0.1296, 'precision': 0.1556}
+idx=22, metric_dict={'f1': 0.1386, 'recall': 0.1273, 'precision': 0.1522}
+idx=23, metric_dict={'f1': 0.1553, 'recall': 0.1429, 'precision': 0.1702}
+idx=24, metric_dict={'f1': 0.1651, 'recall': 0.1525, 'precision': 0.18}
+idx=25, metric_dict={'f1': 0.1622, 'recall': 0.15, 'precision': 0.1765}
+idx=26, metric_dict={'f1': 0.1565, 'recall': 0.1452, 'precision': 0.1698}
+idx=27, metric_dict={'f1': 0.1695, 'recall': 0.1587, 'precision': 0.1818}
+idx=28, metric_dict={'f1': 0.1833, 'recall': 0.1719, 'precision': 0.1964}
+idx=29, metric_dict={'f1': 0.1967, 'recall': 0.1846, 'precision': 0.2105}
+idx=30, metric_dict={'f1': 0.2137, 'recall': 0.2, 'precision': 0.2295}
+idx=31, metric_dict={'f1': 0.259, 'recall': 0.2432, 'precision': 0.2769}
+idx=32, metric_dict={'f1': 0.2695, 'recall': 0.2533, 'precision': 0.2879}
+idx=33, metric_dict={'f1': 0.2585, 'recall': 0.2468, 'precision': 0.2714}
+idx=34, metric_dict={'f1': 0.2533, 'recall': 0.2436, 'precision': 0.2639}
+idx=35, metric_dict={'f1': 0.2484, 'recall': 0.2405, 'precision': 0.2568}
+idx=36, metric_dict={'f1': 0.2452, 'recall': 0.2375, 'precision': 0.2533}
+idx=37, metric_dict={'f1': 0.242, 'recall': 0.2317, 'precision': 0.2533} - ERR
+idx=38, metric_dict={'f1': 0.25, 'recall': 0.241, 'precision': 0.2597}
+idx=39, metric_dict={'f1': 0.2469, 'recall': 0.2381, 'precision': 0.2564}
+idx=40, metric_dict={'f1': 0.2454, 'recall': 0.2353, 'precision': 0.2564}
+idx=41, metric_dict={'f1': 0.2515, 'recall': 0.2442, 'precision': 0.2593}
+idx=42, metric_dict={'f1': 0.2604, 'recall': 0.2529, 'precision': 0.2683}
+idx=43, metric_dict={'f1': 0.269, 'recall': 0.2614, 'precision': 0.2771}
+idx=44, metric_dict={'f1': 0.2659, 'recall': 0.2584, 'precision': 0.2738}
+idx=45, metric_dict={'f1': 0.2743, 'recall': 0.2667, 'precision': 0.2824}
+idx=46, metric_dict={'f1': 0.2809, 'recall': 0.2747, 'precision': 0.2874}
+idx=47, metric_dict={'f1': 0.3158, 'recall': 0.3093, 'precision': 0.3226}
+idx=48, metric_dict={'f1': 0.297, 'recall': 0.303, 'precision': 0.2913}
+idx=49, metric_dict={'f1': 0.2981, 'recall': 0.3039, 'precision': 0.2925}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 1.0, 'recall': 1.0, 'precision': 1.0}
+idx=1, metric_dict={'f1': 0.5, 'recall': 0.6667, 'precision': 0.4}
+idx=2, metric_dict={'f1': 0.6, 'recall': 0.75, 'precision': 0.5}
+idx=3, metric_dict={'f1': 0.5455, 'recall': 0.6, 'precision': 0.5} - ERR
+idx=4, metric_dict={'f1': 0.5882, 'recall': 0.5556, 'precision': 0.625}
+idx=5, metric_dict={'f1': 0.6316, 'recall': 0.6, 'precision': 0.6667}
+idx=6, metric_dict={'f1': 0.6667, 'recall': 0.6364, 'precision': 0.7}
+idx=7, metric_dict={'f1': 0.4828, 'recall': 0.4667, 'precision': 0.5}
+idx=8, metric_dict={'f1': 0.5161, 'recall': 0.5, 'precision': 0.5333}
+idx=9, metric_dict={'f1': 0.5294, 'recall': 0.5294, 'precision': 0.5294}
+idx=10, metric_dict={'f1': 0.5789, 'recall': 0.5789, 'precision': 0.5789}
+idx=11, metric_dict={'f1': 0.5366, 'recall': 0.55, 'precision': 0.5238}
+idx=12, metric_dict={'f1': 0.6122, 'recall': 0.625, 'precision': 0.6}
+idx=13, metric_dict={'f1': 0.5517, 'recall': 0.6154, 'precision': 0.5}
+idx=14, metric_dict={'f1': 0.5667, 'recall': 0.6296, 'precision': 0.5152}
+idx=15, metric_dict={'f1': 0.5231, 'recall': 0.5862, 'precision': 0.4722}
+idx=16, metric_dict={'f1': 0.5075, 'recall': 0.5667, 'precision': 0.4595}
+idx=17, metric_dict={'f1': 0.56, 'recall': 0.6176, 'precision': 0.5122}
+idx=18, metric_dict={'f1': 0.5783, 'recall': 0.6486, 'precision': 0.5217}
+idx=19, metric_dict={'f1': 0.5455, 'recall': 0.6154, 'precision': 0.4898}
+idx=20, metric_dict={'f1': 0.5393, 'recall': 0.6, 'precision': 0.4898} - ERR
+idx=21, metric_dict={'f1': 0.5435, 'recall': 0.6098, 'precision': 0.4902}
+idx=22, metric_dict={'f1': 0.5567, 'recall': 0.6279, 'precision': 0.5}
+idx=23, metric_dict={'f1': 0.5455, 'recall': 0.6136, 'precision': 0.4909}
+idx=24, metric_dict={'f1': 0.5631, 'recall': 0.6304, 'precision': 0.5088}
+idx=25, metric_dict={'f1': 0.537, 'recall': 0.5918, 'precision': 0.4915}
+idx=26, metric_dict={'f1': 0.5225, 'recall': 0.5577, 'precision': 0.4915} - ERR
+idx=27, metric_dict={'f1': 0.5133, 'recall': 0.537, 'precision': 0.4915} - ERR
+idx=28, metric_dict={'f1': 0.4915, 'recall': 0.5179, 'precision': 0.4677}
+idx=29, metric_dict={'f1': 0.5161, 'recall': 0.5424, 'precision': 0.4923}
+idx=30, metric_dict={'f1': 0.5079, 'recall': 0.5333, 'precision': 0.4848}
+idx=31, metric_dict={'f1': 0.4923, 'recall': 0.5161, 'precision': 0.4706}
+idx=32, metric_dict={'f1': 0.4885, 'recall': 0.5079, 'precision': 0.4706} - ERR
+idx=33, metric_dict={'f1': 0.4925, 'recall': 0.5156, 'precision': 0.4714}
+idx=34, metric_dict={'f1': 0.5, 'recall': 0.5231, 'precision': 0.4789}
+idx=35, metric_dict={'f1': 0.5036, 'recall': 0.5303, 'precision': 0.4795}
+idx=36, metric_dict={'f1': 0.5, 'recall': 0.5224, 'precision': 0.4795} - ERR
+idx=37, metric_dict={'f1': 0.4965, 'recall': 0.5147, 'precision': 0.4795} - ERR
+idx=38, metric_dict={'f1': 0.5035, 'recall': 0.5217, 'precision': 0.4865}
+idx=39, metric_dict={'f1': 0.4966, 'recall': 0.507, 'precision': 0.4865} - ERR
+idx=40, metric_dict={'f1': 0.5342, 'recall': 0.5443, 'precision': 0.5244}
+idx=41, metric_dict={'f1': 0.5399, 'recall': 0.55, 'precision': 0.5301}
+idx=42, metric_dict={'f1': 0.5366, 'recall': 0.5432, 'precision': 0.5301} - ERR
+idx=43, metric_dict={'f1': 0.5422, 'recall': 0.5488, 'precision': 0.5357}
+idx=44, metric_dict={'f1': 0.5476, 'recall': 0.5542, 'precision': 0.5412}
+idx=45, metric_dict={'f1': 0.5444, 'recall': 0.5476, 'precision': 0.5412} - ERR
+idx=46, metric_dict={'f1': 0.5465, 'recall': 0.5529, 'precision': 0.5402}
+idx=47, metric_dict={'f1': 0.5341, 'recall': 0.5465, 'precision': 0.5222}
+idx=48, metric_dict={'f1': 0.5444, 'recall': 0.5568, 'precision': 0.5326}
+idx=49, metric_dict={'f1': 0.5514, 'recall': 0.5604, 'precision': 0.5426}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:03, 16.33 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.5514, 'recall': 0.5604, 'precision': 0.5426}
+
+==========================================================================================================================================
+
+# Attempt 3 
+
+{'model': {'name': 'react_memory', 'max_iterations': 5, 'max_retry': 5, 'use_summary': True, 'num_pre_history': 2, 'debug': True, 'logname': 'react_memory'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveRelevantInfo': {'open': False}}, 'train': {'if_train': True, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic', 'code_version': 'AgentRE'}, 'memory': {'CorrectMemory': {'open': True, 'mode': 'bge', 'k': 5, 'num_samples_init': 0}, 'ReflexionMemory': {'open': False, 'mode': 'bge', 'k': 5}, 'IncorrectMemory': {'open': False, 'mode': 'bge', 'k': 5}}}
+Start training with 50 samples (indices 0..49).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0} - ERR
+idx=3, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=4, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0} 
+idx=5, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0} - ERR
+idx=6, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0} - ERR
+idx=7, metric_dict={'f1': 0.0556, 'recall': 0.0435, 'precision': 0.0769}
+idx=8, metric_dict={'f1': 0.3396, 'recall': 0.2903, 'precision': 0.4091}
+idx=9, metric_dict={'f1': 0.3636, 'recall': 0.3125, 'precision': 0.4348} 
+idx=10, metric_dict={'f1': 0.3509, 'recall': 0.303, 'precision': 0.4167}
+idx=11, metric_dict={'f1': 0.3333, 'recall': 0.2778, 'precision': 0.4167} - ERR
+idx=12, metric_dict={'f1': 0.3438, 'recall': 0.2895, 'precision': 0.4231}
+idx=13, metric_dict={'f1': 0.3385, 'recall': 0.2821, 'precision': 0.4231}
+idx=14, metric_dict={'f1': 0.3284, 'recall': 0.275, 'precision': 0.4074}
+idx=15, metric_dict={'f1': 0.3478, 'recall': 0.2927, 'precision': 0.4286}
+idx=16, metric_dict={'f1': 0.3288, 'recall': 0.2791, 'precision': 0.4}
+idx=17, metric_dict={'f1': 0.3243, 'recall': 0.2727, 'precision': 0.4}
+idx=18, metric_dict={'f1': 0.427, 'recall': 0.3725, 'precision': 0.5}
+idx=19, metric_dict={'f1': 0.4301, 'recall': 0.3846, 'precision': 0.4878}
+idx=20, metric_dict={'f1': 0.4211, 'recall': 0.3774, 'precision': 0.4762}
+idx=21, metric_dict={'f1': 0.4124, 'recall': 0.3704, 'precision': 0.4651}
+idx=22, metric_dict={'f1': 0.404, 'recall': 0.3636, 'precision': 0.4545}
+idx=23, metric_dict={'f1': 0.4158, 'recall': 0.375, 'precision': 0.4667}
+idx=24, metric_dict={'f1': 0.4112, 'recall': 0.3729, 'precision': 0.4583}
+idx=25, metric_dict={'f1': 0.4037, 'recall': 0.3667, 'precision': 0.449}
+idx=26, metric_dict={'f1': 0.3894, 'recall': 0.3548, 'precision': 0.4314}
+idx=27, metric_dict={'f1': 0.3966, 'recall': 0.3651, 'precision': 0.434}
+idx=28, metric_dict={'f1': 0.4068, 'recall': 0.375, 'precision': 0.4444}
+idx=29, metric_dict={'f1': 0.4034, 'recall': 0.3692, 'precision': 0.4444} - ERR
+idx=30, metric_dict={'f1': 0.4062, 'recall': 0.3714, 'precision': 0.4483}
+idx=31, metric_dict={'f1': 0.4412, 'recall': 0.4054, 'precision': 0.4839}
+idx=32, metric_dict={'f1': 0.4493, 'recall': 0.4133, 'precision': 0.4921}
+idx=33, metric_dict={'f1': 0.4306, 'recall': 0.4026, 'precision': 0.4627}
+idx=34, metric_dict={'f1': 0.4218, 'recall': 0.3974, 'precision': 0.4493}
+idx=35, metric_dict={'f1': 0.4189, 'recall': 0.3924, 'precision': 0.4493} - ERR
+idx=36, metric_dict={'f1': 0.4161, 'recall': 0.3875, 'precision': 0.4493} - ERR
+idx=37, metric_dict={'f1': 0.4314, 'recall': 0.4024, 'precision': 0.4648}
+idx=38, metric_dict={'f1': 0.4359, 'recall': 0.4096, 'precision': 0.4658}
+idx=39, metric_dict={'f1': 0.443, 'recall': 0.4167, 'precision': 0.473}
+idx=40, metric_dict={'f1': 0.4403, 'recall': 0.4118, 'precision': 0.473} 
+idx=41, metric_dict={'f1': 0.4375, 'recall': 0.407, 'precision': 0.473} - ERR
+idx=42, metric_dict={'f1': 0.4321, 'recall': 0.4023, 'precision': 0.4667}
+idx=43, metric_dict={'f1': 0.4242, 'recall': 0.3977, 'precision': 0.4545}
+idx=44, metric_dict={'f1': 0.4311, 'recall': 0.4045, 'precision': 0.4615}
+idx=45, metric_dict={'f1': 0.426, 'recall': 0.4, 'precision': 0.4557}
+idx=46, metric_dict={'f1': 0.4302, 'recall': 0.4066, 'precision': 0.4568}
+idx=47, metric_dict={'f1': 0.4481, 'recall': 0.4227, 'precision': 0.4767}
+idx=48, metric_dict={'f1': 0.4432, 'recall': 0.4141, 'precision': 0.4767} - ERR
+idx=49, metric_dict={'f1': 0.4421, 'recall': 0.4118, 'precision': 0.4773}
+Finish training with 50 samples.
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE_train.json...
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0} - ERR
+idx=1, metric_dict={'f1': 0, 'recall': 0.0, 'precision': 0.0}
+idx=2, metric_dict={'f1': 0.25, 'recall': 0.25, 'precision': 0.25}
+idx=3, metric_dict={'f1': 0.4, 'recall': 0.4, 'precision': 0.4}
+idx=4, metric_dict={'f1': 0.2857, 'recall': 0.2222, 'precision': 0.4} - ERR
+idx=5, metric_dict={'f1': 0.375, 'recall': 0.3, 'precision': 0.5}
+idx=6, metric_dict={'f1': 0.4444, 'recall': 0.3636, 'precision': 0.5714}
+idx=7, metric_dict={'f1': 0.3077, 'recall': 0.2667, 'precision': 0.3636}
+idx=8, metric_dict={'f1': 0.3571, 'recall': 0.3125, 'precision': 0.4167}
+idx=9, metric_dict={'f1': 0.3871, 'recall': 0.3529, 'precision': 0.4286}
+idx=10, metric_dict={'f1': 0.4571, 'recall': 0.4211, 'precision': 0.5}
+idx=11, metric_dict={'f1': 0.4444, 'recall': 0.4, 'precision': 0.5} - ERR
+idx=12, metric_dict={'f1': 0.5455, 'recall': 0.5, 'precision': 0.6}
+idx=13, metric_dict={'f1': 0.4815, 'recall': 0.5, 'precision': 0.4643} 
+idx=14, metric_dict={'f1': 0.5, 'recall': 0.5185, 'precision': 0.4828}
+idx=15, metric_dict={'f1': 0.5246, 'recall': 0.5517, 'precision': 0.5}
+idx=16, metric_dict={'f1': 0.5079, 'recall': 0.5333, 'precision': 0.4848}
+idx=17, metric_dict={'f1': 0.5634, 'recall': 0.5882, 'precision': 0.5405}
+idx=18, metric_dict={'f1': 0.5823, 'recall': 0.6216, 'precision': 0.5476}
+idx=19, metric_dict={'f1': 0.5476, 'recall': 0.5897, 'precision': 0.5111}
+idx=20, metric_dict={'f1': 0.5412, 'recall': 0.575, 'precision': 0.5111} - ERR
+idx=21, metric_dict={'f1': 0.5349, 'recall': 0.561, 'precision': 0.5111} - ERR
+idx=22, metric_dict={'f1': 0.5227, 'recall': 0.5349, 'precision': 0.5111} - ERR
+idx=23, metric_dict={'f1': 0.5169, 'recall': 0.5227, 'precision': 0.5111} - ERR
+idx=24, metric_dict={'f1': 0.5055, 'recall': 0.5, 'precision': 0.5111} - ERR
+idx=25, metric_dict={'f1': 0.4742, 'recall': 0.4694, 'precision': 0.4792}
+idx=26, metric_dict={'f1': 0.46, 'recall': 0.4423, 'precision': 0.4792} - ERR
+idx=27, metric_dict={'f1': 0.451, 'recall': 0.4259, 'precision': 0.4792} - ERR
+idx=28, metric_dict={'f1': 0.4299, 'recall': 0.4107, 'precision': 0.451}
+idx=29, metric_dict={'f1': 0.4602, 'recall': 0.4407, 'precision': 0.4815}
+idx=30, metric_dict={'f1': 0.4522, 'recall': 0.4333, 'precision': 0.4727}
+idx=31, metric_dict={'f1': 0.4444, 'recall': 0.4194, 'precision': 0.4727} - ERR
+idx=32, metric_dict={'f1': 0.4194, 'recall': 0.4127, 'precision': 0.4262}
+idx=33, metric_dict={'f1': 0.4252, 'recall': 0.4219, 'precision': 0.4286}
+idx=34, metric_dict={'f1': 0.4219, 'recall': 0.4154, 'precision': 0.4286} - ERR
+idx=35, metric_dict={'f1': 0.4275, 'recall': 0.4242, 'precision': 0.4308}
+idx=36, metric_dict={'f1': 0.4211, 'recall': 0.4179, 'precision': 0.4242}
+idx=37, metric_dict={'f1': 0.4179, 'recall': 0.4118, 'precision': 0.4242} - ERR
+idx=38, metric_dict={'f1': 0.4265, 'recall': 0.4203, 'precision': 0.4328}
+idx=39, metric_dict={'f1': 0.4203, 'recall': 0.4085, 'precision': 0.4328} 
+idx=40, metric_dict={'f1': 0.3973, 'recall': 0.3671, 'precision': 0.4328} - ERR
+idx=41, metric_dict={'f1': 0.3946, 'recall': 0.3625, 'precision': 0.4328} - ERR
+idx=42, metric_dict={'f1': 0.3974, 'recall': 0.3704, 'precision': 0.4286}
+idx=43, metric_dict={'f1': 0.4052, 'recall': 0.378, 'precision': 0.4366}
+idx=44, metric_dict={'f1': 0.4026, 'recall': 0.3735, 'precision': 0.4366}
+idx=45, metric_dict={'f1': 0.3949, 'recall': 0.369, 'precision': 0.4247}
+idx=46, metric_dict={'f1': 0.3924, 'recall': 0.3647, 'precision': 0.4247} - ERR
+idx=47, metric_dict={'f1': 0.3899, 'recall': 0.3605, 'precision': 0.4247} - ERR
+idx=48, metric_dict={'f1': 0.4049, 'recall': 0.375, 'precision': 0.44}
+idx=49, metric_dict={'f1': 0.3976, 'recall': 0.3626, 'precision': 0.44} - ERR
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_memory_glm-4.7_DuIE2.0_AgentRE.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:03, 16.47 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.3976, 'recall': 0.3626, 'precision': 0.44}
+
+==========================================================================================================================================
+
+
+REACT_FSL 
+
+# Attempt 1 
+
+{'model': {'name': 'react_fsl', 'max_iterations': 5, 'max_retry': 5, 'logname': 'react_fsl'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveExamples': {'open': True, 'mode': 'bge', 'k': 3}}, 'train': {'if_train': False, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic'}}
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 1.0, 'recall': 1.0, 'precision': 1.0}
+idx=1, metric_dict={'f1': 0.5, 'recall': 0.6667, 'precision': 0.4}
+idx=2, metric_dict={'f1': 0.6, 'recall': 0.75, 'precision': 0.5}
+idx=3, metric_dict={'f1': 0.6667, 'recall': 0.8, 'precision': 0.5714}
+idx=4, metric_dict={'f1': 0.6667, 'recall': 0.6667, 'precision': 0.6667}
+idx=5, metric_dict={'f1': 0.7, 'recall': 0.7, 'precision': 0.7}
+idx=6, metric_dict={'f1': 0.6667, 'recall': 0.7273, 'precision': 0.6154}
+idx=7, metric_dict={'f1': 0.5161, 'recall': 0.5333, 'precision': 0.5}
+idx=8, metric_dict={'f1': 0.5455, 'recall': 0.5625, 'precision': 0.5294}
+idx=9, metric_dict={'f1': 0.5556, 'recall': 0.5882, 'precision': 0.5263}
+idx=10, metric_dict={'f1': 0.5641, 'recall': 0.5789, 'precision': 0.55}
+idx=11, metric_dict={'f1': 0.5238, 'recall': 0.55, 'precision': 0.5}
+idx=12, metric_dict={'f1': 0.44, 'recall': 0.4583, 'precision': 0.4231}
+idx=13, metric_dict={'f1': 0.4231, 'recall': 0.4231, 'precision': 0.4231} - ERR 
+idx=14, metric_dict={'f1': 0.4444, 'recall': 0.4444, 'precision': 0.4444}
+idx=15, metric_dict={'f1': 0.4068, 'recall': 0.4138, 'precision': 0.4}
+idx=16, metric_dict={'f1': 0.3934, 'recall': 0.4, 'precision': 0.3871}
+idx=17, metric_dict={'f1': 0.4638, 'recall': 0.4706, 'precision': 0.4571}
+idx=18, metric_dict={'f1': 0.4935, 'recall': 0.5135, 'precision': 0.475}
+idx=19, metric_dict={'f1': 0.5185, 'recall': 0.5385, 'precision': 0.5}
+idx=20, metric_dict={'f1': 0.506, 'recall': 0.525, 'precision': 0.4884}
+idx=21, metric_dict={'f1': 0.5, 'recall': 0.5122, 'precision': 0.4884} - ERR 
+idx=22, metric_dict={'f1': 0.5169, 'recall': 0.5349, 'precision': 0.5}
+idx=23, metric_dict={'f1': 0.5055, 'recall': 0.5227, 'precision': 0.4894}
+idx=24, metric_dict={'f1': 0.5263, 'recall': 0.5435, 'precision': 0.5102}
+idx=25, metric_dict={'f1': 0.5, 'recall': 0.5102, 'precision': 0.4902}
+idx=26, metric_dict={'f1': 0.5283, 'recall': 0.5385, 'precision': 0.5185}
+idx=27, metric_dict={'f1': 0.5185, 'recall': 0.5185, 'precision': 0.5185} - ERR 
+idx=28, metric_dict={'f1': 0.5, 'recall': 0.5, 'precision': 0.5}
+idx=29, metric_dict={'f1': 0.4746, 'recall': 0.4746, 'precision': 0.4746}
+idx=30, metric_dict={'f1': 0.4667, 'recall': 0.4667, 'precision': 0.4667}
+idx=31, metric_dict={'f1': 0.459, 'recall': 0.4516, 'precision': 0.4667} - ERR 
+idx=32, metric_dict={'f1': 0.4531, 'recall': 0.4603, 'precision': 0.4462}
+idx=33, metric_dict={'f1': 0.4615, 'recall': 0.4688, 'precision': 0.4545}
+idx=34, metric_dict={'f1': 0.458, 'recall': 0.4615, 'precision': 0.4545} - ERR 
+idx=35, metric_dict={'f1': 0.4545, 'recall': 0.4545, 'precision': 0.4545} - ERR 
+idx=36, metric_dict={'f1': 0.4478, 'recall': 0.4478, 'precision': 0.4478}
+idx=37, metric_dict={'f1': 0.4412, 'recall': 0.4412, 'precision': 0.4412}
+idx=38, metric_dict={'f1': 0.4493, 'recall': 0.4493, 'precision': 0.4493}
+idx=39, metric_dict={'f1': 0.4429, 'recall': 0.4366, 'precision': 0.4493} - ERR 
+idx=40, metric_dict={'f1': 0.4872, 'recall': 0.481, 'precision': 0.4935}
+idx=41, metric_dict={'f1': 0.4841, 'recall': 0.475, 'precision': 0.4935} - ERR 
+idx=42, metric_dict={'f1': 0.4845, 'recall': 0.4815, 'precision': 0.4875}
+idx=43, metric_dict={'f1': 0.4785, 'recall': 0.4756, 'precision': 0.4815}
+idx=44, metric_dict={'f1': 0.4848, 'recall': 0.4819, 'precision': 0.4878}
+idx=45, metric_dict={'f1': 0.4819, 'recall': 0.4762, 'precision': 0.4878} - ERR 
+idx=46, metric_dict={'f1': 0.4824, 'recall': 0.4824, 'precision': 0.4824}
+idx=47, metric_dict={'f1': 0.4795, 'recall': 0.4767, 'precision': 0.4824} - ERR 
+idx=48, metric_dict={'f1': 0.4828, 'recall': 0.4773, 'precision': 0.4884}
+idx=49, metric_dict={'f1': 0.4916, 'recall': 0.4835, 'precision': 0.5}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_fsl_glm-4.7_DuIE2.0_.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:01, 29.82 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.4916, 'recall': 0.4835, 'precision': 0.5}
+
+10 errors 
+
+==========================================================================================================================================
+
+
+# Attempt 2 
+
+{'model': {'name': 'react_fsl', 'max_iterations': 5, 'max_retry': 5, 'logname': 'react_fsl'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveExamples': {'open': True, 'mode': 'bge', 'k': 3}}, 'train': {'if_train': False, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic'}}
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 1.0, 'recall': 1.0, 'precision': 1.0}
+idx=1, metric_dict={'f1': 0.4444, 'recall': 0.6667, 'precision': 0.3333}
+idx=2, metric_dict={'f1': 0.5455, 'recall': 0.75, 'precision': 0.4286}
+idx=3, metric_dict={'f1': 0.6154, 'recall': 0.8, 'precision': 0.5}
+idx=4, metric_dict={'f1': 0.6316, 'recall': 0.6667, 'precision': 0.6}
+idx=5, metric_dict={'f1': 0.6667, 'recall': 0.7, 'precision': 0.6364}
+idx=6, metric_dict={'f1': 0.64, 'recall': 0.7273, 'precision': 0.5714}
+idx=7, metric_dict={'f1': 0.5517, 'recall': 0.5333, 'precision': 0.5714} - ERR 
+idx=8, metric_dict={'f1': 0.5806, 'recall': 0.5625, 'precision': 0.6}
+idx=9, metric_dict={'f1': 0.5625, 'recall': 0.5294, 'precision': 0.6} - ERR 
+idx=10, metric_dict={'f1': 0.5714, 'recall': 0.5263, 'precision': 0.625}
+idx=11, metric_dict={'f1': 0.5263, 'recall': 0.5, 'precision': 0.5556}
+idx=12, metric_dict={'f1': 0.6087, 'recall': 0.5833, 'precision': 0.6364}
+idx=13, metric_dict={'f1': 0.5833, 'recall': 0.5385, 'precision': 0.6364} - ERR 
+idx=14, metric_dict={'f1': 0.6, 'recall': 0.5556, 'precision': 0.6522}
+idx=15, metric_dict={'f1': 0.5455, 'recall': 0.5172, 'precision': 0.5769}
+idx=16, metric_dict={'f1': 0.5263, 'recall': 0.5, 'precision': 0.5556}
+idx=17, metric_dict={'f1': 0.5846, 'recall': 0.5588, 'precision': 0.6129}
+idx=18, metric_dict={'f1': 0.5205, 'recall': 0.5135, 'precision': 0.5278}
+idx=19, metric_dict={'f1': 0.5455, 'recall': 0.5385, 'precision': 0.5526}
+idx=20, metric_dict={'f1': 0.5316, 'recall': 0.525, 'precision': 0.5385}
+idx=21, metric_dict={'f1': 0.525, 'recall': 0.5122, 'precision': 0.5385} - ERR 
+idx=22, metric_dict={'f1': 0.5412, 'recall': 0.5349, 'precision': 0.5476}
+idx=23, metric_dict={'f1': 0.5287, 'recall': 0.5227, 'precision': 0.5349}
+idx=24, metric_dict={'f1': 0.5495, 'recall': 0.5435, 'precision': 0.5556}
+idx=25, metric_dict={'f1': 0.5155, 'recall': 0.5102, 'precision': 0.5208}
+idx=26, metric_dict={'f1': 0.5437, 'recall': 0.5385, 'precision': 0.549}
+idx=27, metric_dict={'f1': 0.5283, 'recall': 0.5185, 'precision': 0.5385}
+idx=28, metric_dict={'f1': 0.5091, 'recall': 0.5, 'precision': 0.5185}
+idx=29, metric_dict={'f1': 0.5345, 'recall': 0.5254, 'precision': 0.5439}
+idx=30, metric_dict={'f1': 0.5254, 'recall': 0.5167, 'precision': 0.5345}
+idx=31, metric_dict={'f1': 0.541, 'recall': 0.5323, 'precision': 0.55}
+idx=32, metric_dict={'f1': 0.5354, 'recall': 0.5397, 'precision': 0.5312}
+idx=33, metric_dict={'f1': 0.5385, 'recall': 0.5469, 'precision': 0.5303}
+idx=34, metric_dict={'f1': 0.5344, 'recall': 0.5385, 'precision': 0.5303} - ERR 
+idx=35, metric_dict={'f1': 0.5303, 'recall': 0.5303, 'precision': 0.5303} - ERR 
+idx=36, metric_dict={'f1': 0.5224, 'recall': 0.5224, 'precision': 0.5224}
+idx=37, metric_dict={'f1': 0.5147, 'recall': 0.5147, 'precision': 0.5147}
+idx=38, metric_dict={'f1': 0.5217, 'recall': 0.5217, 'precision': 0.5217}
+idx=39, metric_dict={'f1': 0.5143, 'recall': 0.507, 'precision': 0.5217} - ERR 
+idx=40, metric_dict={'f1': 0.5513, 'recall': 0.5443, 'precision': 0.5584}
+idx=41, metric_dict={'f1': 0.5478, 'recall': 0.5375, 'precision': 0.5584} - ERR 
+idx=42, metric_dict={'f1': 0.5443, 'recall': 0.5309, 'precision': 0.5584} - ERR 
+idx=43, metric_dict={'f1': 0.5375, 'recall': 0.5244, 'precision': 0.5513}
+idx=44, metric_dict={'f1': 0.5432, 'recall': 0.5301, 'precision': 0.557}
+idx=45, metric_dict={'f1': 0.5366, 'recall': 0.5238, 'precision': 0.55}
+idx=46, metric_dict={'f1': 0.5389, 'recall': 0.5294, 'precision': 0.5488}
+idx=47, metric_dict={'f1': 0.5357, 'recall': 0.5233, 'precision': 0.5488} - ERR 
+idx=48, metric_dict={'f1': 0.5294, 'recall': 0.5114, 'precision': 0.5488} - ERR 
+idx=49, metric_dict={'f1': 0.5371, 'recall': 0.5165, 'precision': 0.5595}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_fsl_glm-4.7_DuIE2.0_.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:00, 77.84 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.5371, 'recall': 0.5165, 'precision': 0.5595}
+
+
+11 errors 
+
+==========================================================================================================================================
+
+# Attempt 3 
+
+{'model': {'name': 'react_fsl', 'max_iterations': 5, 'max_retry': 5, 'logname': 'react_fsl'}, 'tools': {'Finish': {'open': True}, 'GetTaskDescription': {'open': True}, 'GetRelationDefinition': {'open': True}, 'RetrieveExamples': {'open': True, 'mode': 'bge', 'k': 3}}, 'train': {'if_train': False, 'if_predict': True, 'if_evaluate': True}, 'data': {'type': 're', 'name': 'DuIE2.0', 'language': 'zh', 'num_samples': 100, 'num_samples_index': 1000, 'train_num_samples': 50, 'input_trace': True}, 'llm': {'model_name': 'glm-4.7', 'temperature': 0, 'max_tokens': 4096, 'use_cache': False, 'client': 'academic'}}
+Start predicting with 50 samples (indices 50..99).
+idx=0, metric_dict={'f1': 1.0, 'recall': 1.0, 'precision': 1.0}
+idx=1, metric_dict={'f1': 0.5, 'recall': 0.6667, 'precision': 0.4}
+idx=2, metric_dict={'f1': 0.4, 'recall': 0.5, 'precision': 0.3333}
+idx=3, metric_dict={'f1': 0.5, 'recall': 0.6, 'precision': 0.4286}
+idx=4, metric_dict={'f1': 0.5556, 'recall': 0.5556, 'precision': 0.5556}
+idx=5, metric_dict={'f1': 0.6, 'recall': 0.6, 'precision': 0.6}
+idx=6, metric_dict={'f1': 0.5833, 'recall': 0.6364, 'precision': 0.5385}
+idx=7, metric_dict={'f1': 0.4375, 'recall': 0.4667, 'precision': 0.4118}
+idx=8, metric_dict={'f1': 0.4706, 'recall': 0.5, 'precision': 0.4444}
+idx=9, metric_dict={'f1': 0.4571, 'recall': 0.4706, 'precision': 0.4444} - ERR 
+idx=10, metric_dict={'f1': 0.4324, 'recall': 0.4211, 'precision': 0.4444} - ERR 
+idx=11, metric_dict={'f1': 0.4, 'recall': 0.4, 'precision': 0.4}
+idx=12, metric_dict={'f1': 0.5, 'recall': 0.5, 'precision': 0.5}
+idx=13, metric_dict={'f1': 0.48, 'recall': 0.4615, 'precision': 0.5} - ERR 
+idx=14, metric_dict={'f1': 0.5, 'recall': 0.4815, 'precision': 0.52}
+idx=15, metric_dict={'f1': 0.4815, 'recall': 0.4483, 'precision': 0.52} - ERR 
+idx=16, metric_dict={'f1': 0.4727, 'recall': 0.4333, 'precision': 0.52} - ERR 
+idx=17, metric_dict={'f1': 0.5397, 'recall': 0.5, 'precision': 0.5862}
+idx=18, metric_dict={'f1': 0.5634, 'recall': 0.5405, 'precision': 0.5882}
+idx=19, metric_dict={'f1': 0.5263, 'recall': 0.5128, 'precision': 0.5405}
+idx=20, metric_dict={'f1': 0.5128, 'recall': 0.5, 'precision': 0.5263}
+idx=21, metric_dict={'f1': 0.5, 'recall': 0.4878, 'precision': 0.5128}
+idx=22, metric_dict={'f1': 0.5176, 'recall': 0.5116, 'precision': 0.5238}
+idx=23, metric_dict={'f1': 0.5057, 'recall': 0.5, 'precision': 0.5116}
+idx=24, metric_dict={'f1': 0.5275, 'recall': 0.5217, 'precision': 0.5333}
+idx=25, metric_dict={'f1': 0.4948, 'recall': 0.4898, 'precision': 0.5}
+idx=26, metric_dict={'f1': 0.5243, 'recall': 0.5192, 'precision': 0.5294}
+idx=27, metric_dict={'f1': 0.5094, 'recall': 0.5, 'precision': 0.5192}
+idx=28, metric_dict={'f1': 0.4909, 'recall': 0.4821, 'precision': 0.5}
+idx=29, metric_dict={'f1': 0.5172, 'recall': 0.5085, 'precision': 0.5263}
+idx=30, metric_dict={'f1': 0.5085, 'recall': 0.5, 'precision': 0.5172}
+idx=31, metric_dict={'f1': 0.5246, 'recall': 0.5161, 'precision': 0.5333}
+idx=32, metric_dict={'f1': 0.5116, 'recall': 0.5238, 'precision': 0.5}
+idx=33, metric_dict={'f1': 0.5191, 'recall': 0.5312, 'precision': 0.5075}
+idx=34, metric_dict={'f1': 0.5152, 'recall': 0.5231, 'precision': 0.5075} - ERR 
+idx=35, metric_dict={'f1': 0.5113, 'recall': 0.5152, 'precision': 0.5075} - ERR 
+idx=36, metric_dict={'f1': 0.5075, 'recall': 0.5075, 'precision': 0.5075} - ERR 
+idx=37, metric_dict={'f1': 0.5, 'recall': 0.5, 'precision': 0.5}
+idx=38, metric_dict={'f1': 0.4964, 'recall': 0.4928, 'precision': 0.5} - ERR 
+idx=39, metric_dict={'f1': 0.4892, 'recall': 0.4789, 'precision': 0.5} - ERR 
+idx=40, metric_dict={'f1': 0.529, 'recall': 0.519, 'precision': 0.5395}
+idx=41, metric_dict={'f1': 0.5256, 'recall': 0.5125, 'precision': 0.5395} - ERR 
+idx=42, metric_dict={'f1': 0.5223, 'recall': 0.5062, 'precision': 0.5395} - ERR 
+idx=43, metric_dict={'f1': 0.5157, 'recall': 0.5, 'precision': 0.5325}
+idx=44, metric_dict={'f1': 0.5217, 'recall': 0.506, 'precision': 0.5385}
+idx=45, metric_dict={'f1': 0.5153, 'recall': 0.5, 'precision': 0.5316}
+idx=46, metric_dict={'f1': 0.5181, 'recall': 0.5059, 'precision': 0.5309}
+idx=47, metric_dict={'f1': 0.515, 'recall': 0.5, 'precision': 0.5309} - ERR 
+idx=48, metric_dict={'f1': 0.5089, 'recall': 0.4886, 'precision': 0.5309} - ERR 
+idx=49, metric_dict={'f1': 0.5172, 'recall': 0.4945, 'precision': 0.5422}
+Saving LLM input trace to input_trace_DuIE2.0/llm_input_trace_react_fsl_glm-4.7_DuIE2.0_.json...
+Finish predicting with 50 samples.
+Loading results...
+Generating train split: 50 examples [00:00, 98.30 examples/s]
+Evaluating...
+Evaluation result: {'f1': 0.5172, 'recall': 0.4945, 'precision': 0.5422}
+
+14 errors 
+
+==========================================================================================================================================

@@ -1,0 +1,29 @@
+ABLATION SUMMARY (NEW ARCHITECTURE)
+
+Complete Setup 
+- Attempt 1: {'f1': 0.0507, 'recall': 0.2576, 'precision': 0.0281}
+- Attempt 2: {'f1': 0.0465, 'recall': 0.3333, 'precision': 0.025}
+- Attempt 3: {'f1': 0.073, 'recall': 0.303, 'precision': 0.0415}
+
+Average F1: 0.0567
+
+Setup C (Flat FSL + Retriever (k=1))
+- Attempt 1: {'f1': 0.0705, 'recall': 0.303, 'precision': 0.0399}
+- Attempt 2: {'f1': 0.0741, 'recall': 0.2879, 'precision': 0.0425}
+- Attempt 3: {'f1': 0.0713, 'recall': 0.2879, 'precision': 0.0407}
+
+Average F1: 0.0719
+
+Setup B (Flat FSL + static example)
+- Attempt 1: {'f1': 0.066, 'recall': 0.2424, 'precision': 0.0382}
+- Attempt 2: {'f1': 0.0687, 'recall': 0.2424, 'precision': 0.04}
+- Attempt 3: {'f1': 0.0451, 'recall': 0.197, 'precision': 0.0255}
+
+Average F1: 0.0599
+
+Setup A (Flat FSL + no examples)
+- Attempt 1: {'f1': 0.0315, 'recall': 0.1818, 'precision': 0.0173
+- Attempt 2: {'f1': 0.0346, 'recall': 0.2121, 'precision': 0.0188}
+- Attempt 3: {'f1': 0.0308, 'recall': 0.2273, 'precision': 0.0165}
+
+Average F1: 0.0323

@@ -1,0 +1,100 @@
+ERROR ANALYSIS METRICS 
+
+AGENTRE_REDUX_ALL_MEM - Total examples: 11
+AGENTRE_REDUX_ONLY_CORRECT_MEM - Total examples: 11 
+AGENTRE_REDUX_WITHOUT_INCORRECT_MEM - Total examples: 12
+AGENTRE - Total examples: 10 
+REACT_FSL - Total examples: 9
+
+1. Recursive Verification Trap - The model either keeps calling the same tool or gets stuck in a self-correction loop that never ends  
+
+AGENTRE_REDUX_ALL_MEM (Error examples in this category: 6)
+- Attempt 1 Train Example 1 
+- Attempt 1 Test Example 1 
+- Attempt 1 Test Example 2 (also the example where correct and incorrect memories are being used)
+- Attempt 2 Train Example 1 
+- Attempt 2 Test Example 1 
+- Attempt 2 Test Example 2 
+- Attempt 3 Test Sample 2 
+
+AGENTRE_REDUX_ONLY_CORRECT_MEM (Error examples in this category: 10)
+- Attempt 1 Train Sample 1 
+- Attempt 1 Train Sample 2
+- Attempt 1 Test Sample 1 
+- Attempt 1 Test Sample 2 
+- Attempt 2 Train Sample 1 
+- Attempt 2 Train Sample 2 
+- Attempt 2 Test Sample 2 - Analysis Paralysis 
+- Attempt 3 Train Sample 1 
+- Attempt 3 Test Sample 1 
+- Attempt 3 Test Sample 2 
+
+AGENTRE_REDUX_WITHOUT_INCORRECT_MEM (Error examples in this category: 8)
+- Attempt 1 Train Sample 2 (The loop was calling GetRelationDefinition again and again except there was no text output behind it, leading to the inner loop parse thinking hey this is an exception, and thus triggering 25 iterations. Normally we would have seen a catch all Finish output which would stop the chaos in the inner loop)
+- Attempt 1 Test Sample 2 
+- Attempt 2 Train Sample 1 
+- Attempt 2 Train Sample 2
+- Attempt 2 Test Sample 2 
+- Attempt 3 Train Sample 1 
+- Attempt 3 Train Sample 2 
+- Attempt 3 Test Sample 2 
+
+
+AGENTRE (Error examples in this category: 6)
+- Attempt 1 Train Example 1 
+- Attempt 1 Test Example 1 
+- Attempt 2 Train Example 1 
+- Attempt 2 Train Example 2 
+- Attempt 2 Test Example 1 
+- Attempt 3 Train Example 1 
+
+
+REACT_FSL (Error examples in this category: 7)
+- Attempt 1 Example 1 
+- Attempt 1 Example 2 
+- Attempt 2 Example 2 
+- Attempt 2 Example 3 
+- Attempt 3 Example 1 (The issue here is being triggered by final formulation terminating)
+- Attempt 3 Example 2 
+- Attempt 3 Example 3 
+
+
+2. Output Parsing as the main issue 
+
+AGENTRE_REDUX_ALL_MEM (Error examples in this category: 1)
+- Attempt 3 Test Sample 1
+
+AGENTRE (Error examples in this category: 1)
+- Attempt 3 Test Example 1
+
+
+3. Just the outputs being wrong. Legitimate - no superficial errors 
+
+AGENTRE_REDUX_ALL_MEM (Error examples in this category: 3)
+- Attempt 3 Train Example 1 - Incorrect relation identified and then thrown out 
+- Attempt 3 Train Example 2 - Entities were incorrectly identified for a given relation 
+- Attempt 3 Train Example 3 - Entities were incorrectly identified 
+
+
+4.  CoT controllability failure - Reasoning terminating at a certain step without any parsing issues or anything 
+
+AGENTRE_REDUX_ONLY_CORRECT_MEM (Error examples in this category: 1)
+- Attempt 2 Test Sample 1 
+
+AGENTRE_REDUX_WITHOUT_INCORRECT_MEM (Error examples in this category: 2)
+- Attempt 1 Test Sample 1 
+- Attempt 3 Test Sample 1 
+
+AGENTRE (Error examples in this category: 3)
+- Attempt 1 Test Example 2 
+- Attempt 3 Train Example 2 
+- Attempt 3 Test Example 2 
+
+REACT_FSL (Error examples in this category: 1)
+- Attempt 1 Example 3 (The first issue is due to action not being correctly parsed but after that its just termination at the same step) 
+
+5. Action not being formulate correctly - model wants Action then ActionInput, instead its thought out as Action(ActionInput) leading to parsing errors 
+
+AGENTRE_REDUX_WITHOUT_INCORRECT_MEM (Error examples in this category: 2)
+- Attempt 1 Train Sample 1 
+- Attempt 2 Test Sample 1 

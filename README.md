@@ -14,3 +14,7 @@ Prior to this, the following discrepancies between the code and the paper will b
 DuIE2.0 obtained from <a href="https://huggingface.co/datasets/hccngu/Viscacha-Chinese-IE/tree/main/DuIE2.0">HuggingFace</a>
 SciERC obtained from <a href="https://www.kaggle.com/datasets/hectorrabago/scierc-processed">Kaggle</a>
 Note that the size of SciERC being small for tests, resulted in lower performances.
+
+
+## Wikidata Dataset 
+A new dataset was prepared from the wikidata knowledge graph pertaining to the supply chain domain to analyse domain specific performance of an agent in relation extraction. In this case, the relations were created using a prompt rooted in SCOR-DS and Enterprise Ontology. These relations were then subjected to manual pruning, if they were too unrelated or overlapping from a semantic perspective, we mapped them into a single label and ended up with 15 relations in total. We also had 5 entity types, based on the relations defined. The wikidata flow can be found in under the name wikidata_v3.

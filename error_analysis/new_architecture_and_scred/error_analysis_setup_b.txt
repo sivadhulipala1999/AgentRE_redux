@@ -1,0 +1,21 @@
+ERROR ANALYSIS 
+
+Total examples: 50 
+
+Setup B (Flat FSL + Static Example)
+- Attempt 1 (Total examples: 10)
+	- idx: 5, 9, 10, 17, 23, 29, 35, 40, 46, 49 - output did not finish generating in the few retries 
+
+- Attempt 2 (Total examples: 14)
+	- idx: 5, 9, 10, 15, 17, 18, 23, 29, 35, 37, 38, 46, 48, 49 
+	- idx: 18, 37, 48 - got the output in the 2nd iteration 
+	- idx: 5, 9, 10, 15, 17, 23, 29, 35, 38, 46, 49 - output did not finish generating in the few retries 
+
+- Attempt 3 (Total examples: 11)
+	- idx: 5, 9, 10, 29, 35, 37, 38, 40, 46, 48, 49
+	- idx: 37, 48 - got the output in the 2nd iteration 
+	- idx: 5, 9, 10, 29, 35, 38, 40, 46, 49 - output did not finish generating in the few retries 
+
+- Examples checked 
+	- looking at examples 18, 37, 38, 48, - we see the word counts 642, 2047, 4895, 1516 
+	- Clearly, chunking at least fixed size version is needed 
