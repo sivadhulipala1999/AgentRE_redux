@@ -1,0 +1,36 @@
+Relations are based on SCOR-DS processes 
+
+Format: relation name (relation p-code) -- subject (domain) -- object (range)
+
+Orchestrate 
+parent company (P127) -- Core Enterprise -- Organizational Unit
+child organization (P355) -- Core Enterprise -- Organizational Unit
+partnership with (P2652) -- Core Enterprise -- Organizational Unit
+regulated by (P3719) -- Core Enterprise -- Organizational Unit 
+investor (P1951) -- Core Enterprise -- Core Enterprise 
+owner of (P1830) -- Core Enterprise -- Product & Material 
+
+
+Plan / Order
+distributed by (P750) -- Product -- Supply Chain Partner 
+commissioned by (P88) -- Product/Material -- Core Enterprise 
+supplied by (P*) -- Product -- Supply Chain Partner 
+buys from (P*) -- Core Enterprise -- Supply Chain Partner 
+
+Source  
+typically sells (P7163) (equivalent to company sells product relation) -- Core Enterprise -- Product 
+energy sourced from (P618) -- Product -- Core Enterprise/Material
+
+Transform 
+manufactured by (P176) -- Product -- Core Enterprise 
+made from material (P186) -- Product -- Product & Material 
+designed by (P287) -- Product -- Core Enterprise  
+raw material processed (P10672) -- Core Enterprise/Supply Chain Partner -- Material 
+assembles (P*) -- Core Enterprise -- Product 
+
+Fulfill  
+distributed by (P750) -- Supply Chain Partner -- Market Actor 
+stored at (P*) -- Product & Material -- Warehouse/Supply Chain Partner 
+
+Return 
+maintained  by (P126) -- Product & Material -- Core Enterprise 

@@ -1,0 +1,66 @@
+Format: Entity Type Label (Entity Type QID) [Specificity Level (Higher the number, more generic the class)]
+
+Level 1: Functional/Specific
+Level 2: Defining Characteristics
+Level 3: Abstract/Generic
+
+# Update: 09.03.2026 removed parent and child organization types since they are relation types and not entity types 
+
+Enterprise / Legal Entity (Covers the profit-seeking core of the supply chain)
+business (Q4830453) [Level 3] 
+enterprise (Q6881511) [Level 3]
+corporation (Q167037) [Level 3]
+logistics company (Q1468664) [Level 1]
+freight forwarder (Q840850) [Level 1]
+transport company (Q740752) [Level 1]
+value-added reseller (Q3552900) [Level 1]
+public company (Q891723) [Level 3]
+privately held company (Q1589009) [Level 2]
+holding company (Q219577) [Level 2]
+multinational corporation (Q161726) [Level 3]  
+defense contractor (Q1934969) [Level 1]
+trade association (Q2178147) [Level 2]
+non-governmental organization (Q79913) [Level 2] 
+limited liability company (Q149789) [Level 2]
+research institute (Q31855) [Level 2]
+certification organization (Q23891650) [Level 1]
+small and medium enterprises (Q622439) [Level 2]
+asset management company (Q4230006) [Level 1]
+
+Partner / Supplier (Defines external dependencies)
+vendor (Q1762621) [Level 2]
+distributor (Q60614978) [Level 1]
+supplier (Q228830) [Level 2]
+manufacturer (Q13235160) [Level 1]
+wholesaler (Q18242306) [Level 1]
+original equipment manufacturer (Q267558) [Level 1]
+contract manufacturer (Q1408259) [Level 1]
+distribution center (Q1229659) [Level 1]
+warehouse (wd:Q181623) [Level 1]
+
+Organizational Unit (Captures internal hierarchy and regulatory actors)
+government agency (Q327333) [Level 2]
+regulatory agency (Q1639780) [Level 2]
+joint venture (Q489209) [Level 2]
+consortium (Q194166) [Level 2]
+cooperative (Q4539) [Level 2]
+concern (Q206361) [Level 2]
+
+ 
+Market / Marketing (Defines the boundary where the SCOR flow ends)
+customer/consumer (Q22855) [Level 2]
+competitor (Q27019785) [Level 2]
+retailer (Q99536263) [Level 2]
+
+
+
+Products and Materials 
+product (Q2424752) [Level 3]
+goods (Q28877) [Level 3]
+manufactured product (Q1836700) [Level 1]
+raw material (Q192355) [Level 2]
+natural resource (Q188460) [Level 3]
+intermediate good (Q3955017) [Level 2]
+computer hardware (Q3966) [Level 1]
+software (Q7397) [Level 1]
+electronic component (Q11653) [Level 1]
