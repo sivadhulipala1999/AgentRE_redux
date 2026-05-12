@@ -1,46 +1,84 @@
-# Benchmarking Supply Chain Relation Extraction: Dataset Construction, AgentRE Reproducibility, and the Limits of Agentic Prompting 
+# AgentRE_redux: Benchmarking Supply Chain Relation Extraction
 
-This repository is based on the paper "**AgentRE: An Agent-Based Framework for Navigating Complex Information Landscapes in Relation Extraction**". Go to <a href="https://github.com/Lightblues/AgentRE/"> AgentRE's original repo </a> for a better overview of what was done. 
+> **Dataset Construction, AgentRE Reproducibility, and the Limits of Agentic Prompting**
 
-As a part of my master thesis, my aim is to improve upon the original AgentRE architecture for extracting supply chain information from raw text. Additional experiments will be done to see what changes contribute the most to the model's increase in performance, as per the GenRES framework. 
+This repository builds upon the foundational work presented in the paper "**AgentRE: An Agent-Based Framework for Navigating Complex Information Landscapes in Relation Extraction**". For a comprehensive overview of the original methodology, please refer to the [AgentRE Original Repository](https://github.com/Lightblues/AgentRE/).
 
-Prior to this, the following discrepancies between the code and the paper will be addressed. 
-<li>The reflexion memory mechanism does not contribute in any way to the response generation process. This will be changed by adding a reflection step in the ReAct prompt-set and the model will be made to focus on the reflection in case of an incorrect response.</li>
-<li>The relevant information retrieval mechanism which extracts information about the entities in the query to include as part of its context, does not actually work as part of the ReAct prompt. This will be fixed by including a step to do the extraction before proceeding with the response generation, thus enhancing the CoT process.</li>
-<li>The paper mentions correct and incorrect memories contain correctly and incorrectly classified triples respectively. What was implemented instead was just the full example and the golden label set being stored regardless of the f1 score. We fix this by enhancing the correct and incorrect memories</li>
-<li>Reflexion done at train time was not being used during test phase, rendering the reflexions worthless. We hence add the reflexion memory mechanism.</li>
+As part of this research, we have extended AgentRE to evaluate and improve its performance specifically on **supply chain relation extraction tasks**. A key focus of this work has been to address and resolve discrepancies between the original paper's claims and its provided codebase.
 
+---
 
-## Dataset
-DuIE2.0 obtained from <a href="https://huggingface.co/datasets/hccngu/Viscacha-Chinese-IE/tree/main/DuIE2.0">HuggingFace</a>
-SciERC obtained from <a href="https://www.kaggle.com/datasets/hectorrabago/scierc-processed">Kaggle</a>
-Note that the size of SciERC being small for tests, resulted in lower performances.
+## 🛠️ Key Improvements (Addressing Original Discrepancies)
 
+Prior to our domain-specific experiments, the following architectural and logical discrepancies between the AgentRE paper and its codebase were addressed:
 
-## Wikidata Dataset 
-A new dataset was prepared from the wikidata knowledge graph pertaining to the supply chain domain to analyse domain specific performance of an agent in relation extraction. In this case, the relations were created using a prompt rooted in SCOR-DS and Enterprise Ontology. These relations were then subjected to manual pruning, if they were too unrelated or overlapping from a semantic perspective, we mapped them into a single label and ended up with 15 relations in total. We also had 5 entity types, based on the relations defined. The wikidata flow can be found in under the name wikidata_v3.
+1. **Reflexion Memory Integration:** The original reflexion memory mechanism did not actively contribute to the response generation process. We have addressed this by adding a dedicated reflection step in the ReAct prompt-set, forcing the model to focus on the reflection when a previous response is incorrect.
+2. **Relevant Information Retrieval:** The retrieval mechanism (which extracts entity information to provide context) was disconnected from the ReAct prompt. We fixed this by introducing an extraction step prior to response generation, significantly enhancing the Chain-of-Thought (CoT) process.
+3. **Correct/Incorrect Memory Definition:** The paper stated that correct and incorrect memories contain correctly and incorrectly classified triples, respectively. The original implementation merely stored the full example and golden label set regardless of the F1 score. We have corrected this by properly distinguishing and enhancing correct and incorrect memory stores.
+4. **Test-time Reflexion:** Reflexions generated during training were not utilized during the testing phase. We have successfully integrated the reflexion memory mechanism into the test pipeline.
 
+---
 
-# Error and Ablation Studies 
-AgentRE and AgentRE_redux were both subjected to ablation setups with respect to DuIE2.0. These analyses can be found under 'ablation_study'. 
+## 📂 Repository Structure
 
-SCAgent (referred to as CRA in the paper/thesis) was subjected to similar analyses as well to analyse how the new changes would compare to the original baseline on the wikidata dataset we prepared. They are also in the 'ablation_study' folder. More specifically, you can find the ReAct_FSL results on SC-RED as well as the SCAgent results in 'ablation_study/wikidata_results'. 
+Below is a brief overview of the key directories in this project:
 
-Error Analysis in on both datasets was also done, where we picked error examples to inform our decisions on what kind of architecture should we propose from ReAct_FSL, which ended up becoming CRA. Further analysis on CRA was also done to finally reveal the plot twist, ReAct_FSL actually performed better than CRA. This could be due to F1 scores being used for comparison and hence we propose GenRES as an alternative. 
+- `src/`: Core source code including models, tools, data utilities, and the main execution scripts (`main.py`, `configurator.py`).
+- `data/` & `src/data/`: Contains the datasets used for evaluation.
+- `ablation_study/`: Scripts and results for various ablation setups on AgentRE, AgentRE_redux, and SCAgent (CRA).
+- `error_analysis/`: Results from our error analysis studies to inform architectural decisions.
+- `out/`: Default output directory for predictions and audit reports.
+- `llm_input_trace_...`: JSON traces logging the exact inputs sent to the LLMs.
+- `log/` & `logs/`: Execution logs categorized by chosen configurations.
 
+---
 
-# To run the code 
-- Ensure your environment is up-to-date as per the agentre_requirements file. 
-- choose your configuration in configurator.py. If you instead run the shell script its much easier because you pass system arguments, but I did it this way. 
-- Make sure you define the API keys in the new_client_langchain.py file. This is the client the whole code is going to be using. Its an update from AgentRE's client file which uses older versions of the code. 
-- Whatever configuration you have chosen, go to the corresponding yml file and check the configuration properly. 
-- Then go to main.py and execute it to get the results. Your results would typically be, predictions and audit_reports in out folder, llm_input_trace JSON files in the llm_input_traces folder, and log files which you can access in the log folder and under your specific chosen config's subfolder. 
+## 📊 Datasets
 
-# To get the Wikidata dataset 
-- You have to run 3 scripts defined under wikidata_v3. 
-- What each stage does is explained the README file in that folder. But run the scripts in order. 
-- Once done you will get std_test and std_train files in 'src/data/wikidata_v3/'
-- 'visualizer.py' in the wikidata_v3 folder will give you an HTML file showing exactly how the nodes are connected giving you an overview of the knowledge graph 
+### Standard Benchmarks
+- **DuIE2.0:** Sourced from [HuggingFace (Viscacha-Chinese-IE)](https://huggingface.co/datasets/hccngu/Viscacha-Chinese-IE/tree/main/DuIE2.0).
+- **SciERC:** Sourced from [Kaggle](https://www.kaggle.com/datasets/hectorrabago/scierc-processed). *(Note: The small size of the SciERC test set resulted in lower overall performances).*
 
-# Issues 
-- If something does not work, please raise an issue. I will try to get the notifications up and will try to respond to every single query. 
+### SC-RED (Wikidata Supply Chain Dataset)
+To analyze domain-specific performance in relation extraction, we prepared a new dataset derived from the Wikidata knowledge graph, focusing on the supply chain domain. 
+- Relations were generated using a prompt rooted in **SCOR-DS** and **Enterprise Ontology**.
+- We manually pruned and semantically mapped overlapping relations, resulting in **15 unique relations** and **5 entity types**.
+- The dataset creation pipeline is located under `wikidata_v3` (see below for generation instructions).
+
+---
+
+## 🔬 Error and Ablation Studies
+
+Both AgentRE and AgentRE_redux were subjected to ablation setups using the DuIE2.0 dataset. These analyses are located in the `ablation_study` directory.
+
+We also developed **SCAgent** (also referred to as **CRA** or Constrained ReAct Architecture) and subjected it to similar analyses to compare new changes against the baseline on our SC-RED dataset. 
+- You can find the `ReAct_FSL` results on SC-RED and SCAgent results in `ablation_study/wikidata_results`.
+
+**Findings:** Error analysis informed the design of CRA. However, further analysis revealed that `ReAct_FSL` actually outperformed CRA. We suspect this discrepancy is due to the limitations of using F1 scores for generative comparison, and we propose **GenRES** as an alternative evaluation metric.
+
+---
+
+## 🚀 How to Run the Code
+
+1. **Environment Setup:** Ensure your environment is up-to-date by installing dependencies from `agentre_requirements.txt`.
+2. **API Keys:** Define your LLM API keys inside `src/new_client_langchain.py`. This file updates the original AgentRE client to use newer LangChain integrations.
+3. **Configuration:** 
+   - Choose your configuration in `src/configurator.py`. 
+   - Alternatively, use `run.sh` to pass system arguments directly (recommended).
+   - Whichever configuration you choose, carefully verify the corresponding `.yml` file in the configuration directory.
+4. **Execution:** Run the main pipeline:
+   ```bash
+   python src/main.py
+   ```
+5. **Outputs:** Results will be saved in the `out/` folder (predictions, audit reports). Traces are saved as JSON files in the root folder, and runtime logs can be found in `log/` under your specific config's subfolder.
+
+---
+
+## 🌐 Generating the Wikidata Dataset (SC-RED)
+
+To regenerate the SC-RED dataset:
+1. Navigate to the `wikidata_v3` directory and run the 3 scripts in sequential order. *(Refer to the README in that folder for stage-specific details).*
+2. Once complete, `std_train.json` and `std_test.json` will be generated in `src/data/wikidata_v3/`.
+3. You can run `visualizer.py` inside the `wikidata_v3` folder to generate an HTML map of the knowledge graph nodes and connections.
+
+---
