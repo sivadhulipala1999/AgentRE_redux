@@ -31,49 +31,6 @@ Organization/Constraint:
     \end{itemize}}
 \end{quote}
 
-\section{Wikidata PID Mapping}
-\label{app:pid_mapping}
-
-Table~\ref{tab:pid_mapping} lists the fifteen relation types in the
-SC-RED ontology alongside their corresponding Wikidata property
-identifiers and SCOR-DS Phases. Table~\ref{tab:extra_pids} lists the additional properties proposed alongside the corresponding SCOR-DS Phases.
-
-
-\begin{table}[h]
-\caption{SC-RED relation types and Wikidata PIDs.}
-\label{tab:pid_mapping}
-\begin{tabular}{llll}
-\textbf{Relation} & \textbf{Relation Wikidata Label} & \textbf{Wikidata PID} & \textbf{SCOR-DS Phase}\\
-is owned by            & parent company & [P127] & Orchestrate\\
-has subsidiary         & child organization & [P355] & Orchestrate\\
-is in partnership with & partnership with & [P2652] & Orchestrate\\
-is regulated by        & regulated by & [P3719] & Orchestrate\\
-is an investor in      & investor & [P1951] & Orchestrate\\
-is the owner of        & owner of & [P1830] & Orchestrate\\
-is distributed by      & distributed by & [P750] & Plan/Order\\
-was commissioned by    & commissioned by & [P88] & Plan/Order\\
-typically sells        & typically sells & [P7163] & Plan/Order\\
-sources energy from    & source of energy & [P618] & Plan/Order\\
-is manufactured by     & manufacturer & [P176] & Source\\
-is made from           & made from material & [P186] & Source\\
-is designed by         & designed by & [P287] & Transform\\
-processes raw material & raw material processed & [P10672] & Transform\\
-is maintained by       & maintained by & [P126] & Return\\
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\caption{Proposed SC-RED relation types.}
-\label{tab:extra_pids}
-\begin{tabular}{ll}
-\textbf{Relation} & \textbf{SCOR-DS Phase}\\
-supplied by         & Plan/Order \\
-buys from           & Plan/Order \\
-assembles           & Transform \\
-stored at           & Fulfill \\
-\end{tabular}
-\end{table}
 
 \section{Ontology Schema}
 \label{app:ontology}
@@ -155,10 +112,104 @@ The following sample has been taken from the training data to represent the form
 }
 \end{verbatim}
 
+\section{SC-RED Rudimentary Baseline Prompt} 
+\label{app:scred_baseline_prompt}
+
+We present the prompt for the baseline in SC-RED experiments. 
+
+\begin{quote}
+{
+SYSTEM\_PROMPT = 
+\itshape
+"""
+You are a supply chain relation extraction system. Extract relation triples from the input text.
+
+
+ONTOLOGY SCHEMA
+
+Entity Types:
+  CoreEnterprise       — profit-seeking companies
+                         (e.g. logistics company, freight forwarder, 
+                          public company, defense contractor)
+  SupplyChainPartner   — external suppliers and service providers
+                         (e.g. vendor, distributor, OEM, 
+                          contract manufacturer, warehouse operator)
+  OrganizationalUnit   — internal divisions and regulatory bodies
+                         (e.g. government agency, regulatory body, 
+                          joint venture, consortium)
+  MarketActor          — demand-side actors
+                         (e.g. customer, consumer, competitor, retailer)
+  ProductMaterial      — physical or digital goods
+                         (e.g. manufactured product, raw material, 
+                          intermediate good, software, hardware component)
+  SupplyChainEntity    — abstract supertype; used in relation constraints
+                         only when no more specific type applies.
+                         Do not use this type to label entities directly.
+
+Relations (relation\_name: subject\_type → object\_type):
+  is owned by               : CoreEnterprise      → OrganizationalUnit
+  has subsidiary            : CoreEnterprise      → OrganizationalUnit
+  is in partnership with    : CoreEnterprise      → OrganizationalUnit
+  is regulated by           : CoreEnterprise      → OrganizationalUnit
+  is an investor in         : CoreEnterprise      → CoreEnterprise
+  is the owner of           : CoreEnterprise      → ProductMaterial
+  is distributed by         : ProductMaterial     → SupplyChainPartner
+  was commissioned by       : ProductMaterial     → CoreEnterprise
+  typically sells           : CoreEnterprise      → ProductMaterial
+  sources energy from       : ProductMaterial     → SupplyChainEntity
+  is manufactured by        : ProductMaterial     → CoreEnterprise
+  is made from              : ProductMaterial     → ProductMaterial
+  is designed by            : ProductMaterial     → CoreEnterprise
+  processes raw material    : SupplyChainEntity   → ProductMaterial
+  is maintained by          : ProductMaterial     → CoreEnterprise
+
+
+INSTRUCTIONS
+
+Read the input text carefully. Using ONLY the relations defined in the ontology
+above, extract all relation triples that are explicitly supported by the text.
+
+- Every predicate must be one of the relations in the ontology.
+- Only extract a triple if the text clearly expresses that relation.
+- Do not invent new relation names or entity types.
+- The subject and object must satisfy the type constraints implied by the ontology.
+  (For example, "is manufactured by" must have a ProductMaterial as subject
+   and a CoreEnterprise as object.)
+- The subject and object strings must be exact text spans from the input.
+- Do not infer or hallucinate entities or relations that are not present in the text.
+- If no triples are found, return an empty spo\_list.
+
+Follow the format and typing behaviour shown in the example(s) you are given.
+Return ONLY the JSON object below, with no additional text.
+
+{
+  "spo\_list": [
+    {"subject": "...", "predicate": "...", "object": "..."}
+  ]
+}
+"""
+}
+\end{quote}
+
+
+\begin{quote}
+{
+USER\_PROMPT = 
+\itshape
+"""
+Extract all relation triples from the following text:
+
+{chunk\_text}
+"""
+}
+\end{quote}
+
+
+
 \section{CRA Prompt Examples}
 \label{app:cra_prompt_example}
 
-We present the system and user prompts for each of the ablation config mentioned in Table~\ref{tab:configs}.
+System and User Prompts for the proposed new architecture called CRA appear below.  
 
 \textbf{CRA Config D - Staged ReAct}
 
