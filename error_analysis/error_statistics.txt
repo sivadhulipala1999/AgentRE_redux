@@ -8,7 +8,7 @@ REACT_FSL - Total examples: 9
 
 1. Recursive Verification Trap - The model either keeps calling the same tool or gets stuck in a self-correction loop that never ends  
 
-AGENTRE_REDUX_ALL_MEM (Error examples in this category: 6)
+AGENTRE_REDUX_ALL_MEM (Error examples in this category: 7)
 - Attempt 1 Train Example 1 
 - Attempt 1 Test Example 1 
 - Attempt 1 Test Example 2 (also the example where correct and incorrect memories are being used)
@@ -67,6 +67,8 @@ AGENTRE_REDUX_ALL_MEM (Error examples in this category: 1)
 AGENTRE (Error examples in this category: 1)
 - Attempt 3 Test Example 1
 
+REACT_FSL 
+- Attempt 2 Example 1 (repeatedly tries to call the same action and due to malforms, fails)
 
 3. Just the outputs being wrong. Legitimate - no superficial errors 
 
@@ -90,7 +92,7 @@ AGENTRE (Error examples in this category: 3)
 - Attempt 3 Train Example 2 
 - Attempt 3 Test Example 2 
 
-REACT_FSL (Error examples in this category: 1)
+REACT_FSL (Error examples in this category: 2)
 - Attempt 1 Example 3 (The first issue is due to action not being correctly parsed but after that its just termination at the same step) 
 
 5. Action not being formulate correctly - model wants Action then ActionInput, instead its thought out as Action(ActionInput) leading to parsing errors 
