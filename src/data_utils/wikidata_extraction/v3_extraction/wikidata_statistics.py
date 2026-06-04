@@ -16,6 +16,8 @@ import csv
 from collections import Counter
 from io import StringIO
 from typing import Optional
+import json
+import matplotlib.pyplot as plt
 
 # ── Paths ────────────────────────────────────────────────────────────────────
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -84,7 +86,8 @@ def _format_distribution(
 # Main
 # ─────────────────────────────────────────────────────────────────────────────
 
-def compute_statistics(csv_path: str, stats_path: str) -> None:
+def compute_statistics(csv_path: str, stats_path: str, use_percentages: bool = False) -> None:
+    '''
     if not os.path.isfile(csv_path):
         print(f"[ERROR] CSV file not found: {csv_path}")
         return
@@ -129,7 +132,69 @@ def compute_statistics(csv_path: str, stats_path: str) -> None:
     with open(stats_path, "w", encoding="utf-8") as f:
         f.write(output)
     print(f"[INFO] Stats saved to {stats_path}")
+    '''
+
+    train_path = os.path.join(DATA_DIR, "std_train.json")
+    test_path = os.path.join(DATA_DIR, "std_test.json")
+
+    if not os.path.isfile(train_path) or not os.path.isfile(test_path):
+        print(f"[ERROR] Train or test JSON not found at {DATA_DIR}")
+        return
+
+    print("Loading train data...")
+    with open(train_path, "r", encoding="utf-8") as f:
+        train_data = json.load(f)
+        
+    print("Loading test data...")
+    with open(test_path, "r", encoding="utf-8") as f:
+        test_data = json.load(f)
+
+    train_counts = Counter()
+    for item in train_data:
+        for spo in item.get("spo_list", []):
+            train_counts[spo.get("predicate")] += 1
+
+    test_counts = Counter()
+    for item in test_data:
+        for spo in item.get("spo_list", []):
+            test_counts[spo.get("predicate")] += 1
+
+    all_relations = set(train_counts.keys()).union(set(test_counts.keys()))
+    sorted_relations = sorted(list(all_relations), key=lambda r: train_counts[r] + test_counts[r], reverse=True)
+
+    train_vals = [train_counts[r] for r in sorted_relations]
+    test_vals = [test_counts[r] for r in sorted_relations]
+
+    if use_percentages:
+        train_total = sum(train_vals)
+        test_total = sum(test_vals)
+        train_vals = [v / train_total * 100 if train_total else 0 for v in train_vals]
+        test_vals = [v / test_total * 100 if test_total else 0 for v in test_vals]
+
+    x = range(len(sorted_relations))
+    width = 0.35
+
+    x_train = [i - width/2 for i in x]
+    x_test = [i + width/2 for i in x]
+
+    fig, ax = plt.subplots(figsize=(12, 8))
+    rects1 = ax.bar(x_train, train_vals, width, label='Train')
+    rects2 = ax.bar(x_test, test_vals, width, label='Test')
+
+    ylabel = 'Percentage of Samples (%)' if use_percentages else 'Number of Samples'
+    ax.set_ylabel(ylabel)
+    ax.set_title('Relation Distribution in Train and Test Sets')
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(sorted_relations, rotation=45, ha="right")
+    ax.legend()
+
+    fig.tight_layout()
+
+    out_img = os.path.join(DATA_DIR, "relation_distribution.png")
+    plt.savefig(out_img, dpi=300)
+    print(f"[INFO] Distribution image saved to {out_img}")
+
 
 
 if __name__ == "__main__":
-    compute_statistics(CSV_PATH, STATS_PATH)
+    compute_statistics(CSV_PATH, STATS_PATH, use_percentages=True)
