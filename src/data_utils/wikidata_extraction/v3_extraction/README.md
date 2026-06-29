@@ -26,3 +26,8 @@ This final script formats the grounded dataset for direct use in relation extrac
 2. **Data Formatting:** Converts the list-based `spo_list` into a list of structured dictionaries: `{"subject": "...", "predicate": "...", "object": "..."}`.
 3. **Train/Test Split:** Splits the fully processed dataset, allocating the first 1,000 entries for training and the remainder for testing.
 - **Outputs:** `std_train.json`, `std_test.json`
+
+
+
+# Note 
+- As of now the labels for each and every entity is not present in the final std_train and std_test json files, meaning the model never gets to see the subject type and object type in the spo. This is a future work step and should be an easy extension to do. It was ignored in the initial iteration because we mention the entity supertypes in the prompt and examples for each supertype as a textual label, letting the model decide. Adding this information to the context can make the extraction much better. 
