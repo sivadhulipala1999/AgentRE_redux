@@ -1,0 +1,925 @@
+\begin{appendices}
+
+
+\chapter{Appendix: Ontology Prompts}
+\thispagestyle{plain}
+\label{app:ontology_prompt}
+
+Here, we share the prompts used for extracting the PIDs and the QIDs from the chat models. Note that we used GPT-5.2, Gemini-3.1, DeepSeek-V3.2 for this purpose.
+
+
+\begin{tcolorbox}[promptbox, title=Entity QID Extraction Prompt]
+Act as a Knowledge Graph Engineer. I am building a Relation Extraction
+dataset based on SCOR-DS and Enterprise Ontology.
+
+I have the following seed Q-codes:
+
+\textbf{Actors:} business (Q4830453), enterprise (Q688151), corporation
+(Q167037), vendor (Q11270215), third-party source (Q11832159), subsidiary
+(Q355209), government agency (Q327333), customer (Q22855), competitor
+(Q476635), retailer (Q200552).
+
+\textbf{Products and Materials:} product (Q2424752), goods (Q28877),
+manufactured product (Q1836700), raw material (Q192355), intermediate
+good (Q3955017).
+
+\medskip
+\textbf{Task:} Identify 20--30 additional Wikidata Q-codes that represent:
+
+\begin{itemize}
+    \item \textbf{Functional Roles:} e.g., Wholesaler, Freight Forwarder,
+    OEM, Contract Manufacturer, 3PL.
+    \item \textbf{Products \& Materials:} e.g., Intermediate good, Raw
+    material, Electronic component, Finished good, Commodity.
+    \item For each code, provide its Superclass QID to ensure it falls
+    under either the Organisation/Economic Entity hierarchy or the
+    Product/Physical Object hierarchy.
+\end{itemize}
+
+\medskip
+\textbf{Organisation / Constraints:}
+
+\begin{itemize}
+    \item Group results into 5 meta-categories: Core Enterprise, Supply
+    Chain Partner, Organisational Unit, Market Actor, and Product \&
+    Material.
+    \item Exclude generic abstract classes like Entity or Object.
+    \item Only provide classes high-level enough to have significant
+    instances with Wikipedia pages.
+\end{itemize}
+\end{tcolorbox}
+
+\bigskip
+
+\begin{tcolorbox}[promptbox, title=Relation PID Extraction Prompt]
+\textbf{Orchestrate}\\
+parent company (P127) \textemdash{} Core Enterprise \textemdash{} Organisational Unit\\
+child organization (P355) \textemdash{} Core Enterprise \textemdash{} Organisational Unit\\
+partnership with (P2652) \textemdash{} Core Enterprise \textemdash{} Organisational Unit\\
+regulated by (P3719) \textemdash{} Core Enterprise \textemdash{} Organisational Unit\\
+investor (P1951) \textemdash{} Core Enterprise \textemdash{} Core Enterprise
+
+\medskip
+\textbf{Plan / Order}\\
+distributed by (P750) \textemdash{} Product \textemdash{} Supply Chain Partner\\
+commissioned by (P88) \textemdash{} Product/Material \textemdash{} Core Enterprise
+
+\medskip
+\textbf{Source}\\
+typically sells (P7163) \textemdash{} Core Enterprise \textemdash{} Product
+
+\medskip
+\textbf{Transform}\\
+manufactured by (P176) \textemdash{} Product \textemdash{} Core Enterprise\\
+made from material (P186) \textemdash{} Product \textemdash{} Product \& Material
+
+\medskip
+\textbf{Fulfill}\\
+distributed by (P750) \textemdash{} Supply Chain Partner \textemdash{} Market Actor
+
+\medskip
+\textbf{Return}\\
+Nothing.
+
+\medskip
+As you can see, the relations are few and far between. There are no
+major valid relations beyond organisation-to-organisation relations.
+I would like you to help me find real Wikidata PIDs that at least
+resemble the topics in SCOR-DS (Plan/Order, Source, Transform,
+Fulfill, Return, Orchestrate). Do not hallucinate.
+\end{tcolorbox}
+
+\chapter{Appendix: SC-RED Entity List}
+\label{app:entity_list}
+
+\begingroup
+\small
+\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{l|p{5cm}|p{3cm}|l}
+
+\caption{SC-RED Entity Type Categories and QID Mappings. Specificity
+levels: Level 1 = Functional/Specific, Level 2 = Defining
+Characteristics, Level 3 = Abstract/Generic.}
+\label{tab:entity_categories} \\
+
+\toprule
+\textbf{Category} & \textbf{Entity Type} & \textbf{Wikidata QID}
+& \textbf{Specificity} \\
+\midrule
+\endfirsthead
+
+\multicolumn{4}{l}{\small\textit{Continued from previous page}} \\
+\toprule
+\textbf{Category} & \textbf{Entity Type} & \textbf{Wikidata QID}
+& \textbf{Specificity} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{4}{r}{\small\textit{Continued on next page}} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+\textbf{Enterprise / Legal Entity}
+& business                   & Q4830453  & Level 3 \\
+& enterprise                 & Q6881511  & Level 3 \\
+& corporation                & Q167037   & Level 3 \\
+& public company             & Q891723   & Level 3 \\
+& multinational corporation  & Q161726   & Level 3 \\
+& privately held company     & Q1589009  & Level 2 \\
+& holding company            & Q219577   & Level 2 \\
+& trade association          & Q2178147  & Level 2 \\
+& non-governmental organization & Q79913 & Level 2 \\
+& limited liability company  & Q149789   & Level 2 \\
+& research institute         & Q31855    & Level 2 \\
+& small and medium enterprises & Q622439 & Level 2 \\
+& logistics company          & Q1468664  & Level 1 \\
+& freight forwarder          & Q840850   & Level 1 \\
+& transport company          & Q740752   & Level 1 \\
+& value-added reseller       & Q3552900  & Level 1 \\
+& defense contractor         & Q1934969  & Level 1 \\
+& certification organization & Q23891650 & Level 1 \\
+& asset management company   & Q4230006  & Level 1 \\
+\midrule
+
+\textbf{Partner / Supplier}
+& vendor                          & Q1762621  & Level 2 \\
+& supplier                        & Q228830   & Level 2 \\
+& distributor                     & Q60614978 & Level 1 \\
+& manufacturer                    & Q13235160 & Level 1 \\
+& wholesaler                      & Q18242306 & Level 1 \\
+& original equipment manufacturer & Q267558   & Level 1 \\
+& contract manufacturer           & Q1408259  & Level 1 \\
+& distribution center             & Q1229659  & Level 1 \\
+& warehouse                       & Q181623   & Level 1 \\
+\midrule
+
+\textbf{Organizational Unit}
+& government agency & Q327333  & Level 2 \\
+& regulatory agency & Q1639780 & Level 2 \\
+& joint venture     & Q489209  & Level 2 \\
+& consortium        & Q194166  & Level 2 \\
+& cooperative       & Q4539    & Level 2 \\
+& concern           & Q206361  & Level 2 \\
+\midrule
+
+\textbf{Market / Marketing}
+& customer / consumer & Q22855    & Level 2 \\
+& competitor          & Q27019785 & Level 2 \\
+& retailer            & Q99536263 & Level 2 \\
+\midrule
+
+\textbf{Products and Materials}
+& product              & Q2424752 & Level 3 \\
+& goods                & Q28877   & Level 3 \\
+& natural resource     & Q188460  & Level 3 \\
+& raw material         & Q192355  & Level 2 \\
+& intermediate good    & Q3955017 & Level 2 \\
+& manufactured product & Q1836700 & Level 1 \\
+& computer hardware    & Q3966    & Level 1 \\
+& software             & Q7397    & Level 1 \\
+& electronic component & Q11653   & Level 1 \\
+
+\end{longtable}
+\endgroup
+
+
+\chapter{Appendix: SPARQL Query for Triple Retrieval}
+\label{app:sparql_query}
+
+\begin{lstlisting}[style=sparqlstyle, caption={SPARQL query used to retrieve supply chain triples from Wikidata. \texttt{\{type\_values\}}, \texttt{\{all\_qids\}}, \texttt{\{rel\_values\}}, \texttt{\{offset\}}, and \texttt{\{limit\}} are Python format string placeholders substituted at runtime.}, label=lst:sparql]
+SELECT DISTINCT ?org ?orgLabel ?orgType ?orgTypeLabel ?rel ?target ?targetLabel
+WHERE {
+    VALUES ?orgType { {type_values} }
+    VALUES ?targetType { {all_qids} }
+
+    ?org    wdt:P31 ?orgType .
+    ?target wdt:P31 ?targetType .
+
+    # Ensures entity is notable and has an English Wikipedia article
+    ?sitelink_org    schema:about ?org    ; schema:isPartOf <https://en.wikipedia.org/> .
+    ?sitelink_target schema:about ?target ; schema:isPartOf <https://en.wikipedia.org/> .
+
+    VALUES ?rel { {rel_values} }
+    ?org ?rel ?target .
+
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+OFFSET {offset}
+LIMIT  {limit}
+\end{lstlisting}
+
+
+\chapter{Appendix: CRA Prompts}
+\label{app:cra_prompts}
+
+We proposed four configurations for CRA in the ablation study.
+Config D is the full staged architecture and is presented first.
+Configs C, B, and A follow in descending order of complexity.
+For each configuration, the system prompt and user prompt are
+presented separately.
+
+
+% ─────────────────────────────────────────────────────────────────
+\section*{Config D — Full Staged ReAct Architecture}
+\needspace{6\baselineskip}
+\begin{tcolorbox}[sysprompt, title=System Prompt]
+You are a supply chain relation extraction agent. Your task is to
+extract relation triples from supply chain text chunks.
+
+\medskip
+Reason and act using the following loop:
+
+\medskip
+\textbf{Thought:} [brief reasoning — 1 to 2 sentences only]\\
+\textbf{Action:} [either RetrieveExamples or Finish]\\
+\textbf{ActionInput:} [the input to the action]\\
+\textbf{Observation:} [returned by the system — do not write this yourself]
+
+\medskip
+\hrule
+\medskip
+\textbf{ONTOLOGY SCHEMA}
+\medskip
+\hrule
+
+\medskip
+\textbf{Entity Types:}
+
+\medskip
+CoreEnterprise \hfill — profit-seeking companies\\
+\hspace*{1em}(e.g. logistics company, freight forwarder, public company, defense contractor)
+
+\smallskip
+SupplyChainPartner \hfill — external suppliers and service providers\\
+\hspace*{1em}(e.g. vendor, distributor, OEM, contract manufacturer, warehouse operator)
+
+\smallskip
+OrganizationalUnit \hfill — internal divisions and regulatory bodies\\
+\hspace*{1em}(e.g. government agency, regulatory body, joint venture, consortium)
+
+\smallskip
+MarketActor \hfill — demand-side actors\\
+\hspace*{1em}(e.g. customer, consumer, competitor, retailer)
+
+\smallskip
+ProductMaterial \hfill — physical or digital goods\\
+\hspace*{1em}(e.g. manufactured product, raw material, intermediate good, software)
+
+\smallskip
+SupplyChainEntity \hfill — abstract supertype; relation constraints only.\\
+\hspace*{1em}Do not use this type to label entities directly.
+
+\medskip
+\textbf{Relations (relation\_name: subject\_type → object\_type):}
+
+\medskip
+\begin{tabular}{@{}l@{\hspace{1em}}l}
+is owned by            & CoreEnterprise    → OrganizationalUnit \\
+has subsidiary         & CoreEnterprise    → OrganizationalUnit \\
+is in partnership with & CoreEnterprise    → OrganizationalUnit \\
+is regulated by        & CoreEnterprise    → OrganizationalUnit \\
+is an investor in      & CoreEnterprise    → CoreEnterprise     \\
+is the owner of        & CoreEnterprise    → ProductMaterial    \\
+is distributed by      & ProductMaterial   → SupplyChainPartner \\
+was commissioned by    & ProductMaterial   → CoreEnterprise     \\
+typically sells        & CoreEnterprise    → ProductMaterial    \\
+sources energy from    & ProductMaterial   → SupplyChainEntity  \\
+is manufactured by     & ProductMaterial   → CoreEnterprise     \\
+is made from           & ProductMaterial   → ProductMaterial    \\
+is designed by         & ProductMaterial   → CoreEnterprise     \\
+processes raw material & SupplyChainEntity → ProductMaterial    \\
+is maintained by       & ProductMaterial   → CoreEnterprise     \\
+\end{tabular}
+
+\medskip
+\hrule
+\medskip
+\textbf{YOUR PROCESS}
+\medskip
+\hrule
+
+\medskip
+\textbf{STEP 1 — RELATION IDENTIFICATION (always first)}\\
+Read the chunk carefully. Identify which relations from the ontology
+are present based on explicit textual evidence only. Do not invent
+new relations. Do not extract triples yet.
+
+\smallskip
+Thought: [reasoning about which relations appear in the chunk]
+
+\medskip
+\textbf{STEP 2 — RETRIEVAL (optional, only after Step 1)}\\
+If you are unsure how to identify subject/object entities, or the
+chunk involves unfamiliar phrasing, call the retriever exactly once.
+
+\smallskip
+Thought: I need a few more similarly annotated examples to guide my extraction.\\
+Action: RetrieveExamples\\
+ActionInput: [the full input chunk text]\\
+Observation: [examples returned by the system]
+
+\smallskip
+Do NOT call this if the chunk is clear. Call at most ONCE, only after Step 1.
+
+\medskip
+\textbf{STEP 3 — TRIPLE EXTRACTION (always last)}\\
+Using ONLY the relations identified in Step 1, extract all triples
+supported by explicit textual evidence.
+
+\smallskip
+- Subject and object must be exact entity mentions from the chunk.\\
+- Subject and object must satisfy the type constraints in the ontology.\\
+- Do not infer or hallucinate entities not present in the chunk.\\
+- Use any retrieved examples as guidance.
+
+\smallskip
+Thought: I have identified the relations and have enough context.
+I will now extract the triples and output the final answer.\\
+Action: Finish\\
+ActionInput:\\
+Present relations: [relation\_1, relation\_2, ...]\\
+\{"spo\_list": [\{"subject": "...", "predicate": "...", "object": "..."\}]\}
+
+\medskip
+\hrule
+\medskip
+\textbf{HARD RULES}
+\medskip
+\hrule
+
+\medskip
+- Always complete Step 1 before anything else.\\
+- Never call RetrieveExamples more than once.\\
+- Never write an Observation yourself.\\
+- The final action must always be Action: Finish.\\
+- Do not write anything after the ActionInput of Finish.\\
+- If no triples are found, return an empty spo\_list.
+\end{tcolorbox}
+
+\begin{tcolorbox}[userprompt, title=User Prompt]
+Here is a real-world example as reference:
+
+\medskip
+\{retrieved\_examples\}
+
+\medskip
+Now please begin the task on the following input text:
+
+\medskip
+\{chunk\_text\}
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[userprompt, title=User Prompt]
+Here is a real-world example as reference:
+
+\medskip
+\{retrieved\_examples\}
+
+\medskip
+Now please begin the task on the following input text:
+
+\medskip
+\{chunk\_text\}
+\end{tcolorbox}
+
+
+% ─────────────────────────────────────────────────────────────────
+\section*{Config C — Flat Prompt with Dynamic Retrieval}
+
+\begin{tcolorbox}[sysprompt, title=System Prompt]
+You are a supply chain relation extraction system. Extract relation
+triples from the input text.
+
+\medskip
+\textit{[Ontology schema identical to Config D — omitted for brevity.]}
+
+\medskip
+\hrule
+\medskip
+\textbf{INSTRUCTIONS}
+\medskip
+\hrule
+
+\medskip
+Read the input text carefully. Using ONLY the relations defined in
+the ontology above, extract all relation triples explicitly supported
+by the text.
+
+\smallskip
+- Every predicate must be one of the relations in the ontology.\\
+- Only extract a triple if the text clearly expresses that relation.\\
+- Do not invent new relation names or entity types.\\
+- Subject and object must satisfy the type constraints in the ontology.\\
+- Subject and object strings must be exact text spans from the input.\\
+- Do not infer or hallucinate entities or relations not present in the text.\\
+- If no triples are found, return an empty spo\_list.\\
+- Follow the format and typing behaviour shown in the provided example.\\
+- Return ONLY the JSON object below, with no additional text.
+
+\medskip
+\{"spo\_list": [\{"subject": "...", "predicate": "...", "object": "..."\}]\}
+\end{tcolorbox}
+
+\begin{tcolorbox}[userprompt, title=User Prompt]
+Here is a real-world example as reference:
+
+\medskip
+\{retrieved\_examples\}
+
+\medskip
+Now please begin the task on the following input text:
+
+\medskip
+\{chunk\_text\}
+\end{tcolorbox}
+
+
+% ─────────────────────────────────────────────────────────────────
+\section*{Configs A and B — Flat Prompt, No Example / Static Example}
+
+Configs A and B share the same system prompt as Config C. Only the
+user prompts differ, and are shown below in order.
+
+\begin{tcolorbox}[userprompt, title=User Prompt — Config A (Zero-shot)]
+Extract all relation triples from the following text:
+
+\medskip
+\{chunk\_text\}
+\end{tcolorbox}
+
+\begin{tcolorbox}[userprompt, title=User Prompt — Config B (Static Few-shot)]
+Here is a reference example:
+
+\medskip
+\{static\_example\}
+
+\medskip
+Now extract triples from the following text:
+
+\medskip
+\{chunk\_text\}
+\end{tcolorbox}
+
+
+% ─────────────────────────────────────────────────────────────────
+\section*{Retrieved Example Template}
+
+\begin{tcolorbox}[sysprompt, title=Example Template]
+Example \{i\}:\\
+Text: \{text\}\\
+Triples: \{spo\_list\}
+
+\medskip
+\end{tcolorbox}
+
+\chapter{Appendix: Open Source Model Selection Results}
+\label{app:open_source_model_selection}
+
+Table~\ref{tab:model_selection} lists the F1, Recall (R), Precision (P) for each and every open source model that was available in GWDG as of February 2026. Both ReAct\_FSL and ReAct\_Memory were tested. glm-4.7 was chosen considering its overall performance in both configurations. 
+
+\begin{table}[h]
+\centering
+\caption{Open Source Model performance on DuIE2.0 dataset in ReAct\_FSL and ReAct\_Memory configs.}
+\label{tab:model_selection}
+\toprule 
+\begin{tabularx}{\textwidth}{X|l|l}\textbf{Open Source Model} & \textbf{ReAct\_FSL \{F1, R, P\}}& \textbf{ReAct\_Memory \{F1, R, P\}}\\
+\midrule
+qwen3-235b-a22b & \{0.3849, 0.451, 0.3358\} & \{0.2439, 0.1471, 0.7143\} \\
+llama-3.3-70b-instruct & \{0.1629, 0.1765, 0.1513\}& \{0.0, 0.0, 0.0\} \\
+gemma-3-27b-it & \{0.3188, 0.3235, 0.3143\} & \{0.2368, 0.1765, 0.36\}  \\
+qwen3-32b & \{0.0, 0.0, 0.0\} & \{0.3136, 0.3627, 0.2761\}\\
+apertus-70b-instruct-2509 & \{0, 0.0, 0.0\} & \{0, 0.0, 0\}\\
+devstral-2-123b-instruct-2512 & \{0.3604, 0.3922, 0.3333\} & \{0.1793, 0.1275, 0.3023\}\\
+deepseek-r1-distill-llama-70b & \{0.117, 0.1078, 0.1279\} & \{0.1572, 0.1765, 0.1417\}\\
+\textbf{glm-4.7} & \textbf{\{0.3565, 0.402, 0.3203\}} & \textbf{\{0.5, 0.5098, 0.4906\}} \\
+internvl3.5-30b-a3b & \{0.2357, 0.3039, 0.1925\} & \{0.0, 0.0, 0.0\}\\
+llama-3.1-sauerkrautlm-70b-instruct & \{0.3103, 0.3529, 0.2769\} & \{0.0194, 0.0098, 1.0\}\\
+medgemma-27b-it & \{0.1202, 0.1373, 0.1069\} & \{0.1271, 0.1471, 0.1119\}\\
+meta-llama-3.1-8b-instruct & \{0.0902, 0.0588, 0.1935\} & \{0.0, 0.0, 0.0\}\\
+mistral-large-3-675b-instruct-2512 & \{0.318, 0.3725, 0.2774\} & \{0.2027, 0.1471, 0.3261\}\\
+qwen3-30b-a3b-instruct-2507 & \{0.3636, 0.4314, 0.3143\} & \{0.1224, 0.0882, 0.2\}\\
+qwen3-30b-a3b-thinking-2507 & \{0.3229, 0.3529, 0.2975\} & \{0.4, 0.4314, 0.3729\}\\
+qwen3-omni-30b-a3b-instruct & \{0.1991, 0.2255, 0.1783\} & \{0.1091, 0.0588, 0.75\}\\
+\bottomrule 
+\end{tabularx}
+\end{table}
+
+\chapter{Appendix: Error Samples - Baseline Analysis on DuIE2.0}
+\label{app:error_samples_duie}
+
+The following examples illustrate the error modes observed during
+the baseline ablation. Since the DuIE2.0 input texts are in Chinese,
+the source sentences were translated using DeepL and Google Translate
+for readability. The model's Thought loops were produced in English
+and required no translation.
+
+\begin{tcolorbox}[errorbox, title=Example 1 — Recursive Verification Trap
+(AgentRE\textsubscript{orig} Test Set Example 10 Attempt 1)]
+
+\textbf{Input Text}
+
+\smallskip\small
+``Zhou Yulou lives in constant fear and suspicion; his life seems to
+have fallen into a chaotic black hole\ldots{} Episode 56: Synopsis,
+Cast \& Crew, Character Profiles, Behind-the-Scenes. The TV series
+\textit{Dear, I'm Sorry} is the second Chinese TV drama filmed by
+South Korean actor Joo Jin-mo.''
+
+\medskip
+\textbf{Tools Invoked (in order)}
+
+\smallskip\small
+\texttt{GetTaskDescription} $\rightarrow$ \texttt{RetrieveCorrectMemory}
+$\rightarrow$ \texttt{GetRelationDefinition} (simulated, repeated)
+
+\medskip
+\textbf{Analysis}
+
+\smallskip\small
+The trace below illustrates the recursive verification trap in full.
+The model correctly identifies two candidate triples by Step 2 and
+receives confirming tool output in Step 4. Despite this, it continues
+to re-examine the same two decision points, namely whether
+\textit{filmed by} implies starring or directing for Joo Jin-mo, and
+whether Zhou Yulou can be linked to the drama title, across Steps 5
+through the end of the trace. Each re-examination reaches the same
+conclusion but does not terminate the loop. The model also queries
+\texttt{GetRelationDefinition} a second time mid-trace after already
+receiving its output. The generation budget is exhausted before a
+\texttt{Finish} action is issued.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[tracebox, title=Model Reasoning Trace]
+STEP 1 — REQUEST ANALYSIS
+  Input: "Zhou Yulou lives in constant fear... The TV series
+  'Dear, I'm Sorry' is the second Chinese TV drama filmed by
+  Korean actor Joo Jin-mo."
+  Task: Identify relation triples conforming to the specified format.
+  Available tools: Finish, GetTaskDescription,
+                   GetRelationDefinition, RetrieveCorrectMemory.
+  Output format: JSON containing spo_list.
+
+──────────────────────────────────────────────────────────────────
+
+STEP 2 — INPUT ANALYSIS
+  Segment 1: "Zhou Yulou lives in constant fear..."
+    -> Plot description. Mentions character "Zhou Yulou".
+    -> Not explicitly linked to drama title by any verb.
+
+  Segment 2: "Episode 56: cast list, character profiles..."
+    -> Web metadata. No extractable triples.
+
+  Segment 3: "Dear, I'm Sorry is the second Chinese TV drama
+              filmed by Korean actor Joo Jin-mo."
+    -> Core information.
+    -> Subject: Dear, I'm Sorry
+    -> Object:  Joo Jin-mo
+    -> Predicate: "filmed by actor" -> likely starring.
+       Allowed relations include: Lead Actor, Director,
+       Screenwriter, Nationality, Protagonist, ...
+    -> "South Korean actor" -> Joo Jin-mo Nationality South Korea.
+
+  Candidate triples formed:
+    T1: Dear, I'm Sorry — Lead Actor — Joo Jin-mo
+    T2: Joo Jin-mo — Nationality — South Korea
+    T3 (uncertain): Dear, I'm Sorry — Lead Character — Zhou Yulou
+       (syntactically loose; title not explicitly linked to character)
+
+  Check relations for Zhou Yulou:
+    Let's check "main character" relationship.
+    Let's check "played by" relationship.
+    Let's check "Starring" relationship.
+    Let's check "Director" relationship.
+    Let's check "Screenwriter" relationship.
+    Let's check "Release Date" relationship.
+    Let's check "Production Company" relationship.
+
+──────────────────────────────────────────────────────────────────
+
+STEP 3 — TOOL CALL 1: RetrieveCorrectMemory
+  Action:      RetrieveCorrectMemory
+  ActionInput: [input chunk text]
+  Observation:
+    Example 1: "Ding Zaican (played by Lee Jong-suk)"
+               -> Explicit actor-role link.
+    Example 2: "Scarlet Heart adapted from Tong Hua"
+    Example 3: "The CEO directed by Oh Tae-myung"
+    Example 5: "My Father Is a Bench... Wang Baoqiang... starring"
+
+  Interpretation:
+    -> Memory examples show explicit links only.
+    -> Zhou Yulou link to drama is implicit. Risky to include.
+    -> T1 and T2 remain strong candidates.
+
+──────────────────────────────────────────────────────────────────
+
+STEP 4 — TOOL CALL 2: GetRelationDefinition          [TOOL CALL]
+  Action:      GetRelationDefinition
+  ActionInput: LeadActor|Nationality|Protagonist
+  Observation (simulated):
+    LeadActor:   The main actor in a TV show or movie.
+    Nationality: The country a person belongs to.
+    Protagonist: The main character in a film or TV series.
+
+  Post-tool interpretation:
+    -> LeadActor confirmed for Joo Jin-mo.
+    -> Nationality confirmed for South Korea.
+    -> Protagonist applicable to Zhou Yulou, but link still loose.
+
+  Refined triple set:
+    T1: Joo Jin-mo — Nationality — South Korea         [CONFIRMED]
+    T2: Dear, I'm Sorry — Lead Actor — Joo Jin-mo      [CONFIRMED]
+    T3: Dear, I'm Sorry — Lead Character — Zhou Yulou  [UNCERTAIN]
+
+──────────────────────────────────────────────────────────────────
+
+STEP 5 — RE-VERIFICATION LOOP BEGINS                 [REPEAT]
+
+  Let's check the relationship with "Joo Jin-mo" again.
+    -> Does "filmed" mean "directed"?
+    -> Text says "actor Joo Jin-mo." -> starring is correct.  [SAME CONCLUSION]
+
+  Let's check "Zhou Yulou" again.
+    -> Title and character not explicitly linked.
+    -> Will stick with explicit triples.                       [SAME CONCLUSION]
+
+  Wait, could "Zhou Yulou" be the author? No.
+  Could "Zhou Yulou" be the director? No.
+
+  Let's check relationship with "Joo Jin-mo" again.          [REPEAT x2]
+    -> "filmed by Korean actor" -> starring. Correct.         [SAME CONCLUSION]
+
+  Let's check "Zhou Yulou" again.                            [REPEAT x2]
+    -> Excluded. Stick with clear ones.                       [SAME CONCLUSION]
+
+  Let's check if "Joo Jin-mo" is the director.              [REPEAT x3]
+    -> Action: GetRelationDefinition                          [REPEAT TOOL CALL]
+    -> ActionInput: director
+    -> Output: "Director: core creator responsible for
+                bringing script to screen."
+    -> "actor" modifier -> starring is safer.                 [SAME CONCLUSION]
+
+  Let's check if "Joo Jin-mo" is the screenwriter. No.
+  Let's check if "Dear, I'm Sorry" has a release date. No.
+  Let's check if "Dear, I'm Sorry" has a production company. No.
+
+  Final candidates restated:                                  [SAME AS STEP 4]
+    C1: Joo Jin-mo — Nationality — South Korea
+    C2: Dear, I'm Sorry — Lead Actor — Joo Jin-mo
+
+  Let's check "Zhou Yulou" again.                            [REPEAT x3]
+    -> Still loose. Excluded.                                 [SAME CONCLUSION]
+
+  Wait, is "filmed" a synonym for "starring"?                [REPEAT x4]
+    -> Not exactly, but actor filming -> starring.
+  Let's check if "director" is better.                       [REPEAT x4]
+  Let's check "GetRelationDefinition".                       [BUDGET EXHAUSTED]
+  -> No Finish action issued. Output: none.
+\end{tcolorbox}
+
+\begin{tcolorbox}[errorbox, title=Example 2 — CoT Controllability Failure
+(AgentRE\textsubscript{redux} with Correct and Reflexion Memories
+Test Set Sample 1 Attempt 1)]
+
+\textbf{Input Text}
+
+\smallskip\small
+``The Youth Theoretical Study Group of the All-China Federation of
+Industry and Commerce Youth Committee, established in August this year,
+recently held its first lesson in the Party Building Conference Room of
+Huaxun Fangzhou Group. The group leader, Wu Guangsheng, Chairman of
+Huaxun Fangzhou Technology Co., Ltd., the deputy group leader, Li
+Jingjing, Chairman of Liaoning Qingchuang Entrepreneurship Service
+Group Co., Ltd., and the deputy group leader, Jiang Nan, Chairman of
+Jinling Gold Foil Co., Ltd., gathered together to learn from each
+other.''
+
+\medskip
+\textbf{Tools Invoked (in order)}
+
+\smallskip\small
+\texttt{GetTaskDescription} $\rightarrow$
+\texttt{RetrieveCorrectMemory} $\rightarrow$
+\texttt{RetrieveRelevantInfo} $\rightarrow$
+\texttt{RetrieveReflexionMemory}
+
+\medskip
+\textbf{Analysis}
+
+\smallskip\small
+This example illustrates a CoT controllability failure. The model
+completes all four tool calls, correctly identifies four candidate
+triples with valid predicates, and reaches the formatting step without
+issue. However, the generation is abruptly interrupted mid-way through
+Step 5, precisely at the point where the model begins to write the
+structured output. No \texttt{Finish} action is issued and no
+\texttt{spo\_list} is produced. The truncation point is marked in the
+trace below.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[tracebox, title=Model Reasoning Trace]
+STEP 1 — REQUEST ANALYSIS
+  Input: "The Youth Theoretical Study Group of the All-China
+          Federation of Industry and Commerce Youth Committee..."
+  Task:  Extract relation triples (Subject, Predicate, Object).
+  Allowed predicates: Official Language | Dynasty | Chairman |
+    Box Office | Composer | Singer | Leader | Land Area | Capital |
+    Screenwriter | Nationality | Award | Theme Song | Father |
+    Production Company | Guest | Director | Spokesperson |
+    Registered Capital | Wife | Adapted From | Leading Role |
+    Founder | Headquarters Location | Release Date |
+    Establishment Date | Graduated Institution | Author | ...
+  Output format: JSON {"spo_list": [...]}.
+
+──────────────────────────────────────────────────────────────────
+
+STEP 2 — INPUT ANALYSIS
+  Segment 1: "...Youth Theoretical Study Group...
+              established in August this year..."
+    -> Entity:    Youth Theoretical Study Group of the
+                  All-China Federation of Industry and Commerce
+                  Youth Committee
+    -> Predicate: Establishment Date
+    -> Object:    August of this year
+
+  Segment 2: "...group leader, Wu Guangsheng, Chairman of
+              Huaxun Fangzhou Technology Co., Ltd...."
+    -> Entity:    Huaxun Fangzhou Technology Co., Ltd.
+    -> Predicate: Chairman
+    -> Object:    Wu Guangsheng
+
+  Segment 3: "...deputy group leader, Li Jingjing, Chairman of
+              Liaoning Qingchuang Entrepreneurship Service
+              Group Co., Ltd...."
+    -> Entity:    Liaoning Qingchuang Entrepreneurship Service
+                  Group Co., Ltd.
+    -> Predicate: Chairman
+    -> Object:    Li Jingjing
+
+  Segment 4: "...deputy group leader, Jiang Nan, Chairman of
+              Jinling Gold Foil Co., Ltd...."
+    -> Entity:    Jinling Gold Foil Co., Ltd.
+    -> Predicate: Chairman
+    -> Object:    Jiang Nan
+
+──────────────────────────────────────────────────────────────────
+
+STEP 3 — PREDICATE VERIFICATION
+  "Establishment Date" -> present in allowed predicate list. [OK]
+  "Chairman"           -> present in allowed predicate list. [OK]
+
+──────────────────────────────────────────────────────────────────
+
+STEP 4 — TRIPLE CONSTRUCTION
+  T1: (Youth Theoretical Study Group...,
+       Establishment Date, August of this year)
+  T2: (Huaxun Fangzhou Technology Co., Ltd.,
+       Chairman, Wu Guangsheng)
+  T3: (Liaoning Qingchuang Entrepreneurship Service Group Co., Ltd.,
+       Chairman, Li Jingjing)
+  T4: (Jinling Gold Foil Co., Ltd.,
+       Chairman, Jiang Nan)
+
+──────────────────────────────────────────────────────────────────
+
+STEP 5 — FORMAT OUTPUT                    [GENERATION INTERRUPTED]
+  5. Format .
+  -> Trace ends here. No Finish action issued.
+  -> No spo\_list produced. Output: none.
+\end{tcolorbox}
+
+\begin{tcolorbox}[errorbox, title=Example 3 — Parsing Error
+(AgentRE\textsubscript{orig} Test Set Sample 20 Attempt 3)]
+
+\textbf{Input Text}
+
+\smallskip\small
+``The song \textit{Southward Flying Geese} is included in the album
+\textit{New Drunken Concubine}.''
+
+\medskip
+\textbf{Analysis}
+
+\smallskip\small
+The reasoning trace leading up to the extract below is omitted for
+brevity. The model correctly identifies the triple and issues a valid
+\texttt{Finish} action with a well-formed \texttt{spo\_list}. However,
+the model then continues generating beyond the \texttt{ActionInput}
+block, producing a second \texttt{</think>} tag followed by a revised
+reasoning segment and a second \texttt{Finish} action with slightly
+different entity surface forms. The output parser expects generation
+to terminate immediately after the first \texttt{ActionInput} of
+\texttt{Finish} and cannot handle the continuation, causing the entire
+output to be rejected and a retry to be triggered.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[tracebox, title=Model Reasoning Trace (from Finish action onward)]
+  Thought: The sentence contains two entities: "Southward Flying Geese"
+           (song) and "The New Drunken Concubine" (album). The relation
+           is "Included in", corresponding to "Album" in the relation
+           list. Entity names do not need quotation marks.
+           Triple: (Southward Flying Geese, Album, The New Drunken Concubine).
+
+  Action:      Finish                               [VALID — should terminate here]
+  ActionInput: {"spo\_list": [{"subject": "Southward Flying Geese",
+                               "predicate": "Album",
+                               "object": "The New Drunken Concubine"}]}
+
+  </think>                                          [UNEXPECTED CONTINUATION]
+  This contains two entities: "South Flying Goose" (song) and
+  "New Drunken Concubine" (album). The relationship is "included in,"
+  corresponding to "album" in the relation list. Entity names do not
+  need quotation marks.
+  Triple: (South Flying Goose, album, New Drunken Concubine).
+
+  Action:      Finish                               [DUPLICATE — unparseable]
+  ActionInput: {"spo\_list": [{"subject": "South Flying Goose",
+                               "predicate": "album",
+                               "object": "new Drunken Concubine"}]}
+
+  "South Flying Goose" "New Drunken Concubine"
+  (South Flying Goose, album, new Drunken Concubine).
+                                                    [PARSER REJECTION → RETRY]
+\end{tcolorbox}
+
+\chapter{Appendix: SC-RED Ablation Error Samples}
+\label{app:scred_error_samples}
+
+The following example illustrates the \textbf{Budget Exhaustion}
+error mode. Example 41 from the ablation test set was processed by
+CRA Config D (Complete Setup) in Run 1. Because both retry attempts
+produce similar output, only the first attempt is shown. The input
+text and triple list have been truncated for brevity.
+
+As the example demonstrates, the model begins generating the triple
+list but exhausts its token budget before completing it, leaving the
+output unfinished. This behaviour occurs prior to the stabilization
+mechanism introduced in \textbf{Stabilising Retries}, which was
+designed specifically to address this failure mode.
+
+\begin{lstlisting}[
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true,
+  breakatwhitespace=false,
+  frame=single,
+  numbers=none,
+  xleftmargin=0pt,
+  columns=flexible
+]
+{
+  "idx": 41,
+  "system_prompt": "...",
+  "user_prompt": "Here is a real-world example as reference:
+    Example 1:
+    Text: Google AdSense....
+    Triples: [{'object': 'Google', 'predicate': 'is owned by',
+               'subject': 'Google AdSense'}]
+    ------------------------------------------
+    Now please begin the task on the following input_text:
+    "Webtoons (Korean: ; RR: Weptun) are a type of episodic digital
+    comics that originated in South Korea usually meant to be read
+    on smartphones.....",
+  "llm_output": "Thought: I need to read the text and identify which
+    relations from the ontology are present based on explicit textual
+    evidence. I will look for relationships between companies,
+    products, and organizational units mentioned in the text.
+    Action: Finish
+    ActionInput:
+    Present relations: [is owned by, has subsidiary,
+      is in partnership with, is an investor in, is the owner of,
+      is distributed by, was commissioned by, typically sells,
+      sources energy from, is manufactured by, is made from,
+      is designed by, processes raw material, is maintained by]
+    {
+      "spo_list": [
+        {"subject": "Naver subsidiary Line",
+         "predicate": "is owned by",
+         "object": "Naver"},
+        {"subject": "Kross Komics",
+         "predicate": "is owned by",
+         "object": "Kakao Entertainment"},
+        {"subject": "Tapas",
+         "predicate": "is owned by",
+         "object": "Kakao Entertainment"},
+        {"subject": "Radish Media",
+         "predicate": "is owned by",
+         "object": "Kakao Entertainment"},
+        ......
+        {"subject": "webtoons",
+         "predicate": "is distributed by",
+         "object": "Dong-a Ilbo"},
+        {"subject": "webtoons",
+         "predicate": "is distributed by",
+         "object": "Korea International Trade Association"},
+      "
+    }
+\end{lstlisting}
+
+\end{appendices}
