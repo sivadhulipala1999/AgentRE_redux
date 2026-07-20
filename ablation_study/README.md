@@ -1,0 +1,5 @@
+This folder contains all of the ablation study results. The folders are named to represent the configuration that was tested on DuIE2.0 and the final results are captured in the ablation_study_metrics.txt file. 
+
+The glm_baseline_experiments file shows the exact f1 score on each and every sample for the corresponding configuration and the errors. 
+
+In wikidata_results, you will notice 2 folders, new_architecture and old_architecture_react_fsl. The latter is ReAct_FSL's evaluation on SC-RED dataset. The former, however, is the Constrained ReAct Architecture results. If you are coming here from the SEMANTICS paper, this new architecture was included as future work. I implemented the new arch as a part of my master thesis and got the results here as well. More on this can be read in my thesis and if it gets published somewhere I will include the link here. 
